@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  resources :events only: %i[new create]
+  resources :events, only: %i[new create]
   
-  resources :insurance_policies only: :index do
-    resources :festival_policies only: %i[new create]
+  resources :insurance_policies, only: :index do
+    resources :festival_policies, only: %i[new create]
   end
 end
