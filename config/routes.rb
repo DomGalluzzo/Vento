@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :events, only: %i[new create]
   
-  resources :insurance_policies, only: :index do
+  resources :insurance_coverages, only: :index do
     resources :festival_policies, only: %i[new create]
   end
 end
