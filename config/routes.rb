@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'festivals/new'
+  get 'festivals/create'
   devise_for :users
 
   root to: 'pages#home'
