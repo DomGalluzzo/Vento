@@ -14,7 +14,12 @@ Rails.application.routes.draw do
     resources :contracts, only: [:new, :create]
   end
 
-  resources :cancellations, :public_injuries, only: [:new, :create] do
-    resources :contract_plans, only: [:new, :create]
+  resources :contracts, only: [:show] do
+    resources :contract_plans, only: [:new, :create] do
+      collection do 
+        post '/public_injuries', to: 'contract_plans#public_injuries', as: :public_injuries
+        post '/cancellations', to: 'contract_plans#cancellations', as: :cancellations
+      end
+    end
   end
 end

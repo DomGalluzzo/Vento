@@ -1,0 +1,10 @@
+<% @contract.contract_plans.each do |plan| %>
+  <% if plan.plannable.kind_of?(PublicInjury) %>
+    <%= plan.plannable_type %>
+    <%= plan.plannable.daily %>
+  <% else %>
+    <%= plan.plannable_type %>
+    <%= plan.plannable.rain %>
+  <% end %>
+  
+<% end %>
