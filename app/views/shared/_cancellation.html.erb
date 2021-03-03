@@ -1,0 +1,101 @@
+   <!-- Modal -->
+   <div class="modal fade" id="cancellation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog modal-dialog-scrollable" role="document">
+     <div class="modal-content">
+       <div class="modal-header text-center">
+         <h4 class="modal-title w-100 font-weight-bold">Unexpected cancellation</h4>
+         <p>Please give us a few details</p>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+        <div class="modal-body mx-3">
+         <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-name">What is the total revenue of your event?</label>
+           <input type="text" id="form34" class="form-control validate">
+        </div>
+         
+        <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-email">Is terrorism cover required?</label>
+            <div class="switch-field event-type">
+              <input type="radio" id="event-radio21" name="event" value="yes">
+              <label for="event-radio21">Yes</label>
+              <input type="radio" id="event-radio22" name="event" value="no">
+              <label for="event-radio22">No</label>
+            </div>
+        </div>
+
+        <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-email">Where is the event predominantley held?</label>
+            <div class="switch-field event-site">
+              <input type="radio" id="event-radio31" name="event" value="Indoors">
+              <label for="event-radio31">Indoors</label>
+              <input type="radio" id="event-radio32" name="event" value="Outdoors">
+              <label for="event-radio32">Outdoors</label>
+              <input type="radio" id="event-radio33" name="event" value="Temporary Structures">
+              <label for="event-radio33">Temporary Structures</label>
+            </div>
+        </div>
+
+        <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">Do you require cover for adverse weather conditions?</label>
+           <div class="switch-field">
+            <input type="radio" id="event-radio41" name="event" value="yes">
+            <label for="event-radio41">Yes</label>
+            <input type="radio" id="event-radio42" name="event" value="no">
+            <label for="event-radio42">No</label>
+           </div>
+        </div>
+
+        <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">If yes, can the event go ahead in continuous moderate rainfall and wind speeds of up to 30mph/50kmh?</label>
+           <div class="switch-field">
+            <input type="radio" id="event-radio43" name="event" value="yes">
+            <label for="event-radio43">Yes</label>
+            <input type="radio" id="event-radio44" name="event" value="no">
+            <label for="event-radio44">No</label>
+           </div>
+        </div>
+
+        <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">Does this event site have any history of flooding?</label>
+           <div class="switch-field">
+            <input type="radio" id="event-radio45" name="event" value="yes">
+            <label for="event-radio45">Yes</label>
+            <input type="radio" id="event-radio46" name="event" value="no">
+            <label for="event-radio46">No</label>
+           </div>
+        </div>
+
+        <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">Has this event ever had any losses as a result of adverse weather, whether insured or not?</label>
+           <div class="switch-field">
+            <input type="radio" id="event-radio47" name="event" value="yes">
+            <label for="event-radio47">Yes</label>
+            <input type="radio" id="event-radio48" name="event" value="no">
+            <label for="event-radio48">No</label>
+           </div>
+        </div>
+
+        <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">Will any stages, marquees or temporary structures be covered on three sides and above, with all electrical equipment rotected from weather?</label>
+           <div class="switch-field">
+            <input type="radio" id="event-radio49" name="event" value="yes">
+            <label for="event-radio49">Yes</label>
+            <input type="radio" id="event-radio50" name="event" value="no">
+            <label for="event-radio50">No</label>
+           </div>
+        </div>
+ 
+       </div>
+       <div class="modal-footer d-flex justify-content-center">
+         <button class="btn btn-deep-orange" data-toggle="modal" data-dismiss="modal" data-target="#public_injuries">next</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ <%= render 'shared/public_injuries' %> 
+
+ 
