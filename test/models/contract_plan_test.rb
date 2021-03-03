@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class InsurancePolicyTest < ActiveSupport::TestCase
+class ContractPlanTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

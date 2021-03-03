@@ -1,6 +1,15 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: #FCF9F7;
+  padding: 40px 300px 40px 300px;
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: bold;
+  font-family: "GraphikLCG-Medium";
+}
+
+.navbar-nav > .nav-item > .nav-link{
+  color: black;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -10,3 +19,57 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+.navbar-nav > li{
+  padding-left:15px;
+  padding-right:15px;
+}
+
+.navbar-nav > .nav-item {
+  margin: 0 10px 0 10px;
+}
+.list-link{
+  padding-right: 100px;
+}
+.btn-ghost {
+  background-color: rgba($color:#00736E, $alpha: 0.3);
+  color: #00736E;
+  // border: 1px solid #4A4A4A;
+  padding: 2px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  opacity: 0.6;
+  transition: 0.2s ease-in;
+  height: 40px;
+}
+
+.btn-ghost:hover {
+  background-color: white;
+  color: #00736E;
+  border: 1px solid #00736E;
+}
+
+.logo {
+  transform: scale(3);
+}
+
+
+@media only screen and (max-width: 768px) {
+  .navbar-lewagon {
+    justify-content: space-between;
+    padding: 40px 40px 40px 100px;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: bold;
+    font-family: "GraphikLCG-Medium";
+  }
+
+  .navbar-nav > li{
+    text-align: center;
+  }
+
+  .list-link{
+    padding-left: 0;
+  }
+}
+
