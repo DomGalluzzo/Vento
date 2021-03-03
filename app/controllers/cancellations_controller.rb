@@ -4,7 +4,7 @@ class CancellationsController < ApplicationController
   end
 
   def create
-    @cancellation = Cancellation.new(params[:cancellation])
+    @cancellation = Cancellation.new(cancellation_params)
     if @cancellation.save
       flash[:success] = "Cancellation successfully created"
       redirect_to @cancellation
