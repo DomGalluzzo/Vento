@@ -14,3 +14,10 @@ $headers-font: "Nunito", "Helvetica", "sans-serif";
 //        font-url('FontFile.ttf') format('truetype')
 // }
 // $my-font: "Font Name";
+
+@font-face {
+  font-family: '[GraphikLCG-Regular, GraphikLCG-Medium, GraphikLCG-Bold]';
+  src: url('fonts/GraphikLCG-Regular.ttf');
+  src: url('fonts/GraphikLCG-Medium.ttf');
+  src: url('fonts/GraphikLCG-Bold.ttf');
+}
