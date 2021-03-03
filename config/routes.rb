@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+
+  get 'contract_plans/new'
+  get 'contract_plans/create'
+  get 'public_injuries/new'
+  get 'public_injuries/create'
+  get 'cancellations/new'
+  get 'cancellations/create'
   devise_for :users
-
   root to: 'pages#home'
-
-  resources :events, only: %i[new create]
-  
-  resources :insurance_policies, only: :index do
-    resources :festival_policies, only: %i[new create]
-  end
 end

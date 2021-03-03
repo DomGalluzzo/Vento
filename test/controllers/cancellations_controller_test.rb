@@ -1,13 +1,13 @@
 require 'test_helper'
 
-class EventsControllerTest < ActionDispatch::IntegrationTest
+class CancellationsControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get events_new_url
+    get cancellations_new_url
     assert_response :success
   end
 
   test "should get create" do
-    get events_create_url
+    get cancellations_create_url
     assert_response :success
   end
 
