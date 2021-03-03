@@ -1,10 +1,17 @@
-<% @contract.contract_plans.each do |plan| %>
-  <% if plan.plannable.kind_of?(PublicInjury) %>
-    <%= plan.plannable_type %>
-    <%= plan.plannable.daily %>
-  <% else %>
-    <%= plan.plannable_type %>
-    <%= plan.plannable.rain %>
-  <% end %>
-  
-<% end %>
+
+<div class="container">
+  <div class="cards">
+    <% @contract.contract_plans.each do |plan| %>
+      <div class="card">
+      <% if plan.plannable.kind_of?(PublicInjury) %>
+        <%= plan.plannable_type %>
+        <%= plan.plannable.daily %>
+      <% else %>
+        <%= plan.plannable_type %>
+        <%= plan.plannable.rain %>
+      <% end %>
+      
+      </div>
+    <% end %>
+  </div>
+</div>
