@@ -6,6 +6,11 @@
     <div class="second">
       <p>Clear Policies. Instant Quotes. Rapid Claims Payment.</p>
     </div>
-    <a href="#" class="btn boton text-white" role="button"><i class="fas fa-fire"></i>Get covered instantly</a>
+    <button type="button" class="btn boton text-white" data-toggle="modal" data-target="#coverages">
+      <i class="fas fa-fire"></i>Get covered instantly
+    </button>
+    <!-- <a href="#" class="btn boton text-white" role="button"><i class="fas fa-fire"></i>Get covered instantly</a> -->
   </div>
 </div>
+
+<%= render "shared/coverages" %>
