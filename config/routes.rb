@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'contract_plans/new'
   get 'contract_plans/create'
   get 'public_injuries/new'
