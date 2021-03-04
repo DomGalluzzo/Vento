@@ -1,17 +1,29 @@
 <div class="container">
+  <h3 class="">Hi, <%= current_user.email %></h3>
   <div class="cards">
+    <div class="card">
+      <h3>Name of Event</h3>
+      <span><%= @contract.festival.name %></span>
+    </div>
+
+    <div class="card">
+      <h3>Event Dates</h3>
+      <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
+    </div>
+
+    <h3>Insurance Coverages</h3>
     <% @contract.contract_plans.each do |plan| %>
       <div class="card">
       <% if plan.plannable.kind_of?(PublicInjury) %>
-        <%= plan.plannable_type %>
-        <%= plan.plannable.liability %>
-        <%= plan.plannable.daily %>
-        <%= plan.plannable.total %>
-        <%= plan.plannable.usa %>
-        <%= plan.plannable.dangerous %>
-        <%= plan.plannable.sub %>
+        <h5>Public Injury</h5>
+        <li>Liability Limit: <%= plan.plannable.liability %></li>
+        <li>Daily Attendance: <%= plan.plannable.daily %></li>
+        <li>Total Attendance: <%= plan.plannable.total %></li>
+        <li>USA Assets? <%= plan.plannable.usa %></li>
+        <li>Dangerous Activities? <%= plan.plannable.dangerous %></li>
+        <li>Sub Festivals? <%= plan.plannable.sub %></li>
       <% else %>
-        <%= plan.plannable_type %>
+        <h5><%= plan.plannable_type %></h5>
         <%= plan.plannable.budget %>
         <%= plan.plannable.terrorism %>
         <%= plan.plannable.location %>
@@ -20,7 +32,6 @@
         <%= plan.plannable.loss %>
         <%= plan.plannable.weather %>
       <% end %>
-      
       </div>
     <% end %>
   </div>
