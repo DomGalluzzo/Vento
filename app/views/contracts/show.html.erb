@@ -5,10 +5,21 @@
       <div class="card">
       <% if plan.plannable.kind_of?(PublicInjury) %>
         <%= plan.plannable_type %>
+        <%= plan.plannable.liability %>
         <%= plan.plannable.daily %>
+        <%= plan.plannable.total %>
+        <%= plan.plannable.usa %>
+        <%= plan.plannable.dangerous %>
+        <%= plan.plannable.sub %>
       <% else %>
         <%= plan.plannable_type %>
+        <%= plan.plannable.budget %>
+        <%= plan.plannable.terrorism %>
+        <%= plan.plannable.location %>
         <%= plan.plannable.rain %>
+        <%= plan.plannable.flood %>
+        <%= plan.plannable.loss %>
+        <%= plan.plannable.weather %>
       <% end %>
       
       </div>
