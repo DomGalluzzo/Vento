@@ -1,5 +1,5 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top"  >
-  <%= link_to "#", class: "navbar-brand" do %>
+  <%= link_to "/", class: "navbar-brand" do %>
     <%= image_tag "vento-logo.png", class: "logo" %>
     <% end %>
 
@@ -10,7 +10,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active" >
+        <li class="nav-item" >
           <%= link_to "Claims", "#", class: "nav-link" %>
         </li>
         <li class="nav-item">
@@ -19,9 +19,17 @@
         <li class="nav-item">
           <%= link_to "Help", "#", class: "nav-link" %>
         </li>
-        <li class="nav-item list-link">
-          <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_user_session_path, method: "delete", data: {confirm: "Are you usre?", title: "Log out?", commit: "Yes", cancel: "No"}, class: "nav-link" %>
         </li>
+        <% else %>
+          <li class="nav-item list-link">
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+
         <button class="btn btn-ghost" type="button" data-toggle="modal" data-target="#coverages">Get covered</button>
 
     </ul>

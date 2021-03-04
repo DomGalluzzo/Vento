@@ -12,6 +12,7 @@ contract1 = Contract.create!(total_cost: 10000, festival: fest)
 
 injury1 = PublicInjury.create!(liability: 100, daily: 10, total: 15, usa: true, dangerous: true, sub: true)
 injury2 = PublicInjury.create!(liability: 200, daily: 20, total: 25, usa: true, dangerous: true, sub: true)
-cancel = Cancellation.create!(budget: 100, terrorism: true, location: "London", rain: true, flood: true, loss: true, weather: true)
+cancel = Cancellation.create!(budget: 100, terrorism: false, location: "London", rain: true, flood: false, loss: true, weather: true)
 
 contract_plan1 = ContractPlan.create!(contract: contract1, plannable: injury1)
+contract1.contract_plans.create!(plannable: cancel)
