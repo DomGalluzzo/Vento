@@ -22,8 +22,10 @@
         <li class="nav-item list-link">
           <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
         </li>
-        <button class="btn btn-ghost" type="button">Get covered</button>
+        <button class="btn btn-ghost" type="button" data-toggle="modal" data-target="#coverages">Get covered</button>
 
     </ul>
   </div>
 </div>
+
+<%= render 'shared/coverages' %> 
