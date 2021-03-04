@@ -1,0 +1,58 @@
+.big-banner{
+    font-size: 50px;
+}
+
+.card-text{
+    font-size: 100px;
+}
+
+.card-title{
+    font-size: 15px;
+    color: black;
+}
+.card-content {
+    border-radius: 25px;
+    height: 100%;
+    width: 70%;
+}
+.insured-button {
+    border-radius: 22px;
+    width: 184px;
+    height: 44px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 33px;
+    margin: 32 auto 0;
+    background-color: #ff3000;
+}
+
+.email-button{
+    border-radius: 22px;
+    width: 164px;
+    height: 34px;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 33px;
+    margin: 32 auto 0;
+    background-color: #F0EBE7;
+}
+
+.group-list{
+    padding-left: 2rem;
+    list-style-type: none;
+}
+
+.group-item{
+    margin-left: -50px;
+    padding-left: 2rem;
+    background-image: url(rounded-square-png.png);
+    background-position: 0 0;
+    background-size: 1.3rem 1.3rem;
+    background-repeat: no-repeat;
+    transition: 1s;
+    // transform: translateX(50px);
+}
