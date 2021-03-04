@@ -2,9 +2,8 @@
   justify-content: space-between;
   background: #FCF9F7;
   padding: 40px 300px 40px 300px;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 30px;
-  font-weight: bold;
   font-family: "GraphikLCG-Medium";
 }
 
@@ -41,6 +40,7 @@
   opacity: 0.6;
   transition: 0.2s ease-in;
   height: 40px;
+  font-size: 1rem;
 }
 
 .btn-ghost:hover {
@@ -54,13 +54,30 @@
 }
 
 
+@media only screen and (max-width: 1280px) {
+  .navbar-lewagon {
+    justify-content: space-between;
+    padding: 20px 150px 20px 150px;
+    font-size: 1rem;
+    line-height: 30px;
+    font-family: "GraphikLCG-Medium";
+  }
+
+  .navbar-nav > li{
+    text-align: center;
+  }
+
+  .list-link{
+    padding-left: 0;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .navbar-lewagon {
     justify-content: space-between;
     padding: 40px 40px 40px 100px;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 30px;
-    font-weight: bold;
     font-family: "GraphikLCG-Medium";
   }
 
