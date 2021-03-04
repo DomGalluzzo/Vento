@@ -5,7 +5,8 @@
   align-items: center;
 }
 
-.first {
+
+.first >h1 {
   font-size: 60px;
 }
 
@@ -18,7 +19,15 @@
 }
 
 .second {
-  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0px 45px;
+  align-items: center;
+}
+
+.second > p {
+  font-size: 14px;
 }
 
 .boton {
