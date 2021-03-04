@@ -1,27 +1,46 @@
 <div class="container">
+  <h3 class="">Hi, <%= current_user.email %></h3>
   <div class="cards">
+  
+    <div class="card">
+      <h3>Name of Event</h3>
+      <span><%= @contract.festival.name %></span>
+    </div>
+
+    <div class="card">
+      <h3>Event Dates</h3>
+      <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
+    </div>
+
+    <h3>Insurance Coverages</h3>
     <% @contract.contract_plans.each do |plan| %>
       <div class="card">
       <% if plan.plannable.kind_of?(PublicInjury) %>
-        <%= plan.plannable_type %>
-        <%= plan.plannable.liability %>
-        <%= plan.plannable.daily %>
-        <%= plan.plannable.total %>
-        <%= plan.plannable.usa %>
-        <%= plan.plannable.dangerous %>
-        <%= plan.plannable.sub %>
+        <h5>Public Injury</h5>
+        <li>Liability Limit: <%= plan.plannable.liability%></li>
+        <li>Daily Attendance: <%= plan.plannable.daily %></li>
+        <li>Total Attendance: <%= plan.plannable.total %></li>
+        <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
+        <li>Dangerous Activities? <%= check_bool(plan.plannable.dangerous)%></li>
+        <li>Sub Festivals? <%= check_bool(plan.plannable.sub) %></li>
       <% else %>
-        <%= plan.plannable_type %>
-        <%= plan.plannable.budget %>
-        <%= plan.plannable.terrorism %>
-        <%= plan.plannable.location %>
-        <%= plan.plannable.rain %>
-        <%= plan.plannable.flood %>
-        <%= plan.plannable.loss %>
-        <%= plan.plannable.weather %>
+        <h5><%= plan.plannable_type %></h5>
+        <li>Total Revenue: <%= plan.plannable.budget %></li>
+        <li>Terrorism Coverage? <%= check_bool(plan.plannable.terrorism) %></li>
+        <li>Main Location: <%= plan.plannable.location %></li>
+        <li>Continue in Rainfall? <%= check_bool(plan.plannable.rain) %></li>
+        <li>History of Flooding? <%= check_bool(plan.plannable.flood) %></li>
+        <li>Previous Loss From Flood? <%= check_bool(plan.plannable.loss) %></li>
+        <li>Structure Protected From Weather? <%= check_bool(plan.plannable.weather) %></li>
       <% end %>
-      
       </div>
     <% end %>
   </div>
 </div>
+
+<%# 
+  Name of Event
+  Event Dates
+  Insurance Covers
+  Documents
+ %>
