@@ -1,42 +1,47 @@
-<div class="container">
-  <h3 class="">Hi, <%= current_user.email %></h3>
-  <div class="cards">
-  
-    <div class="card">
-      <h3>Name of Event</h3>
-      <span><%= @contract.festival.name %></span>
-    </div>
-
-    <div class="card">
-      <h3>Event Dates</h3>
-      <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
-    </div>
-
-    <h3>Insurance Coverages</h3>
-    <% @contract.contract_plans.each do |plan| %>
-      <div class="card">
-      <% if plan.plannable.kind_of?(PublicInjury) %>
-        <h5>Public Injury</h5>
-        <li>Liability Limit: <%= plan.plannable.liability%></li>
-        <li>Daily Attendance: <%= plan.plannable.daily %></li>
-        <li>Total Attendance: <%= plan.plannable.total %></li>
-        <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
-        <li>Dangerous Activities? <%= check_bool(plan.plannable.dangerous)%></li>
-        <li>Sub Festivals? <%= check_bool(plan.plannable.sub) %></li>
-      <% else %>
-        <h5><%= plan.plannable_type %></h5>
-        <li>Total Revenue: <%= plan.plannable.budget %></li>
-        <li>Terrorism Coverage? <%= check_bool(plan.plannable.terrorism) %></li>
-        <li>Main Location: <%= plan.plannable.location %></li>
-        <li>Continue in Rainfall? <%= check_bool(plan.plannable.rain) %></li>
-        <li>History of Flooding? <%= check_bool(plan.plannable.flood) %></li>
-        <li>Previous Loss From Flood? <%= check_bool(plan.plannable.loss) %></li>
-        <li>Structure Protected From Weather? <%= check_bool(plan.plannable.weather) %></li>
-      <% end %>
+<div class="card card-shape m-5" style="width: 30rem; height: 35rem;">
+  <div class="card-body">
+    <h5 class="card-title user-name text-center">Hi, <%= current_user.email %></h5>
+    <div class="cards">
+      <div>
+        <h3 class="vento-font">Name of Event</h3>
       </div>
-    <% end %>
+      <div class="card festvial-name pl-3 mb-3">
+        <span><%= @contract.festival.name %></span>
+      </div>
+      <div>
+        <h3 class="vento-font">Event Dates</h3>
+      </div>
+      <div class="card festival-dates pl-3 mb-4">
+        <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
+      </div>
+      <div>
+        <h3 class="vento-font">Insurance Coverages</h3>
+      </div>
+      <% @contract.contract_plans.each do |plan| %>
+        <div class="card insurance-details px-3 py-3">
+        <% if plan.plannable.kind_of?(PublicInjury) %>
+          <h5>Public Injury</h5>
+          <li>Liability Limit: <%= plan.plannable.liability%></li>
+          <li>Daily Attendance: <%= plan.plannable.daily %></li>
+          <li>Total Attendance: <%= plan.plannable.total %></li>
+          <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
+          <li>Dangerous Activities? <%= check_bool(plan.plannable.dangerous)%></li>
+          <li>Sub Festivals? <%= check_bool(plan.plannable.sub) %></li>
+        <% else %>
+          <h5><%= plan.plannable_type %></h5>
+          <li>Total Revenue: <%= plan.plannable.budget %></li>
+          <li>Terrorism Coverage? <%= check_bool(plan.plannable.terrorism) %></li>
+          <li>Main Location: <%= plan.plannable.location %></li>
+          <li>Continue in Rainfall? <%= check_bool(plan.plannable.rain) %></li>
+          <li>History of Flooding? <%= check_bool(plan.plannable.flood) %></li>
+          <li>Previous Loss From Flood? <%= check_bool(plan.plannable.loss) %></li>
+          <li>Structure Protected From Weather? <%= check_bool(plan.plannable.weather) %></li>
+        <% end %>
+        </div>
+      <% end %>
+     </div>
+     <div class="help-button text-center mt-4">
+        <a href="#" class="card-link link-color">Help ?</a>
+     </div>
   </div>
 </div>
-
-<%= render 'shared/showcard' %>
-
