@@ -1,0 +1,16 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="null" height="null" viewBox="0 0 56 69">
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-320 -1382) translate(178 1335) translate(142 47)">
+                    <path fill="#EFD8D5" fill-rule="nonzero" stroke="#FF3000" d="M34.3 11.24L53.95 46.83 1.93 46.83 21.72 11.2"/>
+                    <ellipse cx="28" cy="51.663" fill="#FCF9F7" fill-rule="nonzero" stroke="#00736E" rx="15.77" ry="27.32" transform="rotate(-89.64 28 51.663)"/>
+                    <ellipse cx="28" cy="51.663" fill="#E0E9E9" fill-rule="nonzero" rx="4.25" ry="7.36" transform="rotate(-89.64 28 51.663)"/>
+                    <path fill="#E0E9E9" fill-rule="nonzero" stroke="#00736E" stroke-linecap="round" stroke-linejoin="round" d="M34.34 11.22c-4.11 1.42-8.58 1.42-12.69 0-.44-.158-.759-.541-.835-1.002-.077-.46.1-.926.465-1.218l4.77-3.76c1.144-.902 2.756-.902 3.9 0L34.72 9c.37.29.551.76.472 1.223-.08.464-.407.846-.852.997zM28 4.53L28 .57"/>
+                    <path stroke="#00736E" stroke-linecap="round" stroke-linejoin="round" d="M28 51.66L28 28.47M23.51 32.97L29.35 27.13"/>
+                    <rect width="3.78" height="2.38" x="28.788" y="24.6" fill="#FCF9F7" fill-rule="nonzero" stroke="#00736E" stroke-linecap="round" stroke-linejoin="round" rx="1.19" transform="rotate(-45 30.678 25.79)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

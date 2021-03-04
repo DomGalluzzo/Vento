@@ -1,0 +1,27 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="null" height="null" viewBox="0 0 68 76">
+    <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g>
+            <g>
+                <g transform="translate(-686 -1096) translate(549 1057) translate(138 40)">
+                    <path stroke="#00736E" d="M44 32.2l3 3c7.738 7.548 12.101 17.9 12.1 28.71v6.49"/>
+                    <path fill="#EFD8D5" fill-rule="nonzero" stroke="#FF3000" d="M38.61 61.9L47.01 35.17 43.96 32.2 31.92 60.1z"/>
+                    <path stroke="#00736E" d="M13.23 55.05l25.38 6.85-3.18 10.45-25.78-5.29C4.23 65.945.36 61.144.42 55.61h0c.009-1.914.508-3.794 1.45-5.46C5.93 43.123 12.024 37.492 19.35 34l3.84-1.82"/>
+                    <path fill="#E0E9E9" fill-rule="nonzero" stroke="#00736E" d="M38.61 61.9L44 63.45c2.596.744 4.19 3.35 3.67 6h0c-.254 1.364-1.043 2.569-2.19 3.348-1.148.78-2.559 1.068-3.92.802l-6.11-1.2 3.16-10.5z"/>
+                    <rect width="24.34" height="31.67" x="21.41" y="6.35" fill="#E0E9E9" fill-rule="nonzero" stroke="#00736E" rx="12.17"/>
+                    <path fill="#FCF9F7" fill-rule="nonzero" stroke="#00736E" d="M37.93 21.05v2.61c.004.712.387 1.369 1.005 1.723.618.354 1.378.353 1.995-.003h0v2.37c0 1.12.48 2.188 1.32 2.93L44 32.2c1.038-1.687 1.646-3.603 1.77-5.58v-5.25l-7.82-.32"/>
+                    <path stroke="#00736E" d="M26.58 25l-.74 2.2c-.152.455-.038.957.297 1.3.335.344.834.471 1.293.33h0"/>
+                    <path fill="#E0E9E9" fill-rule="nonzero" stroke="#00736E" d="M65.58 30.71L61.48 28.35 61.48 23.64 56.47 20.76 56.47 25.46 52.37 23.09 52.37 28.83 56.47 31.19 56.47 35.89 61.48 38.78 61.48 34.08 65.58 36.45z"/>
+                    <path fill="#EFD8D5" fill-rule="nonzero" stroke="#FF3000" d="M27.38 36.32l6.83 35.78-18.87-3.88 7.85-36c1.04 1.688 2.48 3.096 4.19 4.1h0z"/>
+                    <g fill="#EFD8D5" fill-rule="nonzero" stroke="#FF3000">
+                        <path d="M2.278 4.738H30.218V19.958000000000002H2.278z" transform="translate(20) rotate(20 16.248 12.348)"/>
+                        <path d="M16.63 9.23L26.36 20.16 23.27 22.92 13.35 11.8" transform="translate(20)"/>
+                        <path d="M13.58 6.35L4.76 13.27 7.32 16.53 18.8 7.53" transform="translate(20)"/>
+                        <path d="M0.393 15.478H28.333000000000002V19.618H0.393z" transform="translate(20) rotate(20 14.363 17.548)"/>
+                    </g>
+                    <rect width="24.34" height="31.67" x="21.41" y="6.35" stroke="#00736E" rx="12.17"/>
+                    <path stroke="#FF3000" d="M45.75 23.9v-5.38c0-6.721-5.449-12.17-12.17-12.17h0c-5.446.006-10.229 3.622-11.72 8.86l23.89 8.69z"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
