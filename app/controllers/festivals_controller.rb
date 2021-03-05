@@ -27,11 +27,9 @@ class FestivalsController < ApplicationController
     end
   end
 
-  
-
   private
 
   def festival_params
-    params.require(:fetival).permit(:user_id, :start_date, :end_date, :genre, :name, :venue)
+    params.require(:fetival).permit(:user_id, :start_date, :end_date, :address, :genre, :name, :venue)
   end
 end
