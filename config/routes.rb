@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get 'cancellations/new'
   # get 'cancellations/create'
 
-  resources :festivals, only: [:new, :create] do
+  resources :festivals, only: [:new, :create, :index] do
     resources :contracts, only: [:new, :create]
   end
 
