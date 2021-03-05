@@ -36,6 +36,11 @@
         </div>
 
         <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">Address</label>
+           <input type="text" id="form36" class="form-control validate">
+         </div>
+
+        <div class="md-form mb-4">
          <label data-error="wrong" data-success="right" for="orangeForm-pass">Event dates</label>
            <div class="d-flex"> 
             <input type="date" id="form37" class="form-control validate">
@@ -46,9 +51,9 @@
         <div class="md-form mb-4">
           <label data-error="wrong" data-success="right" for="orangeForm-pass">Has the event been held before?</label>
            <div class="switch-field">
-            <input type="radio" id="event-radio1" name="event" value="yes">
+            <input type="radio" id="event-radio1" name="event1" value="yes">
             <label for="event-radio1">Yes</label>
-            <input type="radio" id="event-radio2" name="event" value="no">
+            <input type="radio" id="event-radio2" name="event1" value="no">
             <label for="event-radio2">No</label>
            </div>
         </div>
@@ -56,19 +61,19 @@
         <div class="md-form mb-4">
           <label data-error="wrong" data-success="right" for="orangeForm-pass">Is the event open to the public?</label>
            <div class="switch-field">
-            <input type="radio" id="event-radio3" name="event" value="yes">
+            <input type="radio" id="event-radio3" name="event2" value="yes">
             <label for="event-radio3">Yes</label>
-            <input type="radio" id="event-radio4" name="event" value="no">
+            <input type="radio" id="event-radio4" name="event2" value="no">
             <label for="event-radio4">No</label>
            </div>
         </div>
  
        </div>
        <div class="modal-footer d-flex justify-content-center">
-         <button class="btn btn-deep-orange" data-toggle="modal" data-dismiss="modal" data-target="#cancellation">next</button>
+         <button class="btn btn-deep-orange" data-toggle="modal" data-dismiss="modal" data-target="#coverages">next</button>
        </div>
      </div>
    </div>
  </div>
 
- <%= render 'shared/cancellation' %> 
+ <%= render 'shared/coverages' %> 
