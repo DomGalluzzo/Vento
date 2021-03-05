@@ -1,0 +1,17 @@
+.map {
+  position: relative;
+}
+
+.card-map{
+  position: absolute;
+  left: 50%;
+  bottom: 1px;
+  width: 600px; 
+  height:200px;
+}
+
+#map{
+  position: absolute;
+  border-radius: 50px;
+  border-color: transparent;
+}

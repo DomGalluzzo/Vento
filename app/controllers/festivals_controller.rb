@@ -1,4 +1,16 @@
 class FestivalsController < ApplicationController
+  def index
+    @festivals = Festival.all
+
+    # the `geocoded` scope filters only flats with coordinates (latitude & longitude)
+    @markers = @festivals.geocoded.map do |festival|
+      {
+        lat: festival.latitude,
+        lng: festival.longitude
+      }
+    end
+  end
+
   def new
     @festival = Festival.new
   end
@@ -14,6 +26,8 @@ class FestivalsController < ApplicationController
       render 'new'
     end
   end
+
+  
 
   private
 
