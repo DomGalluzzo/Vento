@@ -10,7 +10,7 @@ class ContractPlansController < ApplicationController
 
     if @contract_plan.save
       flash[:success] = "ContractPlan successfully created"
-      redirect_to @contract_plan
+
     else
       flash[:error] = "Something went wrong"
       render 'new'
@@ -23,7 +23,7 @@ class ContractPlansController < ApplicationController
 
     if @contract_plan.save
       flash[:success] = "ContractPlan successfully created"
-      redirect_to @contract_plan
+
     else
       flash[:error] = "Something went wrong"
       render 'new'

@@ -20,7 +20,6 @@ class FestivalsController < ApplicationController
     @festival.user = current_user
     if @festival.save
       flash[:success] = "Festival successfully created"
-      redirect_to @festival
     else
       flash[:error] = "Something went wrong"
       render 'new'
@@ -30,6 +29,6 @@ class FestivalsController < ApplicationController
   private
 
   def festival_params
-    params.require(:fetival).permit(:user_id, :start_date, :end_date, :address, :genre, :name, :venue)
+    params.require(:festival).permit(:user_id, :start_date, :end_date, :address, :genre, :name, :venue)
   end
 end

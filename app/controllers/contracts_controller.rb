@@ -9,7 +9,6 @@ class ContractsController < ApplicationController
     @festival = Festival.find(params[:festival_id])
     if @contract.save
       flash[:success] = "Contract successfully created"
-      redirect_to @contract
     else
       flash[:error] = "Something went wrong"
       render 'new'
