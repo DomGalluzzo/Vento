@@ -8,8 +8,8 @@ User.destroy_all
 dom1 = User.create!(email: "dom2.galluzzo@gmail.com", password: "111111")
 dom2 = User.create!(email: "dom1.galluzzo@gmail.com", password: "111111")
 
-fest1 = Festival.create!(start_date: DateTime.new(2021,1,1), end_date: DateTime.new(2021,1,2), genre: "Music", name: "Cool Festival", venue: "Cool Venue", user: dom1)
-fest2 = Festival.create!(start_date: DateTime.new(2021,2,2), end_date: DateTime.new(2021,2,3), genre: "Race", name: "Cool Race", venue: "Cool Race Place", user: dom2)
+fest1 = Festival.create!(start_date: DateTime.new(2021,1,1), end_date: DateTime.new(2021,1,2), genre: "Music", address: "Westminster, London SW1A 0AA, United Kingdom", name: "Cool Festival", venue: "Cool Venue", user: dom1)
+fest2 = Festival.create!(start_date: DateTime.new(2021,2,2), end_date: DateTime.new(2021,2,3), genre: "Race", address: "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France", name: "Cool Race", venue: "Cool Race Place", user: dom2)
 
 contract1 = Contract.create!(total_cost: 10000, festival: fest1)
 contract2 = Contract.create!(total_cost: 5000, festival: fest2)
