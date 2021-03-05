@@ -11,6 +11,24 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
 body{
     background-color: #FCF9F7;
 }
+
+
+@font-face {
+    font-family: 'GraphikLCG-Bold';
+    src: url('GraphikLCG-Bold.ttf');
+ }
+
+@font-face {
+    font-family: 'GraphikLCG-Medium';
+    src: url('GraphikLCG-Medium.ttf');
+ }
+
+@font-face {
+    font-family: 'GraphikLCG-Regular';
+    src: url('GraphikLCG-Regular.ttf');
+ }
