@@ -22,7 +22,7 @@
 
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Logout", destroy_user_session_path, method: "delete", data: {confirm: "Are you usre?", title: "Log out?", commit: "Yes", cancel: "No"}, class: "nav-link" %>
+            <%= link_to "Logout", destroy_user_session_path, method: "delete", data: {confirm: "Are you sure?", title: "Log out?", commit: "Yes", cancel: "No"}, class: "nav-link" %>
         </li>
         <% else %>
           <li class="nav-item list-link">
@@ -30,8 +30,11 @@
           </li>
         <% end %>
 
-        <button class="btn btn-ghost" type="button" data-toggle="modal" data-target="#coverages">Get covered</button>
+        <%= link_to "Get covered", new_festival_path, class: "btn btn-ghost"%>
 
+          <%# <button class="btn btn-ghost" type="button" data-toggle="modal" data-target="#coverages">Get covered</button> %>
+        
+        
     </ul>
   </div>
 </div>

@@ -1,2 +1,8 @@
-<h1>Festivals#new</h1>
-<p>Find me in app/views/festivals/new.html.erb</p>
+<%= simple_form_for @festival do |f| %>
+  <%= f.input :start_date, as: :date, html5: true %>
+  <%= f.input :end_date, as: :date, html5: true %>
+  <%= f.input :genre, as: :radio_buttons, collection: [['0', 'Festival'], ['1', 'Conference'], ['2','Other']], label_method: :second, value_method: :first %>
+  <%= f.input :name %>
+  <%= f.input :venue %>
+  <%= f.input :address %>
+<% end %>
