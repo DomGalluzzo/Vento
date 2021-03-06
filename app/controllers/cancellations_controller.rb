@@ -4,9 +4,7 @@ class CancellationsController < ApplicationController
   end
 
   def create
-    @cancellation = Cancellation.new(params[:cancellation])
-    @festival = Festival.find(params[:festival_id])
-    @cancellation.festival = @festival
+    @cancellation = Cancellation.new(cancellation_params)
     if @cancellation.save
       flash[:success] = "Cancellation successfully created"
     else
@@ -18,5 +16,11 @@ class CancellationsController < ApplicationController
   def show
     @cancellation = Cancellation.find(params[:id])
     @contract_plan = @cancellation.plannable.new
+  end
+
+  private
+
+  def cancellation_params
+    params.require(:cancellation).permit(:budget, :terrorism, :location, :rain, :flood, :loss, :weather)
   end
 end

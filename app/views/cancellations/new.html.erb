@@ -1,2 +1,9 @@
-<h1>Cancellations#new</h1>
-<p>Find me in app/views/cancellations/new.html.erb</p>
+<div class="container">
+  <div class="cards">
+    <div class="card">
+      <%= simple_form_for @cancellation do |f| %>
+        <%= f.input :budget, label: "What's your total festival budget?" %>
+      <% end %>
+    </div>
+  </div>
+</div>

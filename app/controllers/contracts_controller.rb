@@ -7,6 +7,7 @@ class ContractsController < ApplicationController
   def create
     @contract = Contract.new(contract_params)
     @festival = Festival.find(params[:festival_id])
+    @contract.festival = @festival
     if @contract.save
       flash[:success] = "Contract successfully created"
     else
