@@ -4,8 +4,6 @@
    <div class="modal-dialog modal-dialog-scrollable" role="document">
      <div class="modal-content">
 
-      <%= simple_form_for Festival.create do |f| %>
-
        <div class="modal-header text-center">
          <h4 class="modal-title w-100 font-weight-bold">Event details</h4>
          <p>Please give us a few details</p>
@@ -17,9 +15,8 @@
 
         <div class="modal-body mx-3">
 
-          
+           <%= simple_form_for Festival.new do |f| %>
             <%= f.input :name, label: 'Name of event' %>
-
             <p>
               <b>Event Type *</b><br />
               <%= f.radio_button :genre, 'Festival' %> Festival<br />
@@ -27,18 +24,20 @@
               <%= f.radio_button :genre, 'Other' %> Other<br />
           </p>
 
-          <%= f.input :venue, label: 'Venue' %>
-          <%= f.input :address, label: 'Address' %>
+            <%= f.input :venue, label: 'Venue' %>
+            <%= f.input :address, label: 'Address' %>
             <div class="d-flex"> 
               <%= f.input :start_date, as: :date, html5: true %>
               <%= f.input :end_date, label: 'End date', as: :date, html5: true %>
             </div>
+
+          <div class="modal-footer d-flex justify-content-center">
+              <%= f.submit %>
+          </div>
+            <% end %>
  
        </div>
-       <div class="modal-footer d-flex justify-content-center">
-         <%= f.submit "next", 'data-target': "#coverages", 'data-dismiss': "modal", 'data-toggle': "modal" %>
-       </div>
-       <% end %>
+      
      </div>
    </div>
  </div>
