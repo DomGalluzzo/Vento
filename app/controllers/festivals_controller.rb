@@ -20,6 +20,7 @@ class FestivalsController < ApplicationController
     @festival.user = current_user
     if @festival.save
       flash[:success] = "Festival successfully created"
+      redirect_to new_festival_cancellation_path(@festival.id)
     else
       flash[:error] = "Something went wrong"
       render 'new'
