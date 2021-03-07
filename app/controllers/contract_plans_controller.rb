@@ -1,14 +1,14 @@
 class ContractPlansController < ApplicationController
   def new
-    @contract_plan = ContractPlan.new
+    @plannable = ContractPlan.new
   end
 
   def public_injuries
-    @contract_plan = ContractPlan.new(public_injury_params)
+    @plannable = ContractPlan.new(public_injury_params)
     @contract = Contract.find(params[:contract_id])
-    @contract_plan.contract = @contract
+    @plannable.contract = @contract
 
-    if @contract_plan.save
+    if @plannable.save
       flash[:success] = "ContractPlan successfully created"
 
     else
@@ -18,10 +18,10 @@ class ContractPlansController < ApplicationController
   end
 
   def cancellations
-    @contract_plan = ContractPlan.new(cancellation_params)
+    @plannable = ContractPlan.new(cancellation_params)
     @contract = Contract.find(params[:contract_id])
-    @contract_plan.contract = @contract
-    if @contract_plan.save
+    @plannable.contract = @contract
+    if @plannable.save
       flash[:success] = "ContractPlan successfully created"
 
     else
