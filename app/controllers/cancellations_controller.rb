@@ -5,6 +5,8 @@ class CancellationsController < ApplicationController
 
   def create
     @cancellation = Cancellation.new(cancellation_params)
+    @festival = Festival.find(params[:festival_id])
+    @cancellation.festival = @festival
     if @cancellation.save
       flash[:success] = "Cancellation successfully created"
     else

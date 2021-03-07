@@ -5,11 +5,12 @@ class ContractsController < ApplicationController
   end
 
   def create
-    @contract = Contract.new(contract_params)
+    @contract = Contract.new(params[:id])
     @festival = Festival.find(params[:festival_id])
     @contract.festival = @festival
     if @contract.save
       flash[:success] = "Contract successfully created"
+      redirect_to new_contract_contract_plan_path(@contract.id)
     else
       flash[:error] = "Something went wrong"
       render 'new'
