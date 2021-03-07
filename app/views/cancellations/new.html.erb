@@ -1,9 +1,4 @@
-<div class="container">
-  <div class="cards">
-    <div class="card">
-      <%= simple_form_for Cancellation.create! do |f| %>
-        <%= f.input :budget, label: "What's your total festival budget?" %>
-      <% end %>
-    </div>
-  </div>
-</div>
+
+<%= simple_form_for [@festival, @cancellation] do |f| %>
+  <%= f.input :budget %>
+<% end %>

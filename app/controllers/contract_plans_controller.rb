@@ -1,36 +1,55 @@
 class ContractPlansController < ApplicationController
   def new
-    @plannable = ContractPlan.new
+    @contract = Contract.find(params[:contract_id])
+    @contract_plan = ContractPlan.new
   end
 
-  def public_injuries
-    @plannable = ContractPlan.new(public_injury_params)
+  def create
     @contract = Contract.find(params[:contract_id])
+    @plannable = ContractPlan.new(contract_plan_params)
     @plannable.contract = @contract
-
     if @plannable.save
       flash[:success] = "ContractPlan successfully created"
-
+      redirect_to @plannable
     else
       flash[:error] = "Something went wrong"
       render 'new'
     end
   end
+  
 
-  def cancellations
-    @plannable = ContractPlan.new(cancellation_params)
-    @contract = Contract.find(params[:contract_id])
-    @plannable.contract = @contract
-    if @plannable.save
-      flash[:success] = "ContractPlan successfully created"
+  # def public_injuries
+  #   @contract_plan = ContractPlan.new(public_injury_params)
+  #   @contract = Contract.find(params[:contract_id])
+  #   @contract_plan.contract = @contract
 
-    else
-      flash[:error] = "Something went wrong"
-      render 'new'
-    end
-  end
+  #   if @contract_plan.save
+  #     flash[:success] = "ContractPlan successfully created"
+
+  #   else
+  #     flash[:error] = "Something went wrong"
+  #     render 'new'
+  #   end
+  # end
+
+  # def cancellations
+  #   @contract_plan = ContractPlan.new(cancellation_params)
+  #   @contract = Contract.find(params[:contract_id])
+  #   @contract_plan.contract = @contract
+
+  #   if @contract_plan.save
+  #     flash[:success] = "ContractPlan successfully created"
+  #   else
+  #     flash[:error] = "Something went wrong"
+  #     render 'new'
+  #   end
+  # end
 
   private
+
+  def contract_plan_params
+    params.require(:contract_plan).permit(:contract_id, :plannable)
+  end
 
   def public_injury_params
     params.require(:public_injury).permit(:liability, :daily, :total, :usa, :dangerous, :sub)

@@ -10,7 +10,7 @@ class ContractsController < ApplicationController
     @contract.festival = @festival
     if @contract.save
       flash[:success] = "Contract successfully created"
-      redirect_to new_contract_contract_plan_path(@contract.id)
+      redirect_to @contract
     else
       flash[:error] = "Something went wrong"
       render 'new'

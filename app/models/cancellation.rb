@@ -1,5 +1,6 @@
 class Cancellation < ApplicationRecord
   has_many :contract_plans, as: :plannable
+  accepts_nested_attributes_for :contract_plans
 
   validates :budget, presence: true
 

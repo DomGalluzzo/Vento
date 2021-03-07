@@ -1,3 +1,5 @@
-<%= simple_form_for ContractPlan.create! do |f| %>
-  <%= f.input :budget %>
+<%= simple_form_for [@contract, @contract_plan, Cancellation.create!] do |f| %>
+
+  <%= f.input :plannable, as: :check_boxes, label: "Cancellations?" %>
+  <%= f.submit %>
 <% end %>

@@ -1,0 +1,9 @@
+<%= simple_form_for @cancellation do |f| %>
+  <%= f.input :budget %>
+
+  <%= f.simple_fields_for :contract_plan do |plan| %>
+    <%= render partial: 'shared/contract_plan/form', locals: {f: contract_plan} %>
+  <% end %>
+
+  <%= f.button :submit %>
+<% end %>
