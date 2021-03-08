@@ -1,6 +1,47 @@
 <%= simple_form_for [@contract, @cancellation] do |f| %>
 
-  <%= f.input :rain, :as => :boolean, input_html: {checked: false} %>
-  <%= f.input :flood, :as => :boolean, input_html: {checked: false} %>
+
+  <%= f.input :budget, :as => :integer, label: 'What is the budget for your event' %>
+  
+  <p>
+    Do you require Terrorism cover? *<br />
+    <%= f.radio_button :terrorism, true %> Yes<br />
+    <%= f.radio_button :terrorism, false %> No<br />
+  </p>
+
+  <p>
+    Where is the event predominantely held? *<br />
+    <%= f.radio_button :location, 'Indoors' %> Indoors<br />
+    <%= f.radio_button :location, 'Outdoors' %> Outdoors<br />
+    <%= f.radio_button :location, 'Temporary Structures' %> Temporary Structures<br />
+  </p>
+  <p>
+    Do you require cover for adverse weather conditions? *<br />
+    <%= f.radio_button :weather, true %> Yes<br />
+    <%= f.radio_button :weather, false %> No<br />
+  </p>
+
+  <p>
+    If yes, can the event go ahead in continuous moderate rainfall and wind speeds of up to 30mph/50kmh? *<br />
+    <%= f.radio_button :rain, true %> Yes<br />
+    <%= f.radio_button :rain, false %> No<br />
+  </p>
+
+  <p>
+    Does this event site have any history of flooding? *<br />
+    <%= f.radio_button :flood, true %> Yes<br />
+    <%= f.radio_button :flood, false %> No<br />
+  </p>
+
+  <p>
+    Has this event ever had any losses as a result of adverse weather, whether insured or not? *<br />
+    <%= f.radio_button :loss, true %> Yes<br />
+    <%= f.radio_button :loss, false %> No<br />
+  </p>
+
+  <%= simple_fields_for @contract_plans do |f| %>
+
+  <% end %>
+
   <%= f.submit %>
 <% end %>
