@@ -1,13 +1,6 @@
-
-
 <%= simple_form_for [@contract, @cancellation] do |f| %>
 
   <%= f.input :rain, :as => :boolean, input_html: {checked: false} %>
   <%= f.input :flood, :as => :boolean, input_html: {checked: false} %>
-  
-  <%= simple_fields_for @contract_plans do |f| %>
-
-  <% end %>
   <%= f.submit %>
-  
 <% end %>

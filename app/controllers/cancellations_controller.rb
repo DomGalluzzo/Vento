@@ -7,15 +7,13 @@ class CancellationsController < ApplicationController
   def create
     @cancellation = Cancellation.new(cancellation_params)
     @contract = Contract.find(params[:contract_id])
-    # @cancellation.contract = @contract
-    # @cancellation.contract_plan.plannable = @cancellation
     if @cancellation.save
       @contract_plan = ContractPlan.new
       @contract_plan.contract = @contract
       @contract_plan.plannable = @cancellation
       @contract_plan.save!
       flash[:success] = "Cancellation successfully created"
-      redirect_to @cancellation
+      redirect_to @contract
     else
       flash[:error] = "Something went wrong"
       render 'new'

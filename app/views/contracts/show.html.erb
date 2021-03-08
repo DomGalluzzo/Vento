@@ -28,6 +28,7 @@
           <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
           <li>Dangerous Activities? <%= check_bool(plan.plannable.dangerous)%></li>
           <li>Sub Festivals? <%= check_bool(plan.plannable.sub) %></li>
+          <% next %>
         <% else %>
           <h5><%= plan.plannable_type %></h5>
           <li>Total Revenue: <%= plan.plannable.budget %></li>
@@ -37,6 +38,7 @@
           <li>History of Flooding? <%= check_bool(plan.plannable.flood) %></li>
           <li>Previous Loss From Flood? <%= check_bool(plan.plannable.loss) %></li>
           <li>Structure Protected From Weather? <%= check_bool(plan.plannable.weather) %></li>
+          <% break %>
         <% end %>
         </div>
       <% end %>
