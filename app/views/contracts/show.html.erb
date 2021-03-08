@@ -15,8 +15,9 @@
         <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
       </div>
       <div>
-        <h3 class="vento-font">Insurance Coverages</h3>
-        <%= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
+        <h3 class="vento-font">Insurance Coverages<%= render 'dropdown' %></h3>
+        <%#= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
+
       </div>
       <% @contract.contract_plans.each do |plan| %>
         <div class="card insurance-details px-3 py-3">
