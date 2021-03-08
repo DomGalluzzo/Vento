@@ -7,8 +7,6 @@ class CancellationsController < ApplicationController
   def create
     @cancellation = Cancellation.new(cancellation_params)
     @contract = Contract.find(params[:contract_id])
-    # @cancellation.contract = @contract
-    # @cancellation.contract_plan.plannable = @cancellation
     if @cancellation.save
       @contract_plan = ContractPlan.new
       @contract_plan.contract = @contract
