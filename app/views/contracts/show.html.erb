@@ -23,7 +23,7 @@
         <div class="card insurance-details px-3 py-3">
         <% if plan.plannable.kind_of?(PublicInjury) %>
           <h5>Public Injury</h5>
-          <li>Liability Limit: <%= plan.plannable.liability%></li>
+          <li>Liability Limit: £<%= plan.plannable.liability%>m</li>
           <li>Daily Attendance: <%= plan.plannable.daily %></li>
           <li>Total Attendance: <%= plan.plannable.total %></li>
           <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
