@@ -48,3 +48,17 @@
      </div>
   </div>
 </div>
+
+<div class="container pt-5">
+  <div class="row map">
+    <div class="card-map col-sm-12 col-lg-12">
+      <div class="card-body">
+        <div id="map"
+            style="width: 100%; height: 200px;"
+            data-markers="<%= @markers.to_json %>"
+            data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
