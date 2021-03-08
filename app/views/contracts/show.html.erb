@@ -14,6 +14,35 @@
       <div class="card festival-dates pl-3 mb-4">
         <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
       </div>
+      
+      <% @contract.contract_plans.each do |plan| %>
+        <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of(Cancellation) %>
+          <% liability = plan.plannable.liability %>
+          <% budget = plan.plannable.budget %>
+          <h3 class="vento-font">Quote</h3>
+          <div class="card festival-dates pl-3 mb-4">
+            £<%= ((liability + budget) * 0.04) + (liability + budget) %>
+          </div>
+          <% break %>
+        <% elsif plan.plannable.kind_of?(PublicInjury) %>
+          <h3 class="vento-font">Quote</h3>
+          <% liability = plan.plannable.liability %>
+          <div class="card festival-dates pl-3 mb-4">
+            £<%= (liability * 0.02) + liability %>
+          </div>
+          <% break %>
+        <% elsif plan.plannable.kind_of?(Cancellation) %>
+          <h3 class="vento-font">Quote</h3>
+          <% budget = plan.plannable.budget %>
+          <div class="card festival-dates pl-3 mb-4">
+            £<%= (budget * 0.02) + budget %>
+          </div>
+          <% break %>
+        <% end %>
+        
+            
+      <% end %>
+      
       <div>
         <h3 class="vento-font">Insurance Coverages <%= render 'dropdown' %></h3>
         <%#= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
@@ -45,7 +74,8 @@
       <% end %>
      </div>
      <div class="help-button text-center mt-4">
-        <a href="#" class="card-link link-color">Help ?</a>
+        <%# <a href="#" class="card-link link-color">Help ?</a> %>
+        <%= link_to "Need Help?", "#{root_path}#faq" %>
      </div>
   </div>
 </div>
