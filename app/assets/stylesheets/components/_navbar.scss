@@ -34,9 +34,9 @@
   background-color: rgba($color:#00736E, $alpha: 0.3);
   color: #00736E;
   // border: 1px solid #4A4A4A;
-  padding: 2px 24px;
+  padding: 6px 24px;
   border-radius: 50px;
-  font-weight: 600;
+  font-weight: 400;
   opacity: 0.6;
   transition: 0.2s ease-in;
   height: 40px;
@@ -47,6 +47,7 @@
   background-color: white;
   color: #00736E;
   border: 1px solid #00736E;
+  font-weight: 600;
 }
 
 .logo {
