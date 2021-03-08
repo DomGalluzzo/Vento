@@ -20,11 +20,17 @@ class FestivalsController < ApplicationController
     @festival.user = current_user
     if @festival.save
       flash[:success] = "Festival successfully created"
+      redirect_to @festival
     else
       flash[:error] = "Something went wrong"
       render 'new'
     end
   end
+  
+  def show
+    @festival = Festival.find(params[:id])
+  end
+  
 
   private
 

@@ -1,2 +1,10 @@
-<h1>ContractPlans#new</h1>
-<p>Find me in app/views/contract_plans/new.html.erb</p>
+<%= simple_form_for [@contract, ContractPlan.new] do |f| %>
+
+  <%= f.check_box :plannable %>
+  
+  <%= simple_fields_for @cancellations do |f| %>
+    <%= f.input :budget %>
+  <% end %>
+  <%= f.submit %>
+  
+<% end %>

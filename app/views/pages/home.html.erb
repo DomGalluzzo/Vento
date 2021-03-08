@@ -8,9 +8,13 @@
       <p>Instant Quotes.</p>
       <p>Rapid Claims Payment.</p>
     </div>
-    <button type="button" class="btn boton text-white" data-toggle="modal" data-target="#festival_details">
+
+    <%= link_to new_festival_path, class: "btn boton text-white" do  %>
       <i class="fas fa-fire"></i>Get covered instantly
-    </button>
+    <% end %>
+     
+    <%# <button type="button" class="btn boton text-white" data-toggle="modal" data-target="">
+    </button> %>
     <!-- <a href="#" class="btn boton text-white" role="button"><i class="fas fa-fire"></i>Get covered instantly</a> -->
   </div>
 </div>
@@ -21,6 +25,4 @@
 <%= render 'shared/bigcard' %> 
 <%= render 'shared/photos' %> 
 <%= render 'shared/faq' %>
-<%= render 'shared/festival_details' %>
-
-
+<%# <%= render 'shared/festival_details' %>
