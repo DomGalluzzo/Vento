@@ -28,6 +28,7 @@
           <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
           <li>Dangerous Activities? <%= check_bool(plan.plannable.dangerous)%></li>
           <li>Sub Festivals? <%= check_bool(plan.plannable.sub) %></li>
+          <% next %>
         <% else %>
           <h5><%= plan.plannable_type %></h5>
           <li>Total Revenue: <%= plan.plannable.budget %></li>
@@ -37,6 +38,7 @@
           <li>History of Flooding? <%= check_bool(plan.plannable.flood) %></li>
           <li>Previous Loss From Flood? <%= check_bool(plan.plannable.loss) %></li>
           <li>Structure Protected From Weather? <%= check_bool(plan.plannable.weather) %></li>
+          <% break %>
         <% end %>
         </div>
       <% end %>
@@ -44,5 +46,19 @@
      <div class="help-button text-center mt-4">
         <a href="#" class="card-link link-color">Help ?</a>
      </div>
+  </div>
+</div>
+
+<div class="container pt-5">
+  <div class="row map">
+    <div class="card-map col-sm-12 col-lg-12">
+      <div class="card-body">
+        <div id="map"
+            style="width: 100%; height: 200px;"
+            data-markers="<%= @markers.to_json %>"
+            data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      </div>
+    </div>
   </div>
 </div>

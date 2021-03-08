@@ -1,6 +1,5 @@
-
-
 <%= simple_form_for [@contract, @cancellation] do |f| %>
+
 
   <%= f.input :budget, :as => :integer, label: 'What is the budget for your event' %>
   
@@ -43,6 +42,6 @@
   <%= simple_fields_for @contract_plans do |f| %>
 
   <% end %>
+
   <%= f.submit %>
-  
 <% end %>
