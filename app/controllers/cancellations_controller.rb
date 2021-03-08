@@ -15,7 +15,7 @@ class CancellationsController < ApplicationController
       @contract_plan.plannable = @cancellation
       @contract_plan.save!
       flash[:success] = "Cancellation successfully created"
-      redirect_to @cancellation
+      redirect_to @contract
     else
       flash[:error] = "Something went wrong"
       render 'new'
