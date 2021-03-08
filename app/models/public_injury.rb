@@ -7,9 +7,6 @@ class PublicInjury < ApplicationRecord
 
   validates :total, presence: true
 
-  validates :usa, exclusion: [nil]
-
   validates :dangerous, exclusion: [nil]
 
-  validates :sub, exclusion: [nil]
 end

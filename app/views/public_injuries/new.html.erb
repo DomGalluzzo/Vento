@@ -1,2 +1,38 @@
-<h1>PublicInjuries#new</h1>
-<p>Find me in app/views/public_injuries/new.html.erb</p>
+<%= simple_form_for [@contract, @public_injury] do |f| %>
+    <p>
+        Select your event liability limit * <br/>
+        <%= f.radio_button :liability, 1 %> £1m <br/>
+        <%= f.radio_button :liability,  2 %> £2m <br/>
+        <%= f.radio_button :liability, 5 %> £5m <br/>
+        <%= f.radio_button :liability, 10 %> £10m <br/>
+   </p>
+    
+   <p>
+        <%= f.input :daily, label: 'What’s your maximum daily attendance?', error: 'Maximum daily attendance is mandatory, please specify one' %>
+   </p>
+
+   <p>
+        <%= f.input :total, label: 'What’s your total attendance?', error: 'Total attendance is mandatory, please specify one' %>  
+   </p>
+
+   <p>
+        Do you have any assets in the USA?<br/>
+        <%= f.radio_button :usa, true %> Yes<br/>
+        <%= f.radio_button :usa, false %> No<br/>
+   </p>
+
+   <p>
+        Does the event include any dangerous activities?*<br/>
+        <%= f.radio_button :dangerous, true %> Yes<br/>
+        <%= f.radio_button :dangerous, false %> No<br/>
+   </p>
+
+   <p>
+        Are there any other events taking place at the event which need to be considered?<br/>
+        <%= f.radio_button :sub, true %> Yes<br/>
+        <%= f.radio_button :sub, false %> No<br/>
+   </p>
+    
+    
+    <%= f.submit %>
+<% end %>
