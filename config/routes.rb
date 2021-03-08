@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :contracts, only: :show do 
     resources :cancellations
+    resources :public_injuries
   end
 
 

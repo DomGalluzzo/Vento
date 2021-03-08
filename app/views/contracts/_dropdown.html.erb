@@ -1,0 +1,7 @@
+<div class="btn-group dropend btn-sm">
+  <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-plus"></i></button>
+  <ul class="dropdown-menu">
+    <li><%= link_to "Unexpected Cancellations", new_contract_cancellation_path(@contract.id), class: "dropdown-item", type: "button"%></li>
+    <li><%= link_to "Public Injuries", new_contract_public_injury_path(@contract.id), class: "dropdown-item", type: "button"%></li>
+  </ul>
+</div>
