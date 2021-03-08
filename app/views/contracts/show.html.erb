@@ -16,7 +16,7 @@
       </div>
       
       <% @contract.contract_plans.each do |plan| %>
-        <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of(Cancellation) %>
+        <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of?(Cancellation) %>
           <% liability = plan.plannable.liability %>
           <% budget = plan.plannable.budget %>
           <h3 class="vento-font">Quote</h3>
