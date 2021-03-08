@@ -19,6 +19,12 @@ class ContractsController < ApplicationController
 
   def show
     @contract = Contract.find(params[:id])
+
+    @markers =[
+      {
+        lat: @contract.festival.latitude,
+        lng: @contract.festival.longitude
+      }]
   end
 
   private
