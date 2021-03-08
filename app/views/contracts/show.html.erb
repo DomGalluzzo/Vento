@@ -16,7 +16,7 @@
       </div>
       <div>
         <h3 class="vento-font">Insurance Coverages</h3>
-        <%= link_to "Add coverages", new_contract_contract_plan_path(@contract)%>
+        <%= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
       </div>
       <% @contract.contract_plans.each do |plan| %>
         <div class="card insurance-details px-3 py-3">

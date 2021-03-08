@@ -13,10 +13,19 @@ Rails.application.routes.draw do
   resources :festivals, only: [:new, :create, :show, :index] do
     resources :contracts, only: [:new, :create]
     resources :cancellations, only: [:new, :create]
-    resources :public_injuries, only: [:create]
+    # resources :public_injuries, only: [:create]
   end
 
-  resources :contracts, only: [:show] do
-    resources :contract_plans, only: [:new, :create]
+  resources :contracts, only: :show do 
+    resources :cancellations
   end
+
+
+  # resources :cancellations do
+  #   resources :contract_plans
+  # end
+
+  # resources :contracts, only: [:show] do
+  #   resources :contract_plans, only: [:new, :create]
+  # end
 end

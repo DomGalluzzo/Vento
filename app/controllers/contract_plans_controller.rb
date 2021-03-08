@@ -1,16 +1,16 @@
 class ContractPlansController < ApplicationController
   def new
-    @contract = Contract.find(params[:contract_id])
+    # @contract = Contract.find(params[:contract_id])
     @contract_plan = ContractPlan.new
   end
 
   def create
-    @contract = Contract.find(params[:contract_id])
-    @plannable = ContractPlan.new(contract_plan_params)
-    @plannable.contract = @contract
-    if @plannable.save
+    # @contract = Contract.find(params[:contract_id])
+    @contract_plan = ContractPlan.new(params[:plannable_id])
+    @contract_plan.contract = @contract
+    if @contract_plan.save
       flash[:success] = "ContractPlan successfully created"
-      redirect_to @plannable
+      redirect_to @contract_plan
     else
       flash[:error] = "Something went wrong"
       render 'new'
@@ -18,37 +18,37 @@ class ContractPlansController < ApplicationController
   end
   
 
-  # def public_injuries
-  #   @contract_plan = ContractPlan.new(public_injury_params)
-  #   @contract = Contract.find(params[:contract_id])
-  #   @contract_plan.contract = @contract
+  def public_injuries
+    @contract_plan = ContractPlan.new(public_injury_params)
+    @contract = Contract.find(params[:contract_id])
+    @contract_plan.contract = @contract
 
-  #   if @contract_plan.save
-  #     flash[:success] = "ContractPlan successfully created"
+    if @contract_plan.save
+      flash[:success] = "ContractPlan successfully created"
 
-  #   else
-  #     flash[:error] = "Something went wrong"
-  #     render 'new'
-  #   end
-  # end
+    else
+      flash[:error] = "Something went wrong"
+      render 'new'
+    end
+  end
 
-  # def cancellations
-  #   @contract_plan = ContractPlan.new(cancellation_params)
-  #   @contract = Contract.find(params[:contract_id])
-  #   @contract_plan.contract = @contract
+  def cancellations
+    @contract_plan = ContractPlan.new(cancellation_params)
+    @contract = Contract.find(params[:contract_id])
+    @contract_plan.contract = @contract
 
-  #   if @contract_plan.save
-  #     flash[:success] = "ContractPlan successfully created"
-  #   else
-  #     flash[:error] = "Something went wrong"
-  #     render 'new'
-  #   end
-  # end
+    if @contract_plan.save
+      flash[:success] = "ContractPlan successfully created"
+    else
+      flash[:error] = "Something went wrong"
+      render 'new'
+    end
+  end
 
   private
 
   def contract_plan_params
-    params.require(:contract_plan).permit(:contract_id, :plannable)
+    params.require(:contract_plan).permit(:contract_id, :plannable_type, :plannable_id)
   end
 
   def public_injury_params
