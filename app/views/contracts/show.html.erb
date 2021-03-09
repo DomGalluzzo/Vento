@@ -19,24 +19,27 @@
         <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of?(Cancellation) %>
           <% liability = plan.plannable.liability %>
           <% budget = plan.plannable.budget %>
+          <% total = plan.plannable.total %>
           <h3 class="vento-font">Quote</h3>
           <div class="card festival-dates pl-3 mb-4">
-            £<%= ((liability + budget) * 0.04) + (liability + budget) %>
+            £<%= (liability * 0.00001) + (total * 0.1) + (budget * 0.02) %>
           </div>
-
+          <% break %>
         <% elsif plan.plannable.kind_of?(PublicInjury) %>
           <h3 class="vento-font">Quote</h3>
           <% liability = plan.plannable.liability %>
+          <% total = plan.plannable.total %>
           <div class="card festival-dates pl-3 mb-4">
-            £<%= (liability * 0.02) + liability %>
+            £<%= (liability * 0.00001) + (total * 0.1)%>
           </div>
-
+          <% break %>
         <% elsif plan.plannable.kind_of?(Cancellation) %>
           <h3 class="vento-font">Quote</h3>
           <% budget = plan.plannable.budget %>
           <div class="card festival-dates pl-3 mb-4">
-            £<%= (budget * 0.02) + budget %>
+            £<%= (budget * 0.02)%>
           </div>
+          <% break %>
         <% end %>
         
             
@@ -51,7 +54,7 @@
         <div class="card insurance-details px-3 py-3">
         <% if plan.plannable.kind_of?(PublicInjury) %>
           <h5>Public Injury</h5>
-          <li>Liability Limit: £<%= plan.plannable.liability%>m</li>
+          <li>Liability Limit: £<%= plan.plannable.liability%></li>
           <li>Daily Attendance: <%= plan.plannable.daily %></li>
           <li>Total Attendance: <%= plan.plannable.total %></li>
           <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
