@@ -43,11 +43,7 @@
             
       <% end %>
       
-      <div>
-        <h3 class="vento-font">Insurance Coverages <%= render 'dropdown' %></h3>
-        <%#= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
 
-      </div>
       <% @contract.contract_plans.each do |plan| %>
         <div class="card insurance-details px-3 py-3">
         <% if plan.plannable.kind_of?(PublicInjury) %>
@@ -74,23 +70,7 @@
      </div>
      <div class="help-button text-center mt-4">
         <%# <a href="#" class="card-link link-color">Help ?</a> %>
-        <%= link_to "Need Help?", "#{root_path}#faq" %> <br>
-        <%= link_to "Download your contract", contract_path(format: :pdf) %>
-        
+        <%# <%= link_to "Need Help?", "#{root_path}#faq" %>
      </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row map">
-    <div class="card-map col-sm-12 col-lg-12">
-      <div class="card-body">
-        <div id="map"
-            style="width: 100%; height: 200px;"
-            data-markers="<%= @markers.to_json %>"
-            data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-        </div>
-      </div>
-    </div>
   </div>
 </div>
