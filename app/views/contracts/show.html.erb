@@ -23,21 +23,20 @@
           <div class="card festival-dates pl-3 mb-4">
             £<%= ((liability + budget) * 0.04) + (liability + budget) %>
           </div>
-          <% break %>
+
         <% elsif plan.plannable.kind_of?(PublicInjury) %>
           <h3 class="vento-font">Quote</h3>
           <% liability = plan.plannable.liability %>
           <div class="card festival-dates pl-3 mb-4">
             £<%= (liability * 0.02) + liability %>
           </div>
-          <% break %>
+
         <% elsif plan.plannable.kind_of?(Cancellation) %>
           <h3 class="vento-font">Quote</h3>
           <% budget = plan.plannable.budget %>
           <div class="card festival-dates pl-3 mb-4">
             £<%= (budget * 0.02) + budget %>
           </div>
-          <% break %>
         <% end %>
         
             
