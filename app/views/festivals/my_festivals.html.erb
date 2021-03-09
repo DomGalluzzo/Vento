@@ -1,0 +1,9 @@
+<h1>lalo</h1>
+iterar sobre festivales
+dentro cada festival iterar sobre contratos
+
+<% @festivals.each do |festival| %>
+    <ul>
+      <li><%= link_to festival.name, contract_path(festival.contract) %></li>
+    </ul> 
+<% end %>
