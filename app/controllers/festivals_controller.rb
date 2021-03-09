@@ -1,4 +1,8 @@
 class FestivalsController < ApplicationController
+  def my_festivals
+    @festivals = current_user.festivals
+  end
+
   def index
     @festivals = Festival.all
   end

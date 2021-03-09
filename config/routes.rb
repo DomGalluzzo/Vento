@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :cancellations, only: [:new, :create]
     # resources :public_injuries, only: [:create]
   end
+  get "my_festivals", to: "festivals#my_festivals", as: "my_festivals"
 
   resources :contracts, only: :show do 
     resources :cancellations

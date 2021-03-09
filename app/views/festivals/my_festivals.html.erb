@@ -1,0 +1,7 @@
+<h1>My Events</h1>
+
+<% @festivals.each do |festival| %>
+    <ul>
+      <li><%= link_to festival.name, contract_path(festival.contract) %></li>
+    </ul> 
+<% end %>
