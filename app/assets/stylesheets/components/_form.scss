@@ -2,7 +2,22 @@ $font-primary: "GraphikLCG-Medium";
 $font-color: rgba(0,0,0,0.6);
 
 .body.cancellation {
-  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),url(https://images.pexels.com/photos/976863/pexels-photo-976863.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),url(https://images.pexels.com/photos/2415435/pexels-photo-2415435.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.body.public-injuries {
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),url(https://images.pexels.com/photos/974320/pexels-photo-974320.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.body.festivals {
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),url(https://images.pexels.com/photos/1047442/pexels-photo-1047442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -93,4 +108,32 @@ $font-color: rgba(0,0,0,0.6);
 .radio_button {
   height: 17px;
   width: 17px;
+}
+
+#radio-public {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+  padding-left: 0;
+
+    label {
+    font-family: $font-primary;
+    color: $font-color;
+    }
+}
+
+#radio-festival {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+  padding-left: 0px;
+
+    label {
+    font-family: $font-primary;
+    color: $font-color;
+    }
+}
+
+#festival-titles {
+  color: rgba(255, 48, 0, 0.6);
 }

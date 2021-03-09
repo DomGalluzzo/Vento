@@ -1,4 +1,4 @@
-<body class="body cancellation">
+<body class="body public-injuries">
 
 	<%= simple_form_for [@contract, @public_injury] do |f| %>
 		<div class="container cancellation mb-5">
@@ -7,10 +7,8 @@
 					<div class="form-inputs">
 						<h3 class="first-title">Liability</h3>
 						<h5>Select your event liability limit</h5>
-						<%= f.radio_button :liability, 100000, class: "radio_button" %> £1m <br/>
-						<%= f.radio_button :liability, 2000000, class: "radio_button" %> £2m <br/>
-						<%= f.radio_button :liability, 5000000, class: "radio_button" %> £5m <br/>
-						<%= f.radio_button :liability, 10000000, class: "radio_button" %> £10m <br/>
+						<%= f.input_field :liability, as: :radio_buttons, collection: [['100000', '£1m'], ['2000000', '£2m'], ['5000000', '£5m'], ['1000000', '£10m']], label_method: :second, value_method: :first, html: {id: "radio-public"}  %>
+
 					</div>
 				</div>
 				
@@ -31,21 +29,18 @@
 					<div class="form-inputs">
 						<h3 class="titles">Concerns</h3>
 						<h5>Do you have any assets in the USA?</h5>
-						<%= f.radio_button :usa, true, class: "radio_button" %><span> Yes</span><br/>
-						<%= f.radio_button :usa, false, class: "radio_button" %><span> No</span>
+						<%= f.input_field :usa, as: :radio_buttons, collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first, html: {id: "radio-public"} %>
 					</div>
 
 					<div class="form-inputs">
 						<h5>Does the event include any dangerous activities?</h5>
-						<%= f.radio_button :dangerous, true, class: "radio_button" %><span> Yes</span><br/>
-						<%= f.radio_button :dangerous, false, class: "radio_button" %><span> No</span>
+						<%= f.input_field :dangerous, as: :radio_buttons, collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first, html: {id: "radio-public"} %>
 					</div>
 
 
 					<div class="form-inputs">
 						<h5>Are there any other events taking place at this event which need to be considered?</h5>
-						<%= f.radio_button :sub, true, class: "radio_button" %><span> Yes</span><br/>
-						<%= f.radio_button :sub, false, class: "radio_button" %><span> No</span>
+						<%= f.input_field :sub, as: :radio_buttons, collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first, html: {id: "radio-public"} %>
 					</div>
 
 				</div>
