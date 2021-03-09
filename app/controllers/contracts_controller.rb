@@ -19,12 +19,19 @@ class ContractsController < ApplicationController
 
   def show
     @contract = Contract.find(params[:id])
-
     @markers =[
       {
         lat: @contract.festival.latitude,
         lng: @contract.festival.longitude
       }]
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render  pdf: "your-filename",
+          template: "contracts/show.pdf.erb",
+          locals: {:contract => @contract}
+        end
+      end  
   end
 
   private
