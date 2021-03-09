@@ -1,38 +1,59 @@
-<%= simple_form_for [@contract, @public_injury] do |f| %>
-    <p>
-        Select your event liability limit * <br/>
-        <%= f.radio_button :liability, 1000000 %> £1m <br/>
-        <%= f.radio_button :liability,  2000000 %> £2m <br/>
-        <%= f.radio_button :liability, 5000000 %> £5m <br/>
-        <%= f.radio_button :liability, 10000000 %> £10m <br/>
-   </p>
-    
-   <p>
-        <%= f.input :daily, label: 'What’s your maximum daily attendance?', error: 'Maximum daily attendance is mandatory, please specify one' %>
-   </p>
+<body class="body cancellation">
 
-   <p>
-        <%= f.input :total, label: 'What’s your total attendance?', error: 'Total attendance is mandatory, please specify one' %>  
-   </p>
+	<%= simple_form_for [@contract, @public_injury] do |f| %>
+		<div class="container cancellation mb-5">
+			<div class="forms">
+				<div class="form-1">
+					<div class="form-inputs">
+						<h3 class="first-title">Liability</h3>
+						<h5>Select your event liability limit</h5>
+						<%= f.radio_button :liability, 100000, class: "radio_button" %> £1m <br/>
+						<%= f.radio_button :liability, 2000000, class: "radio_button" %> £2m <br/>
+						<%= f.radio_button :liability, 5000000, class: "radio_button" %> £5m <br/>
+						<%= f.radio_button :liability, 10000000, class: "radio_button" %> £10m <br/>
+					</div>
+				</div>
+				
+				<div class="form-2">
+					<div class="form-inputs">
+						<h3 class="titles">Attendance</h3>
+						<h5>What’s your event's <strong><u>total</u></strong> attendance count?</h5>
+						<%= f.input :total, label: false %>
+					</div>
 
-   <p>
-        Do you have any assets in the USA?<br/>
-        <%= f.radio_button :usa, true %> Yes<br/>
-        <%= f.radio_button :usa, false %> No<br/>
-   </p>
+					<div class="form-inputs">
+					<h5>What's your event's <strong><u>daily</u></strong> attendance count?</h5>
+						<%= f.input :daily, label: false %>  
+					</div>
+				</div>
 
-   <p>
-        Does the event include any dangerous activities?*<br/>
-        <%= f.radio_button :dangerous, true %> Yes<br/>
-        <%= f.radio_button :dangerous, false %> No<br/>
-   </p>
+				<div class="form-3">
+					<div class="form-inputs">
+						<h3 class="titles">Concerns</h3>
+						<h5>Do you have any assets in the USA?</h5>
+						<%= f.radio_button :usa, true, class: "radio_button" %><span> Yes</span><br/>
+						<%= f.radio_button :usa, false, class: "radio_button" %><span> No</span>
+					</div>
 
-   <p>
-        Are there any other events taking place at the event which need to be considered?<br/>
-        <%= f.radio_button :sub, true %> Yes<br/>
-        <%= f.radio_button :sub, false %> No<br/>
-   </p>
-    
-    
-    <%= f.submit %>
-<% end %>
+					<div class="form-inputs">
+						<h5>Does the event include any dangerous activities?</h5>
+						<%= f.radio_button :dangerous, true, class: "radio_button" %><span> Yes</span><br/>
+						<%= f.radio_button :dangerous, false, class: "radio_button" %><span> No</span>
+					</div>
+
+
+					<div class="form-inputs">
+						<h5>Are there any other events taking place at this event which need to be considered?</h5>
+						<%= f.radio_button :sub, true, class: "radio_button" %><span> Yes</span><br/>
+						<%= f.radio_button :sub, false, class: "radio_button" %><span> No</span>
+					</div>
+
+				</div>
+				
+				<div class="btn-box">
+					<%= f.submit "Submit", class: "submit"%>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</body>    

@@ -1,47 +1,62 @@
-
-<div class="container mb-5">
+<body class="body cancellation">
+  
   <%= simple_form_for [@contract, @cancellation] do |f| %>
+    <div class="container cancellation mb-5">
+      <div class="forms">
+        <div class="form-1">
+          <div class="form-inputs">
+            <h3 class="first-title">Budget</h3>
+            <%= f.input :budget, :as => :integer, placeholder: "£", label: 'What is the budget for your event' %>
+          </div>
+        </div>
 
+        <div class="form-2">
+          <div class="form-inputs">
+            <h3 class="titles">Location</h3>
+            <h5>Do you require Terrorism coverage?</h5>
+            <%= f.radio_button :terrorism, true, class: "radio_button" %><span> Yes</span><br />
+            <%= f.radio_button :terrorism, false, class: "radio_button" %><span> No</span>
+          </div>
 
-    <%= f.input :budget, :as => :integer, label: 'What is the budget for your event' %>
-    
-    <p>
-      Do you require Terrorism cover? *<br />
-      <%= f.radio_button :terrorism, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :terrorism, false, class: "radio_button" %> No<br />
-    </p>
+          <div class="form-inputs">
+            <h5>Where is the event predominantely held?</h5>
+            <%= f.radio_button :location, 'Indoors', class: "radio_button" %><span> Indoors</span><br />
+            <%= f.radio_button :location, 'Outdoors', class: "radio_button" %><span> Outdoors</span><br />
+            <%= f.radio_button :location, 'Temporary Structures', class: "radio_button" %><span> Temporary Structures</span>
+          </div>
+        </div>
 
-    <p>
-      Where is the event predominantely held? *<br />
-      <%= f.radio_button :location, 'Indoors', class: "radio_button" %> Indoors<br />
-      <%= f.radio_button :location, 'Outdoors', class: "radio_button" %> Outdoors<br />
-      <%= f.radio_button :location, 'Temporary Structures', class: "radio_button" %> Temporary Structures<br />
-    </p>
-    <p>
-      Do you require cover for adverse weather conditions? *<br />
-      <%= f.radio_button :weather, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :weather, false, class: "radio_button" %> No<br />
-    </p>
+        <div class="form-3">
+          <div class="form-inputs">
+            <h3 class="titles">Weather</h3>
+            <h5>Do you require cover for adverse weather conditions?</h5>
+            <%= f.radio_button :weather, true, class: "radio_button" %><span> Yes</span><br />
+            <%= f.radio_button :weather, false, class: "radio_button" %><span> No</span>
+          </div>
 
-    <p>
-      If yes, can the event go ahead in continuous moderate rainfall and wind speeds of up to 30mph/50kmh? *<br />
-      <%= f.radio_button :rain, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :rain, false, class: "radio_button" %> No<br />
-    </p>
+          <div class="form-inputs">
+            <h5>If yes, can the event go ahead in continuous moderate rainfall and wind speeds of up to 30mph/50kmh?</h5>
+            <%= f.radio_button :rain, true, class: "radio_button" %><span> Yes</span><br />
+            <%= f.radio_button :rain, false, class: "radio_button" %><span> No</span>
+          </div>
 
-    <p>
-      Does this event site have any history of flooding? *<br />
-      <%= f.radio_button :flood, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :flood, false, class: "radio_button" %> No<br />
-    </p>
+          <div class="form-inputs">
+            <h5>Does this event site have any history of flooding?</h5>
+            <%= f.radio_button :flood, true, class: "radio_button" %><span> Yes</span><br />
+            <%= f.radio_button :flood, false, class: "radio_button" %><span> No</span>
+          </div>
 
-    <p>
-      Has this event ever had any losses as a result of adverse weather, whether insured or not? *<br />
-      <%= f.radio_button :loss, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :loss, false, class: "radio_button" %> No<br />
-    </p>
+          <div class="form-inputs">
+            <h5>Has this event ever had any losses as a result of adverse weather, whether insured or not?</h5>
+            <%= f.radio_button :loss, true, class: "radio_button" %><span> Yes</span><br />
+            <%= f.radio_button :loss, false, class: "radio_button" %><span> No</span>
+          </div>
+        </div>
 
-    <%= f.submit %>
+        <div class="btn-box">
+          <%= f.submit "Submit", class: "submit" %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</div>
-
+</body>
