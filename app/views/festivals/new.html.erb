@@ -1,9 +1,34 @@
-<%= simple_form_for @festival do |f| %>
-  <%= f.input :name %>
-  <%= f.input :venue %>
-  <%= f.input :address %>
-  <%= f.input :start_date, as: :date, html5: true %>
-  <%= f.input :end_date, as: :date, html5: true %>
-  <%= f.input :genre, as: :radio_buttons, collection: [['0', 'Festival'], ['1', 'Conference'], ['2','Other']], label_method: :second, value_method: :first %>
-  <%= f.submit %>
-<% end %>
+<body class="body festivals">
+  
+  <%= simple_form_for @festival do |f| %>
+    <div class="container cancellation mb-5">
+      <div class="forms">
+        <div class="form-1">
+          <div class="form-inputs">
+            <h3 class="first-title">Event Details</h3>
+            <h5 id="festival-titles">Event name</h5>
+            <%= f.input :name, label: false, placeholder: "Woodstock" %>
+
+            <h5 id="festival-titles">Venue name</h5>
+            <%= f.input :venue, label: false, placeholder: "Max Yasgur's dairy farm" %>
+
+            <h5 id="festival-titles">Event address</h5>
+            <%= f.input :address, label: false, placeholder: "Bethel, New York" %>
+            
+            <h5 id="festival-titles">Event <strong><u>start</u></strong> date</h5>
+            <%= f.input :start_date, as: :date, html5: true, label: false %>
+
+            <h5 id="festival-titles">Event <strong><u>end</u></strong> date</h5>
+            <%= f.input :end_date, as: :date, html5: true, label: false %>
+
+            <h5 id="festival-titles">Event type</h5>
+            <%= f.input_field :genre, as: :radio_buttons, collection: [['0', 'Festival'], ['1', 'Conference'], ['2','Other']], label_method: :second, value_method: :first, html: {id: "radio-festival"} %>
+          </div>
+          <div class="btn-box">
+            <%= f.submit "Submit", class: "submit" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</body>
