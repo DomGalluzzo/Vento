@@ -1,3 +1,6 @@
+$font-primary: "GraphikLCG-Medium";
+$font-color: rgba(0,0,0,0.6);
+
 .body.cancellation {
   background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),url(https://images.pexels.com/photos/976863/pexels-photo-976863.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
   background-position: center;
@@ -11,9 +14,10 @@
   height: 100%;
   margin: 5% auto;
   padding: 20px 15px;
-  background: rgba(250,250,250,0.6);
-  border-radius: 5px;
+  background: rgba(200,200,200,0.8);
+  border-radius: 15px;
   position: relative;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
 
     .forms {
       width: 100%;
@@ -27,16 +31,24 @@
       margin-bottom: 40px;
       margin-top: 40px;
       padding-top: 15px;
-      color: darkslategray;
-      border-top: 3px solid #ff3000;
+      color: $font-color;
+      border-top: 3px solid rgba(255, 48, 0, 0.5);
+      font-family: $font-primary;
+
     }
 
     .first-title {
       text-align: center;
       margin-bottom: 40px;
-      margin-top: 40px;
+      margin-top: 20px;
       // padding-top: 15px;
-      color: darkslategray;
+      color: $font-color;
+      font-family: $font-primary;
+    }
+
+    h5 {
+      font-family: $font-primary;
+      color: $font-color;
     }
 }
 
@@ -47,6 +59,16 @@
   border: 0;
   outline: none;
   background: transparent;
+
+  span {
+    font-family: $font-primary;
+    color: $font-color;
+  }
+}
+
+.form-group label {
+  font-family: $font-primary;
+  color: $font-color;
 }
 
 .btn-box {
@@ -63,15 +85,12 @@
       outline: none;
       color: #fff;
       cursor: pointer;
+      font-family: $font-primary;
+      box-shadow: 0 0 15px rgba(145, 27, 0, 0.6);
     }
-
-
 }
 
-.form2 {
-  left: 450px;
-}
-
-.form3 {
-  left: -450px;
+.radio_button {
+  height: 17px;
+  width: 17px;
 }
