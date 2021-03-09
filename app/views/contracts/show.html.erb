@@ -1,98 +1,89 @@
-<div class="card card-shape m-5" style="width: 30rem; height: object-fit;">
-  <div class="card-body">
-    <h5 class="card-title user-name text-center">Hi, Freddie</h5>
-    <div class="cards">
-      <div>
-        <h3 class="vento-font">Name of Event</h3>
-      </div>
-      <div class="card festvial-name pl-3 mb-3">
-        <span><%= @contract.festival.name %></span>
-      </div>
-      <div>
-        <h3 class="vento-font">Event Dates</h3>
-      </div>
-      <div class="card festival-dates pl-3 mb-4">
-        <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
-      </div>
-      
-      <% @contract.contract_plans.each do |plan| %>
-        <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of?(Cancellation) %>
-          <% liability = plan.plannable.liability %>
-          <% budget = plan.plannable.budget %>
-          <% total = plan.plannable.total %>
-          <h3 class="vento-font">Quote</h3>
-          <div class="card festival-dates pl-3 mb-4">
-            £<%= (liability * 0.00001) + (total * 0.1) + (budget * 0.02) %>
-          </div>
-          <% break %>
-        <% elsif plan.plannable.kind_of?(PublicInjury) %>
-          <h3 class="vento-font">Quote</h3>
-          <% liability = plan.plannable.liability %>
-          <% total = plan.plannable.total %>
-          <div class="card festival-dates pl-3 mb-4">
-            £<%= (liability * 0.00001) + (total * 0.1)%>
-          </div>
-          <% break %>
-        <% elsif plan.plannable.kind_of?(Cancellation) %>
-          <h3 class="vento-font">Quote</h3>
-          <% budget = plan.plannable.budget %>
-          <div class="card festival-dates pl-3 mb-4">
-            £<%= (budget * 0.02)%>
-          </div>
-          <% break %>
+<div class="map-container">
+  <div class="card card-shape" style="width: 30rem; height: object-fit;">
+    <div class="card-body">
+      <h5 class="card-title user-name text-center">Hi, Freddie</h5>
+      <div class="cards">
+        <div>
+          <h3 class="vento-font">Name of Event</h3>
+        </div>
+        <div class="card festvial-name pl-3 mb-3">
+          <span><%= @contract.festival.name %></span>
+        </div>
+        <div>
+          <h3 class="vento-font">Event Dates</h3>
+        </div>
+        <div class="card festival-dates pl-3 mb-4">
+          <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
+        </div>
+        
+        <% @contract.contract_plans.each do |plan| %>
+          <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of?(Cancellation) %>
+            <% liability = plan.plannable.liability %>
+            <% budget = plan.plannable.budget %>
+            <% total = plan.plannable.total %>
+            <h3 class="vento-font">Quote</h3>
+            <div class="card festival-dates pl-3 mb-4">
+              £<%= (liability * 0.00001) + (total * 0.1) + (budget * 0.02) %>
+            </div>
+          <% elsif plan.plannable.kind_of?(PublicInjury) %>
+            <h3 class="vento-font">Quote</h3>
+            <% liability = plan.plannable.liability %>
+            <% total = plan.plannable.total %>
+            <div class="card festival-dates pl-3 mb-4">
+              £<%= (liability * 0.00001) + (total * 0.1)%>
+            </div>
+          <% elsif plan.plannable.kind_of?(Cancellation) %>
+            <h3 class="vento-font">Quote</h3>
+            <% budget = plan.plannable.budget %>
+            <div class="card festival-dates pl-3 mb-4">
+              £<%= (budget * 0.02)%>
+            </div>
+          <% end %>      
         <% end %>
         
-            
-      <% end %>
-      
-      <div>
-        <h3 class="vento-font">Insurance Coverages <%= render 'dropdown' %></h3>
-        <%#= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
+        <div>
+          <h3 class="vento-font">Insurance Coverages <%= render 'dropdown' %></h3>
+          <%#= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
 
-      </div>
-      <% @contract.contract_plans.each do |plan| %>
-        <div class="card insurance-details px-3 py-3">
-        <% if plan.plannable.kind_of?(PublicInjury) %>
-          <h5>Public Injury</h5>
-          <li>Liability Limit: £<%= plan.plannable.liability%></li>
-          <li>Daily Attendance: <%= plan.plannable.daily %></li>
-          <li>Total Attendance: <%= plan.plannable.total %></li>
-          <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
-          <li>Dangerous Activities? <%= check_bool(plan.plannable.dangerous)%></li>
-          <li>Sub Festivals? <%= check_bool(plan.plannable.sub) %></li>
-          <% next %>
-        <% else %>
-          <h5><%= plan.plannable_type %></h5>
-          <li>Total Revenue: <%= plan.plannable.budget %></li>
-          <li>Terrorism Coverage? <%= check_bool(plan.plannable.terrorism) %></li>
-          <li>Main Location: <%= plan.plannable.location %></li>
-          <li>Continue in Rainfall? <%= check_bool(plan.plannable.rain) %></li>
-          <li>History of Flooding? <%= check_bool(plan.plannable.flood) %></li>
-          <li>Previous Loss From Flood? <%= check_bool(plan.plannable.loss) %></li>
-          <li>Structure Protected From Weather? <%= check_bool(plan.plannable.weather) %></li>
+        </div>
+        <% @contract.contract_plans.each do |plan| %>
+          <div class="card insurance-details px-3 py-3">
+          <% if plan.plannable.kind_of?(PublicInjury) %>
+            <h5>Public Injury</h5>
+            <li>Liability Limit: £<%= plan.plannable.liability%></li>
+            <li>Daily Attendance: <%= plan.plannable.daily %></li>
+            <li>Total Attendance: <%= plan.plannable.total %></li>
+            <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
+            <li>Dangerous Activities? <%= check_bool(plan.plannable.dangerous)%></li>
+            <li>Sub Festivals? <%= check_bool(plan.plannable.sub) %></li>
+            <%# next %>
+          <% else %>
+            <h5><%= plan.plannable_type %></h5>
+            <li>Total Revenue: <%= plan.plannable.budget %></li>
+            <li>Terrorism Coverage? <%= check_bool(plan.plannable.terrorism) %></li>
+            <li>Main Location: <%= plan.plannable.location %></li>
+            <li>Continue in Rainfall? <%= check_bool(plan.plannable.rain) %></li>
+            <li>History of Flooding? <%= check_bool(plan.plannable.flood) %></li>
+            <li>Previous Loss From Flood? <%= check_bool(plan.plannable.loss) %></li>
+            <li>Structure Protected From Weather? <%= check_bool(plan.plannable.weather) %></li>
+          <% end %>
+          </div>
         <% end %>
-        </div>
-      <% end %>
-     </div>
-     <div class="help-button text-center mt-4">
-        <%# <a href="#" class="card-link link-color">Help ?</a> %>
-        <%= link_to "Need Help?", "#{root_path}#faq" %> <br>
-        <%= link_to "Download your contract", contract_path(format: :pdf) %>
-        
-     </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row map">
-    <div class="card-map col-sm-12 col-lg-12">
-      <div class="card-body">
-        <div id="map"
-            style="width: 100%; height: 200px;"
-            data-markers="<%= @markers.to_json %>"
-            data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-        </div>
+      </div>
+      <div class="help-button text-center mt-4">
+          <%# <a href="#" class="card-link link-color">Help ?</a> %>
+          <%= link_to "Need Help?", "#{root_path}#faq" %> <br>
+          <%= link_to "Download your contract", contract_path(format: :pdf) %>
       </div>
     </div>
   </div>
+
+  <div class="map-body">
+    <div id="map"
+      style="width: 100%; height: 200px;"
+      data-markers="<%= @markers.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+  </div>
+
 </div>
