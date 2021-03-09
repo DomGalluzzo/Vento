@@ -1,45 +1,78 @@
-<div class="container mb-5">
+<body class="body cancellation">
+  
+<div class="container cancellation mb-5">
   <%= simple_form_for [@contract, @cancellation] do |f| %>
 
+    <h3 class="form-title cancellation">Budget</h3>
+    <p class="form-body cancellation" id="form1">What is the budget for your event?</p>
+    <form class="form-input cancellation">
+      <%= f.input :budget, :as => :integer, label: false, placeholder: "£" %>
+    </form>
 
-    <%= f.input :budget, :as => :integer, label: 'What is the budget for your event' %>
+    <div class="btn-box cancellation">
+      <button type="button">Next</button>
+    </div>
     
-    <p>
-      Do you require Terrorism cover? *<br />
-      <%= f.radio_button :terrorism, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :terrorism, false, class: "radio_button" %> No<br />
+    <h3 class="form-title cancellation">Location</h3>
+    <p class="form-body cancellation" id="form2">
+      <h5>Do you require Terrorism cover? *</h5>
+
+      <form class="form-input cancellation">
+        <%= f.radio_button :terrorism, true, class: "radio_button" %> Yes
+        <%= f.radio_button :terrorism, false, class: "radio_button" %> No
+      </form>
+
+      <h5>Where is the event predominantely held? *</h5>
+      <form class="form-input cancellation">
+        <%= f.radio_button :location, 'Indoors', class: "radio_button" %> Indoors
+        <%= f.radio_button :location, 'Outdoors', class: "radio_button" %> Outdoors
+        <%= f.radio_button :location, 'Temporary Structures', class: "radio_button" %> Temporary Structures
+      </form>
+
+      <div class="btn-box cancellation">
+        <button type="button">Back</button>
+        <button type="button">Next</button>
+      </div>
     </p>
 
-    <p>
-      Where is the event predominantely held? *<br />
-      <%= f.radio_button :location, 'Indoors', class: "radio_button" %> Indoors<br />
-      <%= f.radio_button :location, 'Outdoors', class: "radio_button" %> Outdoors<br />
-      <%= f.radio_button :location, 'Temporary Structures', class: "radio_button" %> Temporary Structures<br />
-    </p>
-    <p>
-      Do you require cover for adverse weather conditions? *<br />
-      <%= f.radio_button :weather, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :weather, false, class: "radio_button" %> No<br />
+    <h3 class="form-title cancellation">Weather Conditions</h3>
+    <p class="form-body cancellation">
+      <h5>Do you require cover for adverse weather conditions? *</h5>
+      <form class="form-input cancellation">
+        <%= f.radio_button :weather, true, class: "radio_button" %> Yes
+        <%= f.radio_button :weather, false, class: "radio_button" %> No
+      </form>
+
+      <h5>If yes, can the event go ahead in continuous moderate rainfall and wind speeds of up to 30mph/50kmh? *</h5>
+      <form class="form-input cancellation">
+        <%= f.radio_button :rain, true, class: "radio_button" %> Yes
+        <%= f.radio_button :rain, false, class: "radio_button" %> No
+      </form>
+
+      <div class="btn-box cancellation">
+        <button type="button">Back</button>
+        <button type="button">Next</button>
+      </div>
     </p>
 
-    <p>
-      If yes, can the event go ahead in continuous moderate rainfall and wind speeds of up to 30mph/50kmh? *<br />
-      <%= f.radio_button :rain, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :rain, false, class: "radio_button" %> No<br />
-    </p>
+    <h3 class="form-title cancellation">Weather Conditions (cont.)</h3>
+    <p class="form-body cancellation">
+      <h5>Does this event site have any history of flooding? *</h5>
+      <form class="form-input cancellation">
+        <%= f.radio_button :flood, true, class: "radio_button" %> Yes
+        <%= f.radio_button :flood, false, class: "radio_button" %> No
+      </form>
 
-    <p>
-      Does this event site have any history of flooding? *<br />
-      <%= f.radio_button :flood, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :flood, false, class: "radio_button" %> No<br />
+      <h5>Has this event ever had any losses as a result of adverse weather, whether insured or not? *</h5>
+      <form class="form-input cancellation">
+        <%= f.radio_button :loss, true, class: "radio_button" %> Yes
+        <%= f.radio_button :loss, false, class: "radio_button" %> No
+      </form>
     </p>
-
-    <p>
-      Has this event ever had any losses as a result of adverse weather, whether insured or not? *<br />
-      <%= f.radio_button :loss, true, class: "radio_button" %> Yes<br />
-      <%= f.radio_button :loss, false, class: "radio_button" %> No<br />
-    </p>
-
-    <%= f.submit %>
+    <div class="btn-box cancellation">
+      <button type="button">Back</button>
+      <%= f.submit "Add Policy"%>
+    </div>
   <% end %>
 </div>
+</body>
