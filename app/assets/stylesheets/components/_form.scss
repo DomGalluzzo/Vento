@@ -1,69 +1,77 @@
 .body.cancellation {
-  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(https://images.pexels.com/photos/3052360/pexels-photo-3052360.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260);
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.7)),url(https://images.pexels.com/photos/976863/pexels-photo-976863.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .container.cancellation {
-  width: 360px;
-  height: 400px;
-  margin: 8% auto;
-  background: #fff;
+  width: 600px;
+  height: 100%;
+  margin: 5% auto;
+  padding: 20px 15px;
+  background: rgba(250,250,250,0.6);
   border-radius: 5px;
   position: relative;
 
-    .form {
-      width: 280px;
+    .forms {
+      width: 100%;
       position: aboslute;
       top: 100px;
       left: 40px;
     }
+
+    .titles{
+      text-align: center;
+      margin-bottom: 40px;
+      margin-top: 40px;
+      padding-top: 15px;
+      color: darkslategray;
+      border-top: 3px solid #ff3000;
+    }
+
+    .first-title {
+      text-align: center;
+      margin-bottom: 40px;
+      margin-top: 40px;
+      // padding-top: 15px;
+      color: darkslategray;
+    }
 }
 
-.form-title.cancellation {
-  text-align: center;
-  margin-bottom: 40px;
-  color: #777;
-}
-
-.form-input.cancellation {
+.form-inputs {
   width: 100%;
   padding: 10px 5px;
-  margin: 5px 0;
+  margin: 10px 0;
   border: 0;
-  border-bottom: 1px solid #999;
+  outline: none;
   background: transparent;
-  &:placeholder {
-    color: #777;
-  }
 }
 
-.btn-box.cancellation{
+.btn-box {
   width: 100%;
   margin: 30px auto;
   text-align: center;
+    .submit {
+      width: 110px;
+      height: 35px;
+      margin: 0 10px;
+      background: linear-gradient(to right, #ff3000, #ff6000);
+      border-radius: 30px;
+      border: 0;
+      outline: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+
 }
 
-.btn-box.cancellation button {
-  width: 110px;
-  height: 35px;
-  margin: 0 10px;
-  background: linear-gradient(to right, #ff3000, #ffad06);
-  border-radius: 30px;
-  border: 0;
-  outline: none;
-  color: #fff;
-  cursor: pointer;
+.form2 {
+  left: 450px;
 }
 
-// .btn-box.cancellation input {
-//   width: 110px;
-//   height: 35px;
-//   margin: 0 10px;
-//   background: linear-gradient(to right, #fd461d, #ffad06);
-//   border-radius: 30px;
-//   border: 0;
-//   outline: none;
-//   color: #fff;
-//   cursor: pointer;
-// }
+.form3 {
+  left: -450px;
+}
