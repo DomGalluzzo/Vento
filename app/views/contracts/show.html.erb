@@ -63,7 +63,7 @@
         <div>
           <h3 class="vento-font">Price </h3>
           <div class="card festival-dates pl-3 mb-4">
-          £<%= @contract.price %>
+          <p><%= humanized_money_with_symbol(@contract.price) %></p>
           </div>  
         </div>
 
@@ -116,6 +116,13 @@
           </div>
         <% end %>
       </div>
+      
+      <%= form_tag orders_path do %>
+        <%= hidden_field_tag 'contract_id', @contract.id %>
+        <%= submit_tag 'Buy Now', class: 'btn btn-primary' %>
+      <% end %>
+
+      <div class="help-button text-center mt-4">
       <div id="overlay"></div>
       <div class="help-button text-center mt-5">
           <%# <a href="#" class="card-link link-color">Help ?</a> %>

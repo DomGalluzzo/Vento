@@ -31,6 +31,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'money-rails'
+gem 'stripe'
+gem 'stripe_event'
 
 
 
