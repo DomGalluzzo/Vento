@@ -4,6 +4,10 @@
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
+.card-title{
+    margin-bottom: 2.75rem;
+}
+
 .card-body{
     background-color: white;
     border-radius: 10px;
@@ -15,10 +19,12 @@
 
 .user-name{
     font-family: "GraphikLCG-Medium"; 
+    font-size: 1.50rem;
 }
 
 .vento-font{
     font-family: "GraphikLCG-Medium"; 
+    font-size: 1rem;
 }
 
 .festvial-name{
@@ -50,6 +56,7 @@
     justify-content: space-around;
     align-items: flex-end;
 }
+
 
 
 @media only screen and (max-width: 1280px) {
