@@ -141,10 +141,10 @@
         <% end %>
       </div>
       <div id="overlay"></div>
-      <div class="help-button text-center mt-4">
+      <div class="help-button text-center mt-5">
           <%# <a href="#" class="card-link link-color">Help ?</a> %>
-          <%= link_to "Need Help?", "#{root_path}#faq" %> <br>
-          <%= link_to "Download your contract", contract_path(format: :pdf) %>
+          <%= link_to "Need Help?", "#{root_path}#faq", class: "btn btn-secondary rounded-pill" %> <br>
+          <%= link_to "Download your contract", contract_path(format: :pdf), class: "btn btn-secondary rounded-pill" %>
       </div>
     </div>
   </div>

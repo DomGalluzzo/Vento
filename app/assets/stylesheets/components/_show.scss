@@ -1,6 +1,13 @@
 .card-shape{
-    background: linear-gradient(#E2E8E8, #cac9c9);
-    border-radius: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.card-body{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
 .user-name{
@@ -23,6 +30,7 @@
 
 .insurance-details{
     border-radius: 20px;
+    border: none;
 }
 
 .link-color{
@@ -33,3 +41,15 @@
     padding: 40px 300px 40px 300px;
 }
 
+.help-button {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+@media only screen and (max-width: 1280px) {
+    .title-header {
+        padding: 40px 60px 40px 60px;
+    }
+}

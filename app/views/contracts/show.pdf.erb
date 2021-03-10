@@ -1,76 +1,955 @@
-<div class="card card-shape m-5" style="width: 30rem; height: object-fit;">
-  <div class="card-body">
-    <h5 class="card-title user-name text-center">Hi, Freddie</h5>
-    <div class="cards">
-      <div>
-        <h3 class="vento-font">Name of Event</h3>
-      </div>
-      <div class="card festvial-name pl-3 mb-3">
-        <span><%= @contract.festival.name %></span>
-      </div>
-      <div>
-        <h3 class="vento-font">Event Dates</h3>
-      </div>
-      <div class="card festival-dates pl-3 mb-4">
-        <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
-      </div>
-      
-      <% @contract.contract_plans.each do |plan| %>
-        <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of?(Cancellation) %>
-          <% liability = plan.plannable.liability %>
-          <% budget = plan.plannable.budget %>
-          <h3 class="vento-font">Quote</h3>
-          <div class="card festival-dates pl-3 mb-4">
-            £<%= ((liability + budget) * 0.04) + (liability + budget) %>
-          </div>
-          <% break %>
-        <% elsif plan.plannable.kind_of?(PublicInjury) %>
-          <h3 class="vento-font">Quote</h3>
-          <% liability = plan.plannable.liability %>
-          <div class="card festival-dates pl-3 mb-4">
-            £<%= (liability * 0.02) + liability %>
-          </div>
-          <% break %>
-        <% elsif plan.plannable.kind_of?(Cancellation) %>
-          <h3 class="vento-font">Quote</h3>
-          <% budget = plan.plannable.budget %>
-          <div class="card festival-dates pl-3 mb-4">
-            £<%= (budget * 0.02) + budget %>
-          </div>
-          <% break %>
-        <% end %>
-        
-            
-      <% end %>
-      
-
-      <% @contract.contract_plans.each do |plan| %>
-        <div class="card insurance-details px-3 py-3">
-        <% if plan.plannable.kind_of?(PublicInjury) %>
-          <h5>Public Injury</h5>
-          <li>Liability Limit: £<%= plan.plannable.liability%>m</li>
-          <li>Daily Attendance: <%= plan.plannable.daily %></li>
-          <li>Total Attendance: <%= plan.plannable.total %></li>
-          <li>USA Assets? <%= check_bool(plan.plannable.usa)%></li>
-          <li>Dangerous Activities? <%= check_bool(plan.plannable.dangerous)%></li>
-          <li>Sub Festivals? <%= check_bool(plan.plannable.sub) %></li>
-          <% next %>
-        <% else %>
-          <h5><%= plan.plannable_type %></h5>
-          <li>Total Revenue: <%= plan.plannable.budget %></li>
-          <li>Terrorism Coverage? <%= check_bool(plan.plannable.terrorism) %></li>
-          <li>Main Location: <%= plan.plannable.location %></li>
-          <li>Continue in Rainfall? <%= check_bool(plan.plannable.rain) %></li>
-          <li>History of Flooding? <%= check_bool(plan.plannable.flood) %></li>
-          <li>Previous Loss From Flood? <%= check_bool(plan.plannable.loss) %></li>
-          <li>Structure Protected From Weather? <%= check_bool(plan.plannable.weather) %></li>
-        <% end %>
-        </div>
-      <% end %>
-     </div>
-     <div class="help-button text-center mt-4">
-        <%# <a href="#" class="card-link link-color">Help ?</a> %>
-        <%# <%= link_to "Need Help?", "#{root_path}#faq" %>
-     </div>
-  </div>
+<html>
+<head><meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+span.cls_002{font-family:Arial,serif;font-size:20.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_002{font-family:Arial,serif;font-size:20.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_003{font-family:Arial,serif;font-size:11.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_003{font-family:Arial,serif;font-size:11.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_004{font-family:Arial,serif;font-size:11.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_004{font-family:Arial,serif;font-size:11.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_005{font-family:"Verdana",serif;font-size:7.5px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_005{font-family:"Verdana",serif;font-size:7.5px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_006{font-family:Arial,serif;font-size:9.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_006{font-family:Arial,serif;font-size:9.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_007{font-family:"Verdana Bold",serif;font-size:7.5px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_007{font-family:"Verdana Bold",serif;font-size:7.5px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_008{font-family:"Verdana Italic",serif;font-size:7.5px;color:rgb(0,0,0);font-weight:normal;font-style:italic;text-decoration: none}
+div.cls_008{font-family:"Verdana Italic",serif;font-size:7.5px;color:rgb(0,0,0);font-weight:normal;font-style:italic;text-decoration: none}
+span.cls_010{font-family:"Verdana Bold",serif;font-size:7.5px;color:rgb(206,17,140);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_010{font-family:"Verdana Bold",serif;font-size:7.5px;color:rgb(206,17,140);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_023{font-family:"Verdana",serif;font-size:7.5px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: underline}
+div.cls_023{font-family:"Verdana",serif;font-size:7.5px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_009{font-family:"Verdana",serif;font-size:7.5px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_009{font-family:"Verdana",serif;font-size:7.5px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_011{font-family:Arial,serif;font-size:18.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_011{font-family:Arial,serif;font-size:18.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_012{font-family:Times,serif;font-size:20.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_012{font-family:Times,serif;font-size:20.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_013{font-family:"Verdana Bold",serif;font-size:8.1px;color:rgb(206,17,140);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_013{font-family:"Verdana Bold",serif;font-size:8.1px;color:rgb(206,17,140);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_014{font-family:"Verdana",serif;font-size:8.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_014{font-family:"Verdana",serif;font-size:8.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_015{font-family:"Verdana Bold",serif;font-size:8.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_015{font-family:"Verdana Bold",serif;font-size:8.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_016{font-family:"Verdana Bold Italic",serif;font-size:10.1px;color:rgb(0,0,0);font-weight:bold;font-style:italic;text-decoration: none}
+div.cls_016{font-family:"Verdana Bold Italic",serif;font-size:10.1px;color:rgb(0,0,0);font-weight:bold;font-style:italic;text-decoration: none}
+span.cls_017{font-family:Arial,serif;font-size:8.1px;color:rgb(206,17,140);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_017{font-family:Arial,serif;font-size:8.1px;color:rgb(206,17,140);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_018{font-family:"Cambria",serif;font-size:20.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_018{font-family:"Cambria",serif;font-size:20.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_019{font-family:"Verdana",serif;font-size:8.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_019{font-family:"Verdana",serif;font-size:8.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_020{font-family:"Verdana Italic",serif;font-size:8.1px;color:rgb(0,0,0);font-weight:normal;font-style:italic;text-decoration: none}
+div.cls_020{font-family:"Verdana Italic",serif;font-size:8.1px;color:rgb(0,0,0);font-weight:normal;font-style:italic;text-decoration: none}
+span.cls_021{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_021{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_024{font-family:"Verdana",serif;font-size:8.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: underline}
+div.cls_024{font-family:"Verdana",serif;font-size:8.1px;color:rgb(206,17,140);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_022{font-family:"Verdana",serif;font-size:8.1px;color:rgb(0,0,255);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_022{font-family:"Verdana",serif;font-size:8.1px;color:rgb(0,0,255);font-weight:normal;font-style:normal;text-decoration: none}
+-->
+</style>
+<script type="text/javascript" src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/wz_jsgraphics.js"></script>
+</head>
+<body>
+<div style="position:absolute;left:50%;margin-left:-297px;top:0px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background01.jpg" width=595 height=841></div>
+<div style="position:absolute;left:162.89px;top:102.78px" class="cls_002"><span class="cls_002">VENTO EVENT INSURANCE</span></div>
+<div style="position:absolute;left:263.15px;top:126.34px" class="cls_003"><span class="cls_003">effected through</span></div>
+<div style="position:absolute;left:228.62px;top:138.98px" class="cls_004"><span class="cls_004">Certain underwriters at Lloyd’s</span></div>
+<div style="position:absolute;left:70.05px;top:158.86px" class="cls_005"><span class="cls_005">This Insurance is effected with certain Underwriters at Lloyd’s of London whose syndicate numbers and the proportions</span></div>
+<div style="position:absolute;left:70.05px;top:167.97px" class="cls_005"><span class="cls_005">underwritten by them are Beazley Syndicate 2623: 82% / Beazley Syndicate 0623: 18%</span></div>
+<div style="position:absolute;left:70.05px;top:189.59px" class="cls_005"><span class="cls_005">This  certificate  is  issued  in  accordance  with  the  limited  authorization  granted  to  Beazley  Solutions  Limited</span></div>
+<div style="position:absolute;left:516.73px;top:189.59px" class="cls_005"><span class="cls_005">(“the</span></div>
+<div style="position:absolute;left:70.05px;top:198.10px" class="cls_005"><span class="cls_005">Coverholder”) under contract No </span><span class="cls_006">B6012BEAZCONT1904</span><span class="cls_005"> by certain Underwriters at Lloyd’s, London whose syndicate</span></div>
+<div style="position:absolute;left:70.05px;top:209.05px" class="cls_005"><span class="cls_005">numbers and the proportions underwritten by them can be ascertained from the office of the Coverholder (such Underwriters</span></div>
+<div style="position:absolute;left:70.05px;top:218.16px" class="cls_005"><span class="cls_005">being hereinafter called “Underwriters”) and in consideration of the premium specified herein, Underwriters hereby bind</span></div>
+<div style="position:absolute;left:70.05px;top:227.28px" class="cls_005"><span class="cls_005">themselves, severally and not jointly, each for his own part and not for one another, their Executors and Administrators</span></div>
+<div style="position:absolute;left:70.05px;top:248.89px" class="cls_005"><span class="cls_005">Law and Jurisdiction: This insurance will be governed the laws of England. Any dispute arising under this certificate shall be</span></div>
+<div style="position:absolute;left:70.05px;top:258.01px" class="cls_005"><span class="cls_005">subject to the exclusive jurisdiction of England and Wales.</span></div>
+<div style="position:absolute;left:70.05px;top:281.37px" class="cls_007"><span class="cls_007">Certificate Number:</span></div>
+<div style="position:absolute;left:169.30px;top:281.37px" class="cls_005"><span class="cls_005">BUK/202753</span></div>
+<div style="position:absolute;left:70.05px;top:304.74px" class="cls_007"><span class="cls_007">Bind Date:</span></div>
+<div style="position:absolute;left:169.30px;top:304.74px" class="cls_005"><span class="cls_005">13/11/2019</span></div>
+<div style="position:absolute;left:70.05px;top:320.35px" class="cls_007"><span class="cls_007">Policy Period</span></div>
+<div style="position:absolute;left:169.30px;top:320.35px" class="cls_005"><span class="cls_005">13/11/2019 to 14/07/2020 both days inclusive at the local standard time of your address</span></div>
+<div style="position:absolute;left:70.05px;top:335.97px" class="cls_007"><span class="cls_007">Policy Wording:</span></div>
+<div style="position:absolute;left:169.30px;top:335.97px" class="cls_005"><span class="cls_005">myBeazley UK & International Event Cancellation Wording</span></div>
+<div style="position:absolute;left:70.05px;top:351.58px" class="cls_007"><span class="cls_007">Name of Insurer:</span></div>
+<div style="position:absolute;left:169.30px;top:351.58px" class="cls_005"><span class="cls_005">Certain underwriters at Lloyd’s</span></div>
+<div style="position:absolute;left:70.05px;top:390.81px" class="cls_007"><span class="cls_007">Your Details</span></div>
+<div style="position:absolute;left:70.05px;top:413.43px" class="cls_007"><span class="cls_007">Your Name:</span></div>
+<div style="position:absolute;left:169.30px;top:413.43px" class="cls_005"><span class="cls_005">Noisily Festival Ltd & Birmingham29 (UK) Ltd t/as The Ticket Sellers</span></div>
+<div style="position:absolute;left:70.05px;top:428.54px" class="cls_007"><span class="cls_007">Address:</span></div>
+<div style="position:absolute;left:169.30px;top:428.54px" class="cls_005"><span class="cls_005">65 Alfred Road</span></div>
+<div style="position:absolute;left:70.05px;top:443.66px" class="cls_007"><span class="cls_007">City:</span></div>
+<div style="position:absolute;left:169.30px;top:443.66px" class="cls_005"><span class="cls_005">London</span></div>
+<div style="position:absolute;left:70.05px;top:458.77px" class="cls_007"><span class="cls_007">Country:</span></div>
+<div style="position:absolute;left:169.30px;top:458.77px" class="cls_005"><span class="cls_005">England</span></div>
+<div style="position:absolute;left:70.05px;top:473.89px" class="cls_007"><span class="cls_007">Post/Zip Code</span></div>
+<div style="position:absolute;left:169.30px;top:473.89px" class="cls_005"><span class="cls_005">W2 5EU</span></div>
+<div style="position:absolute;left:70.05px;top:513.12px" class="cls_007"><span class="cls_007">Premium Summary</span></div>
+<div style="position:absolute;left:70.05px;top:535.73px" class="cls_007"><span class="cls_007">Gross Premium:</span></div>
+<div style="position:absolute;left:169.30px;top:535.73px" class="cls_005"><span class="cls_005">GBP 6,706.25</span></div>
+<div style="position:absolute;left:70.05px;top:550.85px" class="cls_007"><span class="cls_007">Additional Taxes:</span></div>
+<div style="position:absolute;left:169.30px;top:550.85px" class="cls_005"><span class="cls_005">GBP 804.75</span></div>
+<div style="position:absolute;left:70.05px;top:565.96px" class="cls_007"><span class="cls_007">Total Premium:</span></div>
+<div style="position:absolute;left:169.30px;top:565.96px" class="cls_005"><span class="cls_005">GBP 7,511.00</span></div>
+<div style="position:absolute;left:70.05px;top:599.19px" class="cls_007"><span class="cls_007">Event Details:</span></div>
+<div style="position:absolute;left:70.05px;top:621.81px" class="cls_007"><span class="cls_007">Event Name:</span></div>
+<div style="position:absolute;left:191.95px;top:621.81px" class="cls_005"><span class="cls_005">Noisily Festival</span></div>
+<div style="position:absolute;left:70.05px;top:636.92px" class="cls_007"><span class="cls_007">Event Type:</span></div>
+<div style="position:absolute;left:191.95px;top:636.92px" class="cls_005"><span class="cls_005">Rock & Pop Music Festival (with professional acts)</span></div>
+<div style="position:absolute;left:70.05px;top:652.04px" class="cls_007"><span class="cls_007">Event Venue:</span></div>
+<div style="position:absolute;left:191.95px;top:652.04px" class="cls_005"><span class="cls_005">Coney Woods</span></div>
+<div style="position:absolute;left:70.05px;top:667.15px" class="cls_007"><span class="cls_007">Event Country:</span></div>
+<div style="position:absolute;left:191.95px;top:667.15px" class="cls_005"><span class="cls_005">England</span></div>
+<div style="position:absolute;left:70.05px;top:682.27px" class="cls_007"><span class="cls_007">Event Start Date:</span></div>
+<div style="position:absolute;left:191.95px;top:682.27px" class="cls_005"><span class="cls_005">09/07/2020</span></div>
+<div style="position:absolute;left:70.05px;top:697.38px" class="cls_007"><span class="cls_007">Event End Date:</span></div>
+<div style="position:absolute;left:191.95px;top:697.38px" class="cls_005"><span class="cls_005">12/07/2020</span></div>
+<div style="position:absolute;left:70.05px;top:712.50px" class="cls_007"><span class="cls_007">Event Cancellation Basis</span></div>
+<div style="position:absolute;left:191.95px;top:711.56px" class="cls_005"><span class="cls_005">Costs and Expenses</span></div>
+<div style="position:absolute;left:70.05px;top:721.61px" class="cls_007"><span class="cls_007">of Cover:</span></div>
 </div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:851px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background02.jpg" width=595 height=841></div>
+<div style="position:absolute;left:70.05px;top:110.06px" class="cls_007"><span class="cls_007">Coverage</span></div>
+<div style="position:absolute;left:211.75px;top:110.06px" class="cls_007"><span class="cls_007">Limit</span></div>
+<div style="position:absolute;left:289.85px;top:110.06px" class="cls_007"><span class="cls_007">Excess</span></div>
+<div style="position:absolute;left:374.95px;top:110.06px" class="cls_007"><span class="cls_007">Included</span></div>
+<div style="position:absolute;left:438.75px;top:110.06px" class="cls_007"><span class="cls_007">Premium</span></div>
+<div style="position:absolute;left:70.05px;top:129.67px" class="cls_005"><span class="cls_005">Event Cancellation</span></div>
+<div style="position:absolute;left:211.75px;top:129.67px" class="cls_005"><span class="cls_005">GBP 580,000</span></div>
+<div style="position:absolute;left:289.85px;top:129.67px" class="cls_005"><span class="cls_005">Nil</span></div>
+<div style="position:absolute;left:374.95px;top:129.67px" class="cls_005"><span class="cls_005">Yes</span></div>
+<div style="position:absolute;left:438.75px;top:129.67px" class="cls_005"><span class="cls_005">GBP 6,706.25</span></div>
+<div style="position:absolute;left:70.05px;top:145.29px" class="cls_005"><span class="cls_005">Adverse Weather</span></div>
+<div style="position:absolute;left:211.75px;top:145.29px" class="cls_005"><span class="cls_005">GBP 580,000</span></div>
+<div style="position:absolute;left:289.85px;top:145.29px" class="cls_005"><span class="cls_005">Nil</span></div>
+<div style="position:absolute;left:374.95px;top:145.29px" class="cls_005"><span class="cls_005">Yes</span></div>
+<div style="position:absolute;left:438.75px;top:145.29px" class="cls_005"><span class="cls_005">Included Above</span></div>
+<div style="position:absolute;left:397.73px;top:160.90px" class="cls_007"><span class="cls_007">TOTAL:</span><span class="cls_005">   GBP 6,706.25 + Taxes</span></div>
+<div style="position:absolute;left:70.30px;top:225.63px" class="cls_007"><span class="cls_007">Tax Details:</span></div>
+<div style="position:absolute;left:70.30px;top:243.75px" class="cls_007"><span class="cls_007">Tax Name</span></div>
+<div style="position:absolute;left:226.20px;top:243.75px" class="cls_007"><span class="cls_007">Tax Percentage</span></div>
+<div style="position:absolute;left:339.60px;top:243.75px" class="cls_007"><span class="cls_007">Tax Type</span></div>
+<div style="position:absolute;left:424.65px;top:243.75px" class="cls_007"><span class="cls_007">Tax Amount</span></div>
+<div style="position:absolute;left:70.30px;top:260.36px" class="cls_005"><span class="cls_005">UK IPT</span></div>
+<div style="position:absolute;left:226.20px;top:260.36px" class="cls_005"><span class="cls_005">12.00%</span></div>
+<div style="position:absolute;left:339.60px;top:260.36px" class="cls_005"><span class="cls_005">To be collected</span></div>
+<div style="position:absolute;left:424.65px;top:260.36px" class="cls_005"><span class="cls_005">GBP 804.75</span></div>
+<div style="position:absolute;left:70.30px;top:324.71px" class="cls_007"><span class="cls_007">Endorsements:</span></div>
+<div style="position:absolute;left:70.30px;top:341.32px" class="cls_005"><span class="cls_005">Adverse weather Extension</span></div>
+<div style="position:absolute;left:70.30px;top:350.44px" class="cls_005"><span class="cls_005">Stage, Marquee and Professionally Erected Temporary Structures Covering Condition</span></div>
+<div style="position:absolute;left:70.30px;top:386.67px" class="cls_007"><span class="cls_007">Subjectivities:</span></div>
+<div style="position:absolute;left:70.30px;top:406.28px" class="cls_008"><span class="cls_008">This quotation is subject to the provision and acceptance of the following information</span></div>
+<div style="position:absolute;left:70.30px;top:459.01px" class="cls_007"><span class="cls_007">Exclusions in addition to those contained in your policy wording:</span></div>
+<div style="position:absolute;left:70.30px;top:478.63px" class="cls_005"><span class="cls_005">None</span></div>
+<div style="position:absolute;left:70.30px;top:583.48px" class="cls_007"><span class="cls_007">Worldwide (Excluding Australia) Disclaimer Notice</span></div>
+<div style="position:absolute;left:70.30px;top:595.60px" class="cls_008"><span class="cls_008">Beazley Solutions Limited is a service company that is part of the Beazley group of companies.  Beazley Solutions Limited</span></div>
+<div style="position:absolute;left:70.30px;top:604.71px" class="cls_008"><span class="cls_008">has authority to enter into contracts of insurance on behalf of the Lloyd’s underwriting members of Lloyd’s syndicates 623</span></div>
+<div style="position:absolute;left:70.30px;top:613.83px" class="cls_008"><span class="cls_008">and 2623 which are managed by Beazley Furlonge Limited. Beazley Solutions Limited is an appointed representative of</span></div>
+<div style="position:absolute;left:70.30px;top:622.94px" class="cls_008"><span class="cls_008">Beazley Furlonge Limited which is authorised by the Prudential Regulation Authority and regulated by the Financial Conduct</span></div>
+<div style="position:absolute;left:70.30px;top:632.06px" class="cls_008"><span class="cls_008">Authority and the Prudential Regulation Authority in the UK (ref 204896) in its capacity as insurer.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:1702px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background03.jpg" width=595 height=841></div>
+<div style="position:absolute;left:70.30px;top:118.68px" class="cls_007"><span class="cls_007">30 Day Premium Payment Warranty:</span></div>
+<div style="position:absolute;left:70.30px;top:141.30px" class="cls_005"><span class="cls_005">The premium in respect of this risk is to be paid to the placing broker within 30 days of the inception date of the insurance</span></div>
+<div style="position:absolute;left:70.30px;top:150.41px" class="cls_005"><span class="cls_005">contract or prior to first scheduled event, whichever is sooner. For this purpose alone the placing broker shall be deemed</span></div>
+<div style="position:absolute;left:70.30px;top:159.53px" class="cls_005"><span class="cls_005">to be Our Agent.</span></div>
+<div style="position:absolute;left:70.30px;top:174.64px" class="cls_005"><span class="cls_005">In the event that payment is not made within this period then We may, at Our sole discretion, without being liable to You</span></div>
+<div style="position:absolute;left:70.30px;top:183.76px" class="cls_005"><span class="cls_005">for any loss arising out of the exercise of that discretion, give notice to You or the placing broker of cancellation and all</span></div>
+<div style="position:absolute;left:70.30px;top:192.87px" class="cls_005"><span class="cls_005">cover under this Policy shall automatically be cancelled ab initio and be deemed to have never been in effect.</span></div>
+<div style="position:absolute;left:70.30px;top:207.99px" class="cls_005"><span class="cls_005">Upon the cancellation of the insurance, You shall forthwith deliver up to the placing broker any Certificate of Insurance,</span></div>
+<div style="position:absolute;left:70.30px;top:217.10px" class="cls_005"><span class="cls_005">Cover Note, Policy document or any other such document or evidence confirming the existence of this Policy for onward</span></div>
+<div style="position:absolute;left:70.30px;top:226.22px" class="cls_005"><span class="cls_005">transmission to Us and shall forthwith communicate the cancellation of the insurance to any person who had been notified</span></div>
+<div style="position:absolute;left:70.30px;top:235.33px" class="cls_005"><span class="cls_005">of its existence.</span></div>
+<div style="position:absolute;left:70.30px;top:250.45px" class="cls_005"><span class="cls_005">The late acceptance of premium after the timescales specified above shall not reinstate the Policy unless expressly agreed</span></div>
+<div style="position:absolute;left:70.30px;top:259.56px" class="cls_005"><span class="cls_005">by Us in writing and then only on such terms as shall be determined by Us.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:2553px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background04.jpg" width=595 height=841></div>
+<div style="position:absolute;left:70.30px;top:107.06px" class="cls_007"><span class="cls_007">Claims Notification</span></div>
+<div style="position:absolute;left:70.30px;top:122.73px" class="cls_005"><span class="cls_005">In the event of a claim or as soon as any circumstances become known to You which could give rise to a claim under</span></div>
+<div style="position:absolute;left:70.30px;top:134.73px" class="cls_005"><span class="cls_005">this insurance, you should immediately report this to our appointed claims representative.</span></div>
+<div style="position:absolute;left:70.30px;top:159.67px" class="cls_007"><span class="cls_007">In respect of event cancellation claims:</span></div>
+<div style="position:absolute;left:68.60px;top:185.96px" class="cls_010"><span class="cls_010">United Kingdom/Ireland</span></div>
+<div style="position:absolute;left:196.20px;top:183.90px" class="cls_005"><span class="cls_005">Hyperion Adjusters Limited</span></div>
+<div style="position:absolute;left:330.85px;top:183.90px" class="cls_005"><span class="cls_005">Contact: Alex Whitaker</span></div>
+<div style="position:absolute;left:196.20px;top:195.02px" class="cls_005"><span class="cls_005">76/77 Watling Street</span></div>
+<div style="position:absolute;left:330.85px;top:195.02px" class="cls_005"><span class="cls_005">Telephone: 020 7236 8888</span></div>
+<div style="position:absolute;left:196.20px;top:206.13px" class="cls_005"><span class="cls_005">London</span></div>
+<div style="position:absolute;left:330.85px;top:206.13px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:awhitaker@hyperionadjusters.com">awhitaker@hyperionadjusters.com</A> </span></div>
+<div style="position:absolute;left:196.20px;top:217.25px" class="cls_005"><span class="cls_005">United Kingdom , EC4M 9BJ</span></div>
+<div style="position:absolute;left:330.85px;top:217.25px" class="cls_005"><span class="cls_005">Mobile: Alex Whitaker 07741 248 196</span></div>
+<div style="position:absolute;left:196.20px;top:239.48px" class="cls_005"><span class="cls_005">Hyperion Adjusters Limited</span></div>
+<div style="position:absolute;left:330.85px;top:239.48px" class="cls_005"><span class="cls_005">Contact: Shaun Coyne</span></div>
+<div style="position:absolute;left:196.20px;top:250.59px" class="cls_005"><span class="cls_005">76/77 Watling Street London</span></div>
+<div style="position:absolute;left:330.85px;top:250.59px" class="cls_005"><span class="cls_005">Telephone: 020 7236 8888</span></div>
+<div style="position:absolute;left:196.20px;top:261.71px" class="cls_005"><span class="cls_005">United Kingdom , EC4M 9BJ</span></div>
+<div style="position:absolute;left:330.85px;top:261.71px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:SCoyne@hyperionadjusters.com">SCoyne@hyperionadjusters.com</A> </span></div>
+<div style="position:absolute;left:330.85px;top:270.82px" class="cls_005"><span class="cls_005">Mobile: Shaun Coyne 07973 405 464</span></div>
+<div style="position:absolute;left:196.20px;top:295.05px" class="cls_005"><span class="cls_005">Hyperion Adjusters Limited</span></div>
+<div style="position:absolute;left:330.85px;top:295.05px" class="cls_005"><span class="cls_005">Contact: Alex Whitaker</span></div>
+<div style="position:absolute;left:68.60px;top:300.00px" class="cls_010"><span class="cls_010">France/Belgium</span></div>
+<div style="position:absolute;left:196.20px;top:306.17px" class="cls_005"><span class="cls_005">76/77 Watling Street</span></div>
+<div style="position:absolute;left:330.85px;top:306.17px" class="cls_005"><span class="cls_005">Telephone: 020 7236 8888</span></div>
+<div style="position:absolute;left:196.20px;top:317.28px" class="cls_005"><span class="cls_005">London</span></div>
+<div style="position:absolute;left:330.85px;top:317.28px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:awhitaker@hyperionadjusters.com">awhitaker@hyperionadjusters.com</A> </span></div>
+<div style="position:absolute;left:196.20px;top:328.40px" class="cls_005"><span class="cls_005">United Kingdom , EC4M 9BJ</span></div>
+<div style="position:absolute;left:330.85px;top:328.40px" class="cls_005"><span class="cls_005">Mobile: Alex Whitaker 07741 248 196</span></div>
+<div style="position:absolute;left:196.20px;top:350.63px" class="cls_005"><span class="cls_005">Hyperion Adjusters Limited</span></div>
+<div style="position:absolute;left:330.85px;top:350.63px" class="cls_005"><span class="cls_005">Contact: Shaun Coyne</span></div>
+<div style="position:absolute;left:196.20px;top:361.74px" class="cls_005"><span class="cls_005">76/77 Watling Street</span></div>
+<div style="position:absolute;left:330.85px;top:361.74px" class="cls_005"><span class="cls_005">Telephone: 020 7236 8888</span></div>
+<div style="position:absolute;left:196.20px;top:372.86px" class="cls_005"><span class="cls_005">London</span></div>
+<div style="position:absolute;left:330.85px;top:372.86px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:SCoyne@hyperionadjusters.com">SCoyne@hyperionadjusters.com</A> </span></div>
+<div style="position:absolute;left:196.20px;top:383.97px" class="cls_005"><span class="cls_005">United Kingdom , EC4M 9BJ</span></div>
+<div style="position:absolute;left:330.85px;top:381.97px" class="cls_005"><span class="cls_005">Mobile: Shaun Coyne 07973 405 464</span></div>
+<div style="position:absolute;left:68.60px;top:408.26px" class="cls_010"><span class="cls_010">Germany</span></div>
+<div style="position:absolute;left:196.20px;top:406.20px" class="cls_005"><span class="cls_005">Gielisch</span></div>
+<div style="position:absolute;left:330.85px;top:406.20px" class="cls_005"><span class="cls_005">Contact: Klaus Lippold</span></div>
+<div style="position:absolute;left:196.20px;top:417.32px" class="cls_005"><span class="cls_005">Büro Köln</span></div>
+<div style="position:absolute;left:330.85px;top:417.32px" class="cls_005"><span class="cls_005">Telephone: 0221 93 55 96 0</span></div>
+<div style="position:absolute;left:196.20px;top:428.43px" class="cls_005"><span class="cls_005">Rinstrasse 9-11</span></div>
+<div style="position:absolute;left:330.85px;top:428.43px" class="cls_005"><span class="cls_005">Fax: 0221 93 55 96 19</span></div>
+<div style="position:absolute;left:196.20px;top:439.55px" class="cls_005"><span class="cls_005">Köln</span></div>
+<div style="position:absolute;left:330.85px;top:439.55px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:koeln@gielisch.de">koeln@gielisch.de</A> </span></div>
+<div style="position:absolute;left:196.20px;top:450.66px" class="cls_005"><span class="cls_005">Germany, DE - 50996</span></div>
+<div style="position:absolute;left:196.20px;top:472.89px" class="cls_005"><span class="cls_005">C Gielisch GmbH</span></div>
+<div style="position:absolute;left:330.85px;top:472.89px" class="cls_005"><span class="cls_005">Contact: Bernd Kowalkowski</span></div>
+<div style="position:absolute;left:196.20px;top:484.01px" class="cls_005"><span class="cls_005">Admiralitatstr.58</span></div>
+<div style="position:absolute;left:330.85px;top:484.01px" class="cls_005"><span class="cls_005">Telephone: 40 374728-21</span></div>
+<div style="position:absolute;left:196.20px;top:495.12px" class="cls_005"><span class="cls_005">20459 Hamburg</span></div>
+<div style="position:absolute;left:330.85px;top:495.12px" class="cls_005"><span class="cls_005">Fax: 40 374728-22</span></div>
+<div style="position:absolute;left:330.85px;top:506.24px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:kowalkowski@gielisch.de">kowalkowski@gielisch.de</A> </span></div>
+<div style="position:absolute;left:196.20px;top:528.47px" class="cls_005"><span class="cls_005">Crawford & Company Italia S.r.l.</span></div>
+<div style="position:absolute;left:330.85px;top:528.47px" class="cls_005"><span class="cls_005">Contact: Gabriele Ceccotti</span></div>
+<div style="position:absolute;left:68.60px;top:530.53px" class="cls_010"><span class="cls_010">Italy</span></div>
+<div style="position:absolute;left:196.20px;top:537.58px" class="cls_005"><span class="cls_005">Via Orazio 10</span></div>
+<div style="position:absolute;left:330.85px;top:539.58px" class="cls_005"><span class="cls_005">Telephone: 06.4201.4949</span></div>
+<div style="position:absolute;left:196.20px;top:546.70px" class="cls_005"><span class="cls_005">00193 Roma</span></div>
+<div style="position:absolute;left:330.85px;top:550.70px" class="cls_005"><span class="cls_005">E-Mail:</span><span class="cls_023"> <A HREF="mailto:G.Ceccotti@crawco.it">G.Ceccotti@crawco.it</A> </span></div>
+<div style="position:absolute;left:68.60px;top:586.10px" class="cls_010"><span class="cls_010">Spain</span></div>
+<div style="position:absolute;left:196.20px;top:584.04px" class="cls_005"><span class="cls_005">RTS Tasadores de Seguros</span></div>
+<div style="position:absolute;left:330.85px;top:584.04px" class="cls_005"><span class="cls_005">Contact: Almudena Suarez/Mabel Lloreda</span></div>
+<div style="position:absolute;left:196.20px;top:595.16px" class="cls_005"><span class="cls_005">C/. Doctor Flemming, 3, 5a</span></div>
+<div style="position:absolute;left:330.85px;top:595.16px" class="cls_005"><span class="cls_005">Telephone: 34 91 458 4600</span></div>
+<div style="position:absolute;left:196.20px;top:604.27px" class="cls_005"><span class="cls_005">Planta</span></div>
+<div style="position:absolute;left:330.85px;top:606.27px" class="cls_005"><span class="cls_005">Fax: 34 91 458 4601</span></div>
+<div style="position:absolute;left:196.20px;top:615.39px" class="cls_005"><span class="cls_005">Madrid</span></div>
+<div style="position:absolute;left:330.85px;top:617.39px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:asu@rtsgrupo.com">asu@rtsgrupo.com</A> </span></div>
+<div style="position:absolute;left:196.20px;top:626.51px" class="cls_005"><span class="cls_005">Spain</span></div>
+<div style="position:absolute;left:68.60px;top:641.68px" class="cls_010"><span class="cls_010">United States</span></div>
+<div style="position:absolute;left:196.20px;top:639.62px" class="cls_005"><span class="cls_005">Premier Insurance Services LLC</span></div>
+<div style="position:absolute;left:330.85px;top:639.62px" class="cls_005"><span class="cls_005">Contact: Michael Tocicki</span></div>
+<div style="position:absolute;left:196.20px;top:648.73px" class="cls_005"><span class="cls_005">2750 NE 35th Court</span></div>
+<div style="position:absolute;left:330.85px;top:648.73px" class="cls_005"><span class="cls_005">Telephone: (267) 377-7112</span></div>
+<div style="position:absolute;left:196.20px;top:657.85px" class="cls_005"><span class="cls_005">Fort Lauderdale</span></div>
+<div style="position:absolute;left:330.85px;top:657.85px" class="cls_005"><span class="cls_005">Mobile:</span></div>
+<div style="position:absolute;left:363.66px;top:657.85px" class="cls_005"><span class="cls_005">(215) 620-5649</span></div>
+<div style="position:absolute;left:196.20px;top:666.96px" class="cls_005"><span class="cls_005">FL 33308</span></div>
+<div style="position:absolute;left:330.85px;top:666.96px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:michael@premierinservices.com">michael@premierinservices.com</A> </span></div>
+<div style="position:absolute;left:68.60px;top:689.26px" class="cls_010"><span class="cls_010">Canada</span></div>
+<div style="position:absolute;left:196.20px;top:687.20px" class="cls_005"><span class="cls_005">Malik, Giffen & Burnett</span></div>
+<div style="position:absolute;left:330.85px;top:687.20px" class="cls_005"><span class="cls_005">Contact: Neil Gibson</span></div>
+<div style="position:absolute;left:196.20px;top:698.31px" class="cls_005"><span class="cls_005">366 Adelaide Street West</span></div>
+<div style="position:absolute;left:330.85px;top:698.31px" class="cls_005"><span class="cls_005">Telephone: (416) 593-4444</span></div>
+<div style="position:absolute;left:196.20px;top:709.42px" class="cls_005"><span class="cls_005">Suite #770</span></div>
+<div style="position:absolute;left:330.85px;top:709.42px" class="cls_005"><span class="cls_005">Fax: (416) 593-4449</span></div>
+<div style="position:absolute;left:196.20px;top:720.54px" class="cls_005"><span class="cls_005">Toronto</span></div>
+<div style="position:absolute;left:330.85px;top:720.54px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:neil.Gibson@crawco.ca">neil.gibson@mgbclaims.com</A> </span></div>
+<div style="position:absolute;left:196.20px;top:731.65px" class="cls_005"><span class="cls_005">Ontario</span></div>
+<div style="position:absolute;left:196.20px;top:742.77px" class="cls_005"><span class="cls_005">Canada , M5V 1R9</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:3404px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background05.jpg" width=595 height=841></div>
+<div style="position:absolute;left:68.60px;top:106.12px" class="cls_010"><span class="cls_010">Hong Kong, Singapore,</span></div>
+<div style="position:absolute;left:196.20px;top:104.06px" class="cls_005"><span class="cls_005">Robert Scally and Associates</span></div>
+<div style="position:absolute;left:330.85px;top:104.06px" class="cls_005"><span class="cls_005">Contact: Robert Scally</span></div>
+<div style="position:absolute;left:196.20px;top:115.17px" class="cls_005"><span class="cls_005">Suite 802, Crocodile House 1</span></div>
+<div style="position:absolute;left:330.85px;top:115.17px" class="cls_005"><span class="cls_005">Telephone:852 2850 7818</span></div>
+<div style="position:absolute;left:68.60px;top:118.12px" class="cls_010"><span class="cls_010">Thailand</span></div>
+<div style="position:absolute;left:196.20px;top:126.29px" class="cls_005"><span class="cls_005">50 Connaught Road</span></div>
+<div style="position:absolute;left:330.85px;top:126.29px" class="cls_005"><span class="cls_005">Fax:852 9198 8342</span></div>
+<div style="position:absolute;left:196.20px;top:137.40px" class="cls_005"><span class="cls_005">Central Hong Kong</span></div>
+<div style="position:absolute;left:330.85px;top:137.40px" class="cls_005"><span class="cls_005">E-Mail:</span><span class="cls_009"> </span><span class="cls_023">robert.scally@rsa.com.hk</span></div>
+<div style="position:absolute;left:196.20px;top:148.52px" class="cls_005"><span class="cls_005">Hong Kong , HK</span></div>
+<div style="position:absolute;left:68.60px;top:172.81px" class="cls_010"><span class="cls_010">Australia</span></div>
+<div style="position:absolute;left:196.20px;top:170.75px" class="cls_005"><span class="cls_005">Cunningham Lindsey Australia</span></div>
+<div style="position:absolute;left:330.85px;top:170.75px" class="cls_005"><span class="cls_005">Contact: Mike Greenwood</span></div>
+<div style="position:absolute;left:196.20px;top:179.86px" class="cls_005"><span class="cls_005">Pty Ltd</span></div>
+<div style="position:absolute;left:330.85px;top:181.86px" class="cls_005"><span class="cls_005">Telephone: +61 3 9684 3000</span></div>
+<div style="position:absolute;left:196.20px;top:190.98px" class="cls_005"><span class="cls_005">Level 6, 156 Pacific Highway</span></div>
+<div style="position:absolute;left:330.85px;top:192.98px" class="cls_005"><span class="cls_005">Fax: 61 7 3121 6811</span></div>
+<div style="position:absolute;left:196.20px;top:200.09px" class="cls_005"><span class="cls_005">Greenwich, Sydney</span></div>
+<div style="position:absolute;left:330.85px;top:204.09px" class="cls_005"><span class="cls_005">Mobile:</span><span class="cls_010"> </span><span class="cls_009">+ 61 4 2161 5606</span></div>
+<div style="position:absolute;left:196.20px;top:211.21px" class="cls_005"><span class="cls_005">Australia, NSW 2065</span></div>
+<div style="position:absolute;left:330.85px;top:215.21px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:mike.greenwood@cl-au.com">mike.greenwood@cl-au.com</A> </span></div>
+<div style="position:absolute;left:68.60px;top:239.50px" class="cls_010"><span class="cls_010">New Zealand</span></div>
+<div style="position:absolute;left:196.20px;top:237.44px" class="cls_005"><span class="cls_005">Forensic Advisory Services</span></div>
+<div style="position:absolute;left:330.85px;top:237.44px" class="cls_005"><span class="cls_005">Contact: Brett Fawcett</span></div>
+<div style="position:absolute;left:196.20px;top:246.55px" class="cls_005"><span class="cls_005">NZAuckland Branch, Cnr Kent &</span></div>
+<div style="position:absolute;left:330.85px;top:248.55px" class="cls_005"><span class="cls_005">Telephone: +64 9 520 9058</span></div>
+<div style="position:absolute;left:196.20px;top:255.67px" class="cls_005"><span class="cls_005">Crowhurst Streets,</span></div>
+<div style="position:absolute;left:330.85px;top:257.67px" class="cls_005"><span class="cls_005">Mobile: +64 21 353 530</span></div>
+<div style="position:absolute;left:196.20px;top:266.78px" class="cls_005"><span class="cls_005">PO Box 335, Shortland Street,</span></div>
+<div style="position:absolute;left:330.85px;top:266.78px" class="cls_005"><span class="cls_005">E-Mail: </span><span class="cls_023">bfawcett@cl-nz.com</span></div>
+<div style="position:absolute;left:196.20px;top:277.90px" class="cls_005"><span class="cls_005">Auckland</span></div>
+<div style="position:absolute;left:196.20px;top:289.01px" class="cls_005"><span class="cls_005">1140</span></div>
+<div style="position:absolute;left:68.60px;top:313.30px" class="cls_010"><span class="cls_010">South Africa</span></div>
+<div style="position:absolute;left:196.20px;top:311.24px" class="cls_005"><span class="cls_005">Associated Loss Adjusters CC</span></div>
+<div style="position:absolute;left:330.85px;top:311.24px" class="cls_005"><span class="cls_005">Contact: Mike Mullins</span></div>
+<div style="position:absolute;left:196.20px;top:322.36px" class="cls_005"><span class="cls_005">PO Box 68231</span></div>
+<div style="position:absolute;left:330.85px;top:322.36px" class="cls_005"><span class="cls_005">Telephone: 083 625 3954</span></div>
+<div style="position:absolute;left:196.20px;top:331.47px" class="cls_005"><span class="cls_005">Bryanston</span></div>
+<div style="position:absolute;left:330.85px;top:333.47px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:mcm@alacc.com">mcm@alacc.com</A> </span></div>
+<div style="position:absolute;left:196.20px;top:340.59px" class="cls_005"><span class="cls_005">2021</span></div>
+<div style="position:absolute;left:196.20px;top:360.82px" class="cls_005"><span class="cls_005">Associated Loss Adjusters CC</span></div>
+<div style="position:absolute;left:330.85px;top:360.82px" class="cls_005"><span class="cls_005">Contact: Alan Blem</span></div>
+<div style="position:absolute;left:196.20px;top:371.93px" class="cls_005"><span class="cls_005">PO Box 68231</span></div>
+<div style="position:absolute;left:330.85px;top:371.93px" class="cls_005"><span class="cls_005">Telephone: 083 629 8688</span></div>
+<div style="position:absolute;left:196.20px;top:381.05px" class="cls_005"><span class="cls_005">Bryanston</span></div>
+<div style="position:absolute;left:330.85px;top:383.05px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:alan@alacc.com">alan@alacc.com</A> </span></div>
+<div style="position:absolute;left:196.20px;top:390.16px" class="cls_005"><span class="cls_005">2021</span></div>
+<div style="position:absolute;left:64.90px;top:425.51px" class="cls_007"><span class="cls_007">In respect of event liability claims:</span></div>
+<div style="position:absolute;left:68.60px;top:451.80px" class="cls_010"><span class="cls_010">All Territories</span></div>
+<div style="position:absolute;left:196.20px;top:449.74px" class="cls_005"><span class="cls_005">Liability & Corporate Claims</span></div>
+<div style="position:absolute;left:330.85px;top:449.74px" class="cls_005"><span class="cls_005">Telephone: 0121 411 0530</span></div>
+<div style="position:absolute;left:196.20px;top:458.85px" class="cls_005"><span class="cls_005">Solutions QuestGates Limited</span></div>
+<div style="position:absolute;left:330.85px;top:460.85px" class="cls_005"><span class="cls_005">E-Mail: </span><A HREF="mailto:claimsmanagement@questgates.co.uk">claimsmanagement@questgates.co.uk</A> </span></div>
+<div style="position:absolute;left:196.20px;top:467.97px" class="cls_005"><span class="cls_005">11A The Wharf</span></div>
+<div style="position:absolute;left:330.85px;top:471.97px" class="cls_005"><span class="cls_005">Out of hours: For out of hours assistance</span></div>
+<div style="position:absolute;left:196.20px;top:477.08px" class="cls_005"><span class="cls_005">Bridge Street</span></div>
+<div style="position:absolute;left:330.85px;top:481.08px" class="cls_005"><span class="cls_005">please call the switchboard</span></div>
+<div style="position:absolute;left:438.07px;top:481.08px" class="cls_005"><span class="cls_005">0121 411 0535</span></div>
+<div style="position:absolute;left:196.20px;top:486.20px" class="cls_005"><span class="cls_005">Birmingham</span></div>
+<div style="position:absolute;left:196.20px;top:495.31px" class="cls_005"><span class="cls_005">B1 2JS</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:4255px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background06.jpg" width=595 height=841></div>
+<div style="position:absolute;left:139.55px;top:431.26px" class="cls_011"><span class="cls_011">Event Cancellation Insurance Policy</span></div>
+<div style="position:absolute;left:209.60px;top:451.96px" class="cls_011"><span class="cls_011">(UK & International)</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:5106px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background07.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:102.69px" class="cls_012"><span class="cls_012">Policy summary</span></div>
+<div style="position:absolute;left:64.90px;top:140.12px" class="cls_013"><span class="cls_013">Your Policy Summary</span></div>
+<div style="position:absolute;left:64.90px;top:152.12px" class="cls_014"><span class="cls_014">This section of the document provides key information about </span><span class="cls_015">your </span><span class="cls_014">policy.  Please note that this policy summary</span></div>
+<div style="position:absolute;left:64.90px;top:164.12px" class="cls_014"><span class="cls_014">does not contain the full terms and conditions of this contract. </span><span class="cls_015"> You</span><span class="cls_014"> will need to read the full policy wording in</span></div>
+<div style="position:absolute;left:64.90px;top:176.12px" class="cls_014"><span class="cls_014">conjunction with </span><span class="cls_015">your schedule </span><span class="cls_014">to understand all conditions, limitations and exclusions which apply to the risks</span></div>
+<div style="position:absolute;left:64.90px;top:188.12px" class="cls_015"><span class="cls_015">we </span><span class="cls_014">cover in this policy. Should </span><span class="cls_015">you</span><span class="cls_014"> have any queries in relation to the cover provided, please contact</span><span class="cls_015"> your</span></div>
+<div style="position:absolute;left:64.90px;top:200.12px" class="cls_014"><span class="cls_014">insurance broker or agent.</span></div>
+<div style="position:absolute;left:205.71px;top:225.62px" class="cls_016"><span class="cls_016">Significant features and benefits</span></div>
+<div style="position:absolute;left:75.95px;top:249.12px" class="cls_013"><span class="cls_013">Standard Cover</span></div>
+<div style="position:absolute;left:75.95px;top:261.12px" class="cls_014"><span class="cls_014">This policy provides cover for </span><span class="cls_015">your</span><span class="cls_014"> </span><span class="cls_015">net loss </span><span class="cls_014">up to the</span><span class="cls_015"> limit </span><span class="cls_014">stated in the</span><span class="cls_015"> schedule</span><span class="cls_014"> following the necessary</span></div>
+<div style="position:absolute;left:75.95px;top:273.12px" class="cls_014"><span class="cls_014">and unavoidable </span><span class="cls_015">cancellation</span><span class="cls_014">, </span><span class="cls_015">abandonment</span><span class="cls_014">, </span><span class="cls_015">disruption </span><span class="cls_014">or </span><span class="cls_015">rescheduling </span><span class="cls_014">of the </span><span class="cls_015">event </span><span class="cls_014">for reasons beyond</span></div>
+<div style="position:absolute;left:75.95px;top:285.12px" class="cls_015"><span class="cls_015">your </span><span class="cls_014">control and the control of the </span><span class="cls_015">participants</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:75.95px;top:309.62px" class="cls_013"><span class="cls_013">Automatic Cover Extensions Included</span></div>
+<div style="position:absolute;left:75.95px;top:321.62px" class="cls_014"><span class="cls_014">The following benefits are provided under </span><span class="cls_015">your</span><span class="cls_014"> policy as standard.</span></div>
+<div style="position:absolute;left:81.35px;top:345.62px" class="cls_017"><span class="cls_017"></span><span class="cls_014">   Adverse weather is covered unless the </span><span class="cls_015">event</span><span class="cls_014"> is</span></div>
+<div style="position:absolute;left:306.40px;top:345.62px" class="cls_017"><span class="cls_017"></span><span class="cls_015">   National  mourning </span><span class="cls_014"> following  the  death  of</span></div>
+<div style="position:absolute;left:98.65px;top:357.62px" class="cls_014"><span class="cls_014">taking   place   outdoors   or   in   a   temporary</span></div>
+<div style="position:absolute;left:324.40px;top:357.62px" class="cls_014"><span class="cls_014">head of state or member of the Royal Family</span></div>
+<div style="position:absolute;left:98.65px;top:369.62px" class="cls_014"><span class="cls_014">structure.  If the </span><span class="cls_015">event</span><span class="cls_014"> is outdoors or within a</span></div>
+<div style="position:absolute;left:324.40px;top:369.62px" class="cls_014"><span class="cls_014">below the age of 75 years, and such death</span></div>
+<div style="position:absolute;left:98.65px;top:381.62px" class="cls_014"><span class="cls_014">temporary  structure  adverse  weather  cover</span></div>
+<div style="position:absolute;left:324.40px;top:381.62px" class="cls_014"><span class="cls_014">occurs 7 days prior to the start date of the</span></div>
+<div style="position:absolute;left:98.65px;top:393.62px" class="cls_014"><span class="cls_014">applies if requested and stated in the </span><span class="cls_015">schedule</span></div>
+<div style="position:absolute;left:324.40px;top:393.62px" class="cls_015"><span class="cls_015">event</span><span class="cls_014"> or during the </span><span class="cls_015">period of</span><span class="cls_014"> </span><span class="cls_015">event</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:98.65px;top:405.62px" class="cls_014"><span class="cls_014">and attaching endorsements.</span></div>
+<div style="position:absolute;left:81.35px;top:429.62px" class="cls_017"><span class="cls_017"></span><span class="cls_014">   Losses resulting from </span><span class="cls_015">your </span><span class="cls_014">failure to vacate the</span></div>
+<div style="position:absolute;left:306.40px;top:429.62px" class="cls_017"><span class="cls_017"></span><span class="cls_014">   Additional  costs  or  charges  reasonable  and</span></div>
+<div style="position:absolute;left:99.35px;top:441.62px" class="cls_015"><span class="cls_015">venue </span><span class="cls_014">at the </span><span class="cls_015">termination of tenancy.</span></div>
+<div style="position:absolute;left:324.40px;top:441.62px" class="cls_014"><span class="cls_014">necessarily paid by </span><span class="cls_015">you</span><span class="cls_014"> to avoid or diminish a</span></div>
+<div style="position:absolute;left:324.40px;top:453.62px" class="cls_014"><span class="cls_014">loss.</span></div>
+<div style="position:absolute;left:75.95px;top:484.12px" class="cls_013"><span class="cls_013">Cover Extensions Available At An Additional Cost</span></div>
+<div style="position:absolute;left:75.95px;top:496.12px" class="cls_014"><span class="cls_014">Covers which are not insured under </span><span class="cls_015">your</span><span class="cls_014"> policy unless requested and shown in the </span><span class="cls_015">schedule</span><span class="cls_014"> or</span></div>
+<div style="position:absolute;left:75.95px;top:508.12px" class="cls_014"><span class="cls_014">endorsements:</span></div>
+<div style="position:absolute;left:77.60px;top:532.12px" class="cls_017"><span class="cls_017"></span><span class="cls_014">   Adverse weather for outdoor </span><span class="cls_015">events</span><span class="cls_014"> or </span><span class="cls_015">events</span></div>
+<div style="position:absolute;left:302.65px;top:532.12px" class="cls_017"><span class="cls_017"></span><span class="cls_015">   Terrorism</span></div>
+<div style="position:absolute;left:91.80px;top:544.12px" class="cls_014"><span class="cls_014">in temporary structures</span></div>
+<div style="position:absolute;left:77.60px;top:568.12px" class="cls_017"><span class="cls_017"></span><span class="cls_014">   Civil commotion</span></div>
+<div style="position:absolute;left:302.65px;top:568.12px" class="cls_017"><span class="cls_017"></span><span class="cls_015">   Communicable diseases</span></div>
+<div style="position:absolute;left:77.60px;top:586.12px" class="cls_017"><span class="cls_017"></span><span class="cls_014">   Non-appearance of individuals, groups or teams</span></div>
+<div style="position:absolute;left:302.65px;top:586.12px" class="cls_017"><span class="cls_017"></span><span class="cls_015">   National mourning</span><span class="cls_014"> for over 65’s</span></div>
+<div style="position:absolute;left:160.77px;top:630.12px" class="cls_016"><span class="cls_016">Significant or unusual exclusions and limitations</span></div>
+<div style="position:absolute;left:303.40px;top:647.62px" class="cls_013"><span class="cls_013">×</span><span class="cls_014">  Circumstances known to </span><span class="cls_015">you</span><span class="cls_014"> prior to inception</span></div>
+<div style="position:absolute;left:77.35px;top:653.62px" class="cls_013"><span class="cls_013">×</span><span class="cls_015">  Your</span><span class="cls_014">   failure   to   make   correct   and   proper</span></div>
+<div style="position:absolute;left:317.55px;top:659.62px" class="cls_014"><span class="cls_014">of the policy which could result in </span><span class="cls_015">cancellation</span></div>
+<div style="position:absolute;left:91.55px;top:665.62px" class="cls_014"><span class="cls_014">arrangements for the successful fulfilment of</span></div>
+<div style="position:absolute;left:317.55px;top:671.62px" class="cls_014"><span class="cls_014">of the </span><span class="cls_015">event</span></div>
+<div style="position:absolute;left:91.55px;top:677.62px" class="cls_014"><span class="cls_014">the </span><span class="cls_015">event</span></div>
+<div style="position:absolute;left:303.40px;top:689.62px" class="cls_013"><span class="cls_013">×</span><span class="cls_014">  Financial failure of any venture</span></div>
+<div style="position:absolute;left:77.35px;top:692.62px" class="cls_013"><span class="cls_013">×</span><span class="cls_014">  Lack of support or sales</span></div>
+<div style="position:absolute;left:303.40px;top:704.62px" class="cls_013"><span class="cls_013">×</span><span class="cls_014">  War, civil war whether actual or threatened</span></div>
+<div style="position:absolute;left:77.35px;top:707.62px" class="cls_013"><span class="cls_013">×</span><span class="cls_014">  Breach of contract</span></div>
+<div style="position:absolute;left:303.40px;top:719.62px" class="cls_013"><span class="cls_013">×</span><span class="cls_014">  Nuclear   risks   and   chemical   and   biological</span></div>
+<div style="position:absolute;left:77.35px;top:722.62px" class="cls_013"><span class="cls_013">×</span><span class="cls_014">  Customs seizure resulting from the handling of</span></div>
+<div style="position:absolute;left:317.55px;top:731.62px" class="cls_014"><span class="cls_014">weapons</span></div>
+<div style="position:absolute;left:91.55px;top:734.62px" class="cls_014"><span class="cls_014">contraband or illicit trade which is with </span><span class="cls_015">your</span></div>
+<div style="position:absolute;left:91.55px;top:746.62px" class="cls_014"><span class="cls_014">knowledge</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:5957px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background08.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:103.22px" class="cls_018"><span class="cls_018">What to do if you have a claim</span></div>
+<div style="position:absolute;left:64.90px;top:139.56px" class="cls_014"><span class="cls_014">To help </span><span class="cls_015">you</span><span class="cls_014"> prove any loss, please retain receipts, hiring contracts, service agreements and so on to help with</span></div>
+<div style="position:absolute;left:64.90px;top:149.29px" class="cls_015"><span class="cls_015">your</span><span class="cls_014"> claim.   It is important that </span><span class="cls_015">you</span><span class="cls_014"> notify </span><span class="cls_015">your </span><span class="cls_014">insurance representative as soon as</span><span class="cls_015"> you</span><span class="cls_014"> can after </span><span class="cls_015">you</span><span class="cls_014"> are</span></div>
+<div style="position:absolute;left:64.90px;top:159.01px" class="cls_014"><span class="cls_014">aware of a potential claim.</span></div>
+<div style="position:absolute;left:64.90px;top:178.45px" class="cls_019"><span class="cls_019">1.</span></div>
+<div style="position:absolute;left:93.25px;top:178.45px" class="cls_014"><span class="cls_014">In the event of any happening or circumstance which could give rise to a claim under this policy, </span><span class="cls_015">you</span><span class="cls_014"> must:</span></div>
+<div style="position:absolute;left:93.25px;top:198.18px" class="cls_019"><span class="cls_019">a)</span></div>
+<div style="position:absolute;left:121.60px;top:198.18px" class="cls_014"><span class="cls_014">Contact the person designated in the </span><span class="cls_015">schedule</span><span class="cls_014"> as soon as reasonably possible. If </span><span class="cls_015">you </span><span class="cls_014">do not contact</span></div>
+<div style="position:absolute;left:121.60px;top:207.90px" class="cls_014"><span class="cls_014">the person designated in the </span><span class="cls_015">schedule</span><span class="cls_014"> as soon as reasonably possible and the delay prevents </span><span class="cls_015">us</span></div>
+<div style="position:absolute;left:121.60px;top:217.62px" class="cls_014"><span class="cls_014">from fully investigating </span><span class="cls_015">your </span><span class="cls_014">claim </span><span class="cls_015">we</span><span class="cls_014"> may not deal with </span><span class="cls_015">your</span><span class="cls_014"> claim.</span></div>
+<div style="position:absolute;left:93.25px;top:237.35px" class="cls_019"><span class="cls_019">b)</span></div>
+<div style="position:absolute;left:121.60px;top:237.35px" class="cls_014"><span class="cls_014">confirm the facts in writing as soon as possible, with all information that is available;</span></div>
+<div style="position:absolute;left:93.25px;top:257.07px" class="cls_019"><span class="cls_019">c)</span></div>
+<div style="position:absolute;left:121.60px;top:257.07px" class="cls_014"><span class="cls_014">forward to </span><span class="cls_015">us</span><span class="cls_014"> unanswered every letter of claim, writ or summons immediately they are received</span></div>
+<div style="position:absolute;left:121.60px;top:266.79px" class="cls_014"><span class="cls_014">including all associated documents and any other written evidence of the claim and consult with </span><span class="cls_015">us</span></div>
+<div style="position:absolute;left:121.60px;top:276.52px" class="cls_014"><span class="cls_014">regarding the response to be sent to any such correspondence</span></div>
+<div style="position:absolute;left:93.25px;top:296.24px" class="cls_019"><span class="cls_019">d)</span></div>
+<div style="position:absolute;left:121.60px;top:296.24px" class="cls_014"><span class="cls_014">make no admission of liability or offer of payment without </span><span class="cls_015">our</span><span class="cls_014"> prior written consent;</span></div>
+<div style="position:absolute;left:93.25px;top:315.68px" class="cls_019"><span class="cls_019">e)</span></div>
+<div style="position:absolute;left:121.60px;top:315.68px" class="cls_014"><span class="cls_014">take all reasonable steps to minimise or avoid any loss under this policy;</span></div>
+<div style="position:absolute;left:93.25px;top:335.13px" class="cls_019"><span class="cls_019">f)</span></div>
+<div style="position:absolute;left:121.60px;top:335.13px" class="cls_014"><span class="cls_014">provide</span><span class="cls_015"> us</span><span class="cls_014"> or </span><span class="cls_015">our </span><span class="cls_014">appointed claims representatives with all information, documents and assistance</span></div>
+<div style="position:absolute;left:121.60px;top:344.85px" class="cls_014"><span class="cls_014">requested as soon as reasonably possible</span></div>
+<div style="position:absolute;left:64.90px;top:364.30px" class="cls_019"><span class="cls_019">2.</span></div>
+<div style="position:absolute;left:93.25px;top:364.30px" class="cls_014"><span class="cls_014">So far as is in </span><span class="cls_015">your</span><span class="cls_014"> power </span><span class="cls_015">you</span><span class="cls_014"> shall cause </span><span class="cls_015">your </span><span class="cls_014">employees and all other persons interested in the </span><span class="cls_015">event</span></div>
+<div style="position:absolute;left:93.25px;top:374.02px" class="cls_014"><span class="cls_014">to comply with the above</span></div>
+<div style="position:absolute;left:64.90px;top:393.47px" class="cls_019"><span class="cls_019">3.</span></div>
+<div style="position:absolute;left:93.25px;top:393.47px" class="cls_014"><span class="cls_014">Provide a signed proof of loss to </span><span class="cls_015">us</span><span class="cls_014"> or </span><span class="cls_015">our</span><span class="cls_014"> representative to substantiate the occurrence, nature, cause</span></div>
+<div style="position:absolute;left:93.25px;top:403.19px" class="cls_014"><span class="cls_014">and amount of loss claimed under this policy</span></div>
+<div style="position:absolute;left:64.90px;top:422.64px" class="cls_019"><span class="cls_019">4.</span></div>
+<div style="position:absolute;left:93.25px;top:422.64px" class="cls_014"><span class="cls_014">Allow </span><span class="cls_015">us</span><span class="cls_014"> the right, if </span><span class="cls_015">we</span><span class="cls_014"> so wish, to:</span></div>
+<div style="position:absolute;left:93.25px;top:442.08px" class="cls_019"><span class="cls_019">a)</span></div>
+<div style="position:absolute;left:121.60px;top:442.08px" class="cls_014"><span class="cls_014">take such steps as </span><span class="cls_015">we</span><span class="cls_014"> deem necessary to prevent, mitigate or minimise a loss;</span></div>
+<div style="position:absolute;left:93.25px;top:461.53px" class="cls_019"><span class="cls_019">b)</span></div>
+<div style="position:absolute;left:121.60px;top:461.53px" class="cls_014"><span class="cls_014">take over and conduct the defence or settlement of claims made against </span><span class="cls_015">you</span><span class="cls_014"> that are covered by</span></div>
+<div style="position:absolute;left:121.60px;top:471.25px" class="cls_014"><span class="cls_014">this policy;</span></div>
+<div style="position:absolute;left:93.25px;top:490.70px" class="cls_019"><span class="cls_019">c)</span></div>
+<div style="position:absolute;left:121.60px;top:490.70px" class="cls_014"><span class="cls_014">pursue all rights or remedies available to </span><span class="cls_015">you</span><span class="cls_014"> whether or not payment has been made under this</span></div>
+<div style="position:absolute;left:121.60px;top:500.42px" class="cls_014"><span class="cls_014">policy.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:6808px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background09.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:102.69px" class="cls_012"><span class="cls_012">Introduction</span></div>
+<div style="position:absolute;left:64.90px;top:140.12px" class="cls_014"><span class="cls_014">Words written in bold are defined terms in the policy, so please refer to the Definitions section to see the</span></div>
+<div style="position:absolute;left:64.90px;top:152.12px" class="cls_014"><span class="cls_014">meaning of these terms.</span></div>
+<div style="position:absolute;left:64.90px;top:176.12px" class="cls_014"><span class="cls_014">In return for </span><span class="cls_015">you</span><span class="cls_014"> paying the premium, </span><span class="cls_015">we</span><span class="cls_014"> will provide the cover shown in </span><span class="cls_015">your</span><span class="cls_014"> </span><span class="cls_015">schedule </span><span class="cls_014">during the </span><span class="cls_015">period</span><span class="cls_014"> of</span></div>
+<div style="position:absolute;left:64.90px;top:188.12px" class="cls_014"><span class="cls_014">insurance.</span></div>
+<div style="position:absolute;left:64.90px;top:210.56px" class="cls_013"><span class="cls_013">Parties to this agreement</span></div>
+<div style="position:absolute;left:64.90px;top:220.28px" class="cls_014"><span class="cls_014">This policy</span><span class="cls_015"> </span><span class="cls_014">is between </span><span class="cls_015">you </span><span class="cls_014">and </span><span class="cls_015">us </span><span class="cls_014">as declared in the </span><span class="cls_015">schedule.  </span><span class="cls_014">This document, together with its </span><span class="cls_015">schedule </span><span class="cls_014">and</span></div>
+<div style="position:absolute;left:64.90px;top:230.01px" class="cls_014"><span class="cls_014">any attaching endorsements is the policy which sets out this insurance.  It is a legal contract so please read all of</span></div>
+<div style="position:absolute;left:64.90px;top:239.73px" class="cls_014"><span class="cls_014">it carefully.</span></div>
+<div style="position:absolute;left:64.90px;top:265.18px" class="cls_013"><span class="cls_013">Your Policy</span></div>
+<div style="position:absolute;left:64.90px;top:274.90px" class="cls_014"><span class="cls_014">Each insured section sets out the scope of the main cover and the circumstances in which </span><span class="cls_015">our</span><span class="cls_014"> liability to </span><span class="cls_015">you </span><span class="cls_014">is</span></div>
+<div style="position:absolute;left:64.90px;top:284.62px" class="cls_014"><span class="cls_014">limited or may be excluded.  Further, each section sets out other terms and conditions relevant to that section.</span></div>
+<div style="position:absolute;left:64.90px;top:294.34px" class="cls_014"><span class="cls_014">The cover provided by each section is only operative if stated as ‘insured’ in the </span><span class="cls_015">schedule.  </span><span class="cls_014">Where any </span><span class="cls_015">schedule</span></div>
+<div style="position:absolute;left:64.90px;top:304.07px" class="cls_014"><span class="cls_014">heading or sub-heading states ‘n/a’, ‘not applicable’ or ‘not insured’ then no cover applies for that item.</span></div>
+<div style="position:absolute;left:64.90px;top:329.51px" class="cls_014"><span class="cls_014">Additional clauses set out terms, conditions, exclusions or limitations that may apply to more than one insured</span></div>
+<div style="position:absolute;left:64.90px;top:339.24px" class="cls_014"><span class="cls_014">section.</span></div>
+<div style="position:absolute;left:64.90px;top:358.68px" class="cls_014"><span class="cls_014">The following general terms apply to all sections, clauses and endorsements:</span></div>
+<div style="position:absolute;left:64.90px;top:378.13px" class="cls_019"><span class="cls_019">a)</span></div>
+<div style="position:absolute;left:93.25px;top:378.13px" class="cls_014"><span class="cls_014">What is not covered;</span></div>
+<div style="position:absolute;left:64.90px;top:387.85px" class="cls_019"><span class="cls_019">b)</span></div>
+<div style="position:absolute;left:93.25px;top:387.85px" class="cls_014"><span class="cls_014">General conditions;</span></div>
+<div style="position:absolute;left:64.90px;top:397.57px" class="cls_019"><span class="cls_019">c)</span></div>
+<div style="position:absolute;left:93.25px;top:397.57px" class="cls_014"><span class="cls_014">Complaints; and</span></div>
+<div style="position:absolute;left:64.90px;top:407.30px" class="cls_019"><span class="cls_019">d)</span></div>
+<div style="position:absolute;left:93.25px;top:407.30px" class="cls_014"><span class="cls_014">Claims procedure.</span></div>
+<div style="position:absolute;left:64.90px;top:432.74px" class="cls_013"><span class="cls_013">Policy period and premium</span></div>
+<div style="position:absolute;left:64.90px;top:442.47px" class="cls_015"><span class="cls_015">We </span><span class="cls_014">will provide insurance as described in this policy and </span><span class="cls_015">schedule</span><span class="cls_014"> for the </span><span class="cls_015">period </span><span class="cls_014">as long as </span><span class="cls_015">you </span><span class="cls_014">pay the</span></div>
+<div style="position:absolute;left:64.90px;top:452.19px" class="cls_014"><span class="cls_014">premium(s) and other charges to </span><span class="cls_015">us </span><span class="cls_014">or </span><span class="cls_015">your </span><span class="cls_014">intermediary and </span><span class="cls_015">we</span><span class="cls_014"> or the intermediary accept the premium(s) and</span></div>
+<div style="position:absolute;left:64.90px;top:461.91px" class="cls_014"><span class="cls_014">other charges within the terms of </span><span class="cls_015">your </span><span class="cls_014">invoice.  Taxes and other charges apply to this policy in addition to the</span></div>
+<div style="position:absolute;left:64.90px;top:471.64px" class="cls_014"><span class="cls_014">premium.</span></div>
+<div style="position:absolute;left:64.90px;top:491.08px" class="cls_014"><span class="cls_014">If any premium (including a premium instalment) is not paid to and accepted by </span><span class="cls_015">us </span><span class="cls_014">or </span><span class="cls_015">your </span><span class="cls_014">intermediary within</span></div>
+<div style="position:absolute;left:64.90px;top:500.80px" class="cls_014"><span class="cls_014">the terms of</span><span class="cls_015"> your </span><span class="cls_014">invoice,</span><span class="cls_015"> we </span><span class="cls_014">may cancel the policy</span><span class="cls_015"> </span><span class="cls_014">and </span><span class="cls_015">you </span><span class="cls_014">will have no insurance protection.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:7659px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background10.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:103.22px" class="cls_012"><span class="cls_012">Information you must tell us</span></div>
+<div style="position:absolute;left:64.90px;top:141.12px" class="cls_014"><span class="cls_014">In deciding to accept this insurance and in setting the terms and premium, </span><span class="cls_015">we </span><span class="cls_014">have relied on the information</span></div>
+<div style="position:absolute;left:64.90px;top:153.12px" class="cls_015"><span class="cls_015">you </span><span class="cls_014">have given </span><span class="cls_015">us.  You</span><span class="cls_014"> must take reasonable care to provide complete and accurate answers to the questions</span></div>
+<div style="position:absolute;left:64.90px;top:165.12px" class="cls_015"><span class="cls_015">we</span><span class="cls_014"> ask when </span><span class="cls_015">you</span><span class="cls_014"> take out and make changes to </span><span class="cls_015">your </span><span class="cls_014">policy.</span></div>
+<div style="position:absolute;left:64.90px;top:189.12px" class="cls_015"><span class="cls_015">Careless misrepresentation in the context of a claim</span></div>
+<div style="position:absolute;left:64.90px;top:213.12px" class="cls_014"><span class="cls_014">If, on presentation of a claim, </span><span class="cls_015">we</span><span class="cls_014"> obtain evidence which suggests that </span><span class="cls_015">you </span><span class="cls_014">failed to take care to verify the</span></div>
+<div style="position:absolute;left:64.90px;top:225.12px" class="cls_014"><span class="cls_014">information </span><span class="cls_015">you </span><span class="cls_014">have provided and </span><span class="cls_015">we</span><span class="cls_014"> have relied upon in accepting this insurance and</span><span class="cls_020"> </span><span class="cls_014">setting the terms and</span></div>
+<div style="position:absolute;left:64.90px;top:237.12px" class="cls_014"><span class="cls_014">premium of this insurance </span><span class="cls_015">we </span><span class="cls_014">may:</span></div>
+<div style="position:absolute;left:71.95px;top:259.56px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   Treat this insurance as if it never existed and refuse to pay all claims and return the premiums paid, if </span><span class="cls_015">your</span></div>
+<div style="position:absolute;left:86.15px;top:269.29px" class="cls_014"><span class="cls_014">carelessness</span><span class="cls_015"> </span><span class="cls_014">causes </span><span class="cls_015">us</span><span class="cls_014"> to provide </span><span class="cls_015">you</span><span class="cls_014"> with insurance cover which </span><span class="cls_015">we</span><span class="cls_014"> would not otherwise have offered;</span></div>
+<div style="position:absolute;left:71.95px;top:279.01px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   Treat </span><span class="cls_015">your</span><span class="cls_014"> insurance as if it had been entered into on different terms from those agreed (specifically to</span></div>
+<div style="position:absolute;left:86.15px;top:288.73px" class="cls_014"><span class="cls_014">reflect the relevant misrepresentation); or</span></div>
+<div style="position:absolute;left:71.95px;top:298.45px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   Charge an additional premium representing the amount of premium for the full contract term or, in respect</span></div>
+<div style="position:absolute;left:86.15px;top:308.18px" class="cls_014"><span class="cls_014">of any mid-term variation, the remaining contract term from the effective date of such variations, that </span><span class="cls_015">we</span></div>
+<div style="position:absolute;left:86.15px;top:317.90px" class="cls_014"><span class="cls_014">would have charged in addition to the premium originally payable by </span><span class="cls_015">you </span><span class="cls_014">(specifically to reflect the relevant</span></div>
+<div style="position:absolute;left:86.15px;top:327.62px" class="cls_014"><span class="cls_014">misrepresentation) if </span><span class="cls_015">we</span><span class="cls_014"> would have charged more for </span><span class="cls_015">your</span><span class="cls_014"> insurance.</span></div>
+<div style="position:absolute;left:64.90px;top:350.90px" class="cls_015"><span class="cls_015">Careless misrepresentation generally</span></div>
+<div style="position:absolute;left:64.90px;top:374.90px" class="cls_014"><span class="cls_014">If</span><span class="cls_015"> we</span><span class="cls_014"> obtain evidence unrelated to any outstanding claim which suggests that </span><span class="cls_015">you</span><span class="cls_014"> failed to take care to verify</span></div>
+<div style="position:absolute;left:64.90px;top:386.90px" class="cls_014"><span class="cls_014">the information provided to </span><span class="cls_015">us</span><span class="cls_014"> and </span><span class="cls_015">we</span><span class="cls_014"> have relied upon in accepting this insurance and setting the terms and</span></div>
+<div style="position:absolute;left:64.90px;top:398.90px" class="cls_014"><span class="cls_014">premium of this insurance </span><span class="cls_015">we</span><span class="cls_014"> may:</span></div>
+<div style="position:absolute;left:71.95px;top:421.35px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   Give </span><span class="cls_015">you</span><span class="cls_014"> notice in writing that </span><span class="cls_015">you</span><span class="cls_014"> must pay more for </span><span class="cls_015">your</span><span class="cls_014"> insurance;</span></div>
+<div style="position:absolute;left:71.95px;top:431.07px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   Give </span><span class="cls_015">you</span><span class="cls_014"> notice in writing that the terms of </span><span class="cls_015">your</span><span class="cls_014"> insurance have changed; or</span></div>
+<div style="position:absolute;left:71.95px;top:440.79px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   Cancel this contract of insurance by giving </span><span class="cls_015">you</span><span class="cls_014"> thirty days' notice in writing and return any premium paid for</span></div>
+<div style="position:absolute;left:86.15px;top:450.52px" class="cls_014"><span class="cls_014">the balance of the contract term.</span></div>
+<div style="position:absolute;left:64.90px;top:473.80px" class="cls_014"><span class="cls_014">If </span><span class="cls_015">we</span><span class="cls_014"> give </span><span class="cls_015">you </span><span class="cls_014">notice that the terms of </span><span class="cls_015">your</span><span class="cls_014"> insurance have changed or that </span><span class="cls_015">you</span><span class="cls_014"> must pay more for </span><span class="cls_015">your</span></div>
+<div style="position:absolute;left:64.90px;top:485.80px" class="cls_014"><span class="cls_014">insurance then </span><span class="cls_015">you</span><span class="cls_014"> may give </span><span class="cls_015">us </span><span class="cls_014">thirty days' notice in writing that </span><span class="cls_015">you</span><span class="cls_014"> wish to terminate the contract.</span></div>
+<div style="position:absolute;left:64.90px;top:509.80px" class="cls_014"><span class="cls_014">Any return premium due to </span><span class="cls_015">you</span><span class="cls_014"> will depend on how long this contract of insurance has been in force and</span></div>
+<div style="position:absolute;left:64.90px;top:521.80px" class="cls_014"><span class="cls_014">whether </span><span class="cls_015">you</span><span class="cls_014"> have made a claim.</span></div>
+<div style="position:absolute;left:64.90px;top:545.80px" class="cls_014"><span class="cls_014">If we establish that </span><span class="cls_015">you</span><span class="cls_014"> deliberately or recklessly provided </span><span class="cls_015">us </span><span class="cls_014">with false information </span><span class="cls_015">we</span><span class="cls_014"> may:</span></div>
+<div style="position:absolute;left:71.95px;top:565.96px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   treat this insurance as if it never existed;</span></div>
+<div style="position:absolute;left:71.95px;top:575.68px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   decline all claims; and</span></div>
+<div style="position:absolute;left:71.95px;top:585.41px" class="cls_021"><span class="cls_021"></span><span class="cls_014">   retain the premium</span></div>
+<div style="position:absolute;left:169.72px;top:585.41px" class="cls_014"><span class="cls_014">(unless it would be unfair to do so).</span></div>
+<div style="position:absolute;left:64.90px;top:608.69px" class="cls_015"><span class="cls_015">Change in circumstance</span></div>
+<div style="position:absolute;left:64.90px;top:631.13px" class="cls_015"><span class="cls_015">You</span><span class="cls_014"> must tell </span><span class="cls_015">us</span><span class="cls_014"> as soon as possible about any changes in the information </span><span class="cls_015">you</span><span class="cls_014"> have provided to </span><span class="cls_015">us</span><span class="cls_014"> which</span></div>
+<div style="position:absolute;left:64.90px;top:640.85px" class="cls_014"><span class="cls_014">happens before or during any period of insurance. </span><span class="cls_015">We</span><span class="cls_014"> will tell </span><span class="cls_015">you</span><span class="cls_014"> if such change affects </span><span class="cls_015">your</span><span class="cls_014"> insurance and if</span></div>
+<div style="position:absolute;left:64.90px;top:650.58px" class="cls_014"><span class="cls_014">so, whether the change will result in revised terms and/or premium being applied to </span><span class="cls_015">your</span><span class="cls_014"> policy. If </span><span class="cls_015">you</span><span class="cls_014"> do not</span></div>
+<div style="position:absolute;left:64.90px;top:660.30px" class="cls_014"><span class="cls_014">inform </span><span class="cls_015">us</span><span class="cls_014"> about a change it may affect any claim </span><span class="cls_015">you</span><span class="cls_014"> make or could result in </span><span class="cls_015">your</span><span class="cls_014"> insurance being invalid.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:8510px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background11.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:103.22px" class="cls_012"><span class="cls_012">Definitions</span></div>
+<div style="position:absolute;left:64.90px;top:143.92px" class="cls_014"><span class="cls_014">An explanation of what words mean. These words will have the same meaning wherever they appear in bold</span></div>
+<div style="position:absolute;left:64.90px;top:155.92px" class="cls_014"><span class="cls_014">letters within this policy, schedule, endorsements and extensions.</span></div>
+<div style="position:absolute;left:70.70px;top:183.62px" class="cls_015"><span class="cls_015">Abandonment/Abandoned</span></div>
+<div style="position:absolute;left:206.20px;top:183.62px" class="cls_014"><span class="cls_014">The inability to complete the </span><span class="cls_015">event</span><span class="cls_014"> once commenced.</span></div>
+<div style="position:absolute;left:70.70px;top:201.92px" class="cls_015"><span class="cls_015">Cancellation/Cancelled</span></div>
+<div style="position:absolute;left:206.20px;top:201.92px" class="cls_014"><span class="cls_014">The inability to commence with the </span><span class="cls_015">event</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:70.70px;top:220.22px" class="cls_015"><span class="cls_015">Communicable Disease</span></div>
+<div style="position:absolute;left:206.20px;top:220.22px" class="cls_014"><span class="cls_014">An illness caused by a pathogen and transmitted from an infected person</span></div>
+<div style="position:absolute;left:206.20px;top:232.22px" class="cls_014"><span class="cls_014">or animal to another person or animal.</span></div>
+<div style="position:absolute;left:70.70px;top:250.52px" class="cls_015"><span class="cls_015">Disruption/Disrupted</span></div>
+<div style="position:absolute;left:206.20px;top:250.52px" class="cls_014"><span class="cls_014">The unavoidable partial closure of the</span><span class="cls_015"> event</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:70.70px;top:268.82px" class="cls_015"><span class="cls_015">Event</span></div>
+<div style="position:absolute;left:206.20px;top:268.82px" class="cls_014"><span class="cls_014">As described in the </span><span class="cls_015">schedule</span><span class="cls_014"> and held at the</span><span class="cls_015"> venue.</span></div>
+<div style="position:absolute;left:70.70px;top:287.12px" class="cls_015"><span class="cls_015">Excess/Excesses</span></div>
+<div style="position:absolute;left:206.20px;top:287.12px" class="cls_014"><span class="cls_014">The amount(s) stated in the </span><span class="cls_015">schedule</span><span class="cls_014"> which shall be retained by </span><span class="cls_015">you</span><span class="cls_014"> at</span></div>
+<div style="position:absolute;left:206.20px;top:299.12px" class="cls_015"><span class="cls_015">your</span><span class="cls_014"> own risk and uninsured.</span></div>
+<div style="position:absolute;left:70.70px;top:317.42px" class="cls_015"><span class="cls_015">Expenses</span></div>
+<div style="position:absolute;left:206.20px;top:317.42px" class="cls_014"><span class="cls_014">The total of all costs and charges which would have been incurred by </span><span class="cls_015">you</span></div>
+<div style="position:absolute;left:206.20px;top:329.42px" class="cls_014"><span class="cls_014">in organising, running and providing services for the </span><span class="cls_015">event</span><span class="cls_014"> had a loss not</span></div>
+<div style="position:absolute;left:206.20px;top:341.42px" class="cls_014"><span class="cls_014">occurred.</span></div>
+<div style="position:absolute;left:70.70px;top:359.72px" class="cls_015"><span class="cls_015">Gross revenue</span></div>
+<div style="position:absolute;left:206.20px;top:359.72px" class="cls_014"><span class="cls_014">All monies which would have been paid or payable to </span><span class="cls_015">you</span><span class="cls_014"> from every</span></div>
+<div style="position:absolute;left:206.20px;top:371.72px" class="cls_014"><span class="cls_014">source arising out of the </span><span class="cls_015">event</span><span class="cls_014"> had a loss not occurred.</span></div>
+<div style="position:absolute;left:70.70px;top:390.02px" class="cls_015"><span class="cls_015">Limit insured</span></div>
+<div style="position:absolute;left:206.20px;top:390.02px" class="cls_014"><span class="cls_014">The </span><span class="cls_015">expenses</span><span class="cls_014"> or </span><span class="cls_015">gross revenue</span><span class="cls_014"> shown to be insured in the </span><span class="cls_015">schedule</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:70.70px;top:408.32px" class="cls_015"><span class="cls_015">National mourning</span></div>
+<div style="position:absolute;left:206.20px;top:408.32px" class="cls_014"><span class="cls_014">A declared state of national, court or religious mourning which occurs,</span></div>
+<div style="position:absolute;left:206.20px;top:420.32px" class="cls_014"><span class="cls_014">following the death of a member of the Royal Family or Head of State up</span></div>
+<div style="position:absolute;left:206.20px;top:432.32px" class="cls_014"><span class="cls_014">to the age of 75.</span></div>
+<div style="position:absolute;left:70.70px;top:450.62px" class="cls_015"><span class="cls_015">Net loss</span></div>
+<div style="position:absolute;left:206.20px;top:450.62px" class="cls_014"><span class="cls_014">Such amount above any </span><span class="cls_015">excess</span><span class="cls_014"> stated in the</span><span class="cls_015"> schedule </span><span class="cls_014">as represented</span></div>
+<div style="position:absolute;left:206.20px;top:462.62px" class="cls_014"><span class="cls_014">in the loss calculation section.</span></div>
+<div style="position:absolute;left:70.70px;top:480.92px" class="cls_015"><span class="cls_015">Net profit</span></div>
+<div style="position:absolute;left:206.20px;top:480.92px" class="cls_014"><span class="cls_014">When insured and stated in the </span><span class="cls_015">schedule</span><span class="cls_014"> (as </span><span class="cls_015">gross revenue</span><span class="cls_014">), this</span></div>
+<div style="position:absolute;left:206.20px;top:492.92px" class="cls_014"><span class="cls_014">means the amount by which </span><span class="cls_015">gross revenue</span><span class="cls_014"> exceeds </span><span class="cls_015">expenses</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:70.70px;top:511.22px" class="cls_015"><span class="cls_015">Participants</span></div>
+<div style="position:absolute;left:206.20px;top:511.22px" class="cls_014"><span class="cls_014">Any party who is contracted by </span><span class="cls_015">you</span><span class="cls_014"> to perform a function critical to the</span></div>
+<div style="position:absolute;left:206.20px;top:523.22px" class="cls_014"><span class="cls_014">successful fulfilment of the </span><span class="cls_015">event</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:70.70px;top:541.52px" class="cls_015"><span class="cls_015">Period</span></div>
+<div style="position:absolute;left:206.20px;top:541.52px" class="cls_014"><span class="cls_014">The date from which this policy commences (as shown in the </span><span class="cls_015">schedule</span><span class="cls_014">)</span></div>
+<div style="position:absolute;left:206.20px;top:553.52px" class="cls_014"><span class="cls_014">and the date to where all cover under this policy ends (also as shown in</span></div>
+<div style="position:absolute;left:206.20px;top:565.52px" class="cls_014"><span class="cls_014">the </span><span class="cls_015">schedule</span><span class="cls_014">).</span></div>
+<div style="position:absolute;left:70.70px;top:583.82px" class="cls_015"><span class="cls_015">Period of event</span></div>
+<div style="position:absolute;left:206.20px;top:583.82px" class="cls_014"><span class="cls_014">The date from when the </span><span class="cls_015">event</span><span class="cls_014"> opens (as shown in the </span><span class="cls_015">schedule</span><span class="cls_014">) to the</span></div>
+<div style="position:absolute;left:206.20px;top:595.82px" class="cls_014"><span class="cls_014">date when the </span><span class="cls_015">event</span><span class="cls_014"> ends (also as shown in the </span><span class="cls_015">schedule</span><span class="cls_014">).</span></div>
+<div style="position:absolute;left:70.70px;top:614.12px" class="cls_015"><span class="cls_015">Rescheduling/Rescheduled</span></div>
+<div style="position:absolute;left:206.20px;top:614.12px" class="cls_014"><span class="cls_014">The unavoidable postponement of the </span><span class="cls_015">event</span><span class="cls_014"> to another time or the</span></div>
+<div style="position:absolute;left:206.20px;top:626.12px" class="cls_014"><span class="cls_014">unavoidable removal of the </span><span class="cls_015">event</span><span class="cls_014"> to another location.</span></div>
+<div style="position:absolute;left:70.70px;top:644.42px" class="cls_015"><span class="cls_015">Schedule</span></div>
+<div style="position:absolute;left:206.20px;top:644.42px" class="cls_014"><span class="cls_014">The attachment to this policy which sets out </span><span class="cls_015">your</span><span class="cls_014"> details and the details</span></div>
+<div style="position:absolute;left:206.20px;top:656.42px" class="cls_014"><span class="cls_014">of the </span><span class="cls_015">event</span><span class="cls_014"> and the coverage provided.</span></div>
+<div style="position:absolute;left:70.70px;top:674.72px" class="cls_015"><span class="cls_015">Terrorism</span></div>
+<div style="position:absolute;left:206.20px;top:674.72px" class="cls_014"><span class="cls_014">An unlawful act, including but not limited to the use of force or violence,</span></div>
+<div style="position:absolute;left:206.20px;top:686.72px" class="cls_014"><span class="cls_014">of any person or group(s) of persons, whether acting alone or on behalf</span></div>
+<div style="position:absolute;left:206.20px;top:698.72px" class="cls_014"><span class="cls_014">of or in connection with any organisation(s) or government(s), committed</span></div>
+<div style="position:absolute;left:206.20px;top:710.72px" class="cls_014"><span class="cls_014">for political, religious, ideological or similar purposes including the</span></div>
+<div style="position:absolute;left:206.20px;top:722.72px" class="cls_014"><span class="cls_014">intention to influence any government and/or to put the public, or any</span></div>
+<div style="position:absolute;left:206.20px;top:734.72px" class="cls_014"><span class="cls_014">section of the public, in fear.</span></div>
+<div style="position:absolute;left:70.70px;top:753.02px" class="cls_015"><span class="cls_015">Threat of terrorism</span></div>
+<div style="position:absolute;left:206.20px;top:753.02px" class="cls_014"><span class="cls_014">Information received by local or national governmental authorities</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:9361px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background12.jpg" width=595 height=841></div>
+<div style="position:absolute;left:206.20px;top:108.52px" class="cls_014"><span class="cls_014">relating to</span><span class="cls_015"> terrorism</span><span class="cls_014"> that poses or appears to pose a real risk of physical</span></div>
+<div style="position:absolute;left:206.20px;top:120.52px" class="cls_014"><span class="cls_014">loss or damage or actual bodily injury or death if the </span><span class="cls_015">event</span><span class="cls_014"> were to</span></div>
+<div style="position:absolute;left:206.20px;top:132.52px" class="cls_014"><span class="cls_014">proceed, whether or not such risk subsequently proves to have been real</span></div>
+<div style="position:absolute;left:206.20px;top:144.52px" class="cls_014"><span class="cls_014">or hoax.</span></div>
+<div style="position:absolute;left:70.70px;top:162.82px" class="cls_015"><span class="cls_015">Venue</span></div>
+<div style="position:absolute;left:206.20px;top:161.26px" class="cls_014"><span class="cls_014">The place(s), building(s) or other structure(s) stated in the </span><span class="cls_015">schedule</span></div>
+<div style="position:absolute;left:206.20px;top:170.99px" class="cls_014"><span class="cls_014">where the </span><span class="cls_015">event</span><span class="cls_014"> is to be held as well as accommodation, any services</span></div>
+<div style="position:absolute;left:206.20px;top:180.71px" class="cls_014"><span class="cls_014">and utilities which are essential to the </span><span class="cls_015">event</span><span class="cls_014"> taking place.</span></div>
+<div style="position:absolute;left:70.70px;top:198.29px" class="cls_015"><span class="cls_015">We/Us/Our</span></div>
+<div style="position:absolute;left:206.20px;top:198.29px" class="cls_014"><span class="cls_014">The Insurer as shown in the </span><span class="cls_015">schedule</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:70.70px;top:216.59px" class="cls_015"><span class="cls_015">You/Your</span></div>
+<div style="position:absolute;left:206.20px;top:216.59px" class="cls_015"><span class="cls_015">Your</span><span class="cls_014"> details shown in the</span><span class="cls_015"> schedule</span><span class="cls_014">.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:10212px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background13.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:115.62px" class="cls_012"><span class="cls_012">What is covered?</span></div>
+<div style="position:absolute;left:64.90px;top:153.52px" class="cls_014"><span class="cls_014">An explanation of the coverage provided by this policy.</span></div>
+<div style="position:absolute;left:64.90px;top:177.52px" class="cls_014"><span class="cls_014">Subject always to the terms, conditions, limitations, exclusions and </span><span class="cls_015">excesses</span><span class="cls_014"> contained within this policy or</span></div>
+<div style="position:absolute;left:64.90px;top:189.52px" class="cls_014"><span class="cls_014">included by endorsement, and subject always to the </span><span class="cls_015">limit insured</span><span class="cls_014">:</span></div>
+<div style="position:absolute;left:64.90px;top:213.52px" class="cls_019"><span class="cls_019">1.</span></div>
+<div style="position:absolute;left:93.25px;top:213.52px" class="cls_015"><span class="cls_015">We</span><span class="cls_014"> will reimburse </span><span class="cls_015">you</span><span class="cls_014"> for the </span><span class="cls_015">net loss</span><span class="cls_014"> following the necessary </span><span class="cls_015">cancellation</span><span class="cls_014">, </span><span class="cls_015">abandonment</span><span class="cls_014">,</span></div>
+<div style="position:absolute;left:93.25px;top:225.52px" class="cls_015"><span class="cls_015">disruption</span><span class="cls_014"> or </span><span class="cls_015">rescheduling </span><span class="cls_014">of the</span><span class="cls_015"> event</span><span class="cls_014">, which is the sole and direct result of a cause not otherwise</span></div>
+<div style="position:absolute;left:93.25px;top:237.52px" class="cls_014"><span class="cls_014">excluded which occurs during the </span><span class="cls_015">period</span><span class="cls_014"> and is beyond </span><span class="cls_015">your</span><span class="cls_014"> control and the control of the </span><span class="cls_015">participants</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:261.52px" class="cls_019"><span class="cls_019">2.</span></div>
+<div style="position:absolute;left:93.25px;top:261.52px" class="cls_015"><span class="cls_015">We</span><span class="cls_014"> will reimburse </span><span class="cls_015">you</span><span class="cls_014"> for proven additional costs or charges reasonably and necessarily paid by </span><span class="cls_015">you</span><span class="cls_014"> to</span></div>
+<div style="position:absolute;left:93.25px;top:273.52px" class="cls_014"><span class="cls_014">avoid or diminish a loss payable by this policy, provided such additional costs or charges do not exceed</span></div>
+<div style="position:absolute;left:93.25px;top:285.52px" class="cls_014"><span class="cls_014">the amount of loss that has been avoided or diminished.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:11063px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background14.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:103.22px" class="cls_012"><span class="cls_012">What is not covered?</span></div>
+<div style="position:absolute;left:64.90px;top:141.12px" class="cls_014"><span class="cls_014">This policy does not cover any loss directly or indirectly arising out of, contributed to by, or resulting from:</span></div>
+<div style="position:absolute;left:64.90px;top:165.12px" class="cls_019"><span class="cls_019">1.</span></div>
+<div style="position:absolute;left:93.25px;top:165.12px" class="cls_014"><span class="cls_014">non-appearance of any person(s) or groups of persons.</span></div>
+<div style="position:absolute;left:64.90px;top:189.12px" class="cls_019"><span class="cls_019">2.</span></div>
+<div style="position:absolute;left:93.25px;top:189.12px" class="cls_015"><span class="cls_015">Your</span><span class="cls_014"> lack of care, diligence or prudent behaviour, the result of which would increase the risk, and/or</span></div>
+<div style="position:absolute;left:93.25px;top:201.12px" class="cls_014"><span class="cls_014">likelihood of a loss, under this policy.</span></div>
+<div style="position:absolute;left:64.90px;top:225.12px" class="cls_019"><span class="cls_019">3.</span></div>
+<div style="position:absolute;left:93.25px;top:225.12px" class="cls_014"><span class="cls_014">any contractual dispute or breach by </span><span class="cls_015">you </span><span class="cls_014">or any</span><span class="cls_015"> participant</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:249.12px" class="cls_019"><span class="cls_019">4.</span></div>
+<div style="position:absolute;left:93.25px;top:249.12px" class="cls_014"><span class="cls_014">alterations or variances to the </span><span class="cls_015">event </span><span class="cls_014">without </span><span class="cls_015">our</span><span class="cls_014"> prior written approval.</span></div>
+<div style="position:absolute;left:64.90px;top:273.12px" class="cls_019"><span class="cls_019">5.</span></div>
+<div style="position:absolute;left:93.25px;top:273.12px" class="cls_014"><span class="cls_014">adverse weather in respect of any </span><span class="cls_015">event </span><span class="cls_014">in the open or under canvas or in a temporary structure unless</span></div>
+<div style="position:absolute;left:93.25px;top:285.12px" class="cls_014"><span class="cls_014">agreed by </span><span class="cls_015">us</span><span class="cls_014"> in writing and stated in the </span><span class="cls_015">schedule</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:309.12px" class="cls_019"><span class="cls_019">6.</span></div>
+<div style="position:absolute;left:93.25px;top:309.12px" class="cls_014"><span class="cls_014">any work being carried out by builders or other contractors which renders the </span><span class="cls_015">venue</span><span class="cls_014"> or its facilities</span></div>
+<div style="position:absolute;left:93.25px;top:321.12px" class="cls_014"><span class="cls_014">unusable in whole or in part, unless such work is unknown to </span><span class="cls_015">you</span><span class="cls_014"> at the inception of this policy or at the</span></div>
+<div style="position:absolute;left:93.25px;top:333.12px" class="cls_014"><span class="cls_014">time of agreeing the terms of the tenancy agreement with the </span><span class="cls_015">venue</span><span class="cls_014"> whichever is the later.</span></div>
+<div style="position:absolute;left:64.90px;top:357.12px" class="cls_019"><span class="cls_019">7.</span></div>
+<div style="position:absolute;left:93.25px;top:357.12px" class="cls_015"><span class="cls_015">Expenses</span><span class="cls_014"> and </span><span class="cls_015">gross revenue</span><span class="cls_014"> which have not been declared to and agreed by </span><span class="cls_015">us</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:381.12px" class="cls_019"><span class="cls_019">8.</span></div>
+<div style="position:absolute;left:93.25px;top:381.12px" class="cls_015"><span class="cls_015">Your</span><span class="cls_014"> failure to:</span></div>
+<div style="position:absolute;left:93.25px;top:405.12px" class="cls_019"><span class="cls_019">a)</span></div>
+<div style="position:absolute;left:121.60px;top:405.12px" class="cls_014"><span class="cls_014">observe and comply with the requirements of any law, ordinance, court or regulatory body of</span></div>
+<div style="position:absolute;left:121.60px;top:417.12px" class="cls_014"><span class="cls_014">whatever jurisdiction.</span></div>
+<div style="position:absolute;left:93.25px;top:441.12px" class="cls_019"><span class="cls_019">b)</span></div>
+<div style="position:absolute;left:121.60px;top:441.12px" class="cls_014"><span class="cls_014">make all necessary arrangements for the successful fulfilment of the </span><span class="cls_015">event</span><span class="cls_014"> (which for the</span></div>
+<div style="position:absolute;left:121.60px;top:453.12px" class="cls_014"><span class="cls_014">avoidance of doubt shall include, but not be limited to, the provision of sufficient allowances for</span></div>
+<div style="position:absolute;left:121.60px;top:465.12px" class="cls_014"><span class="cls_014">travel time, set up and/or rehearsal time) in a prudent and timely manner.</span></div>
+<div style="position:absolute;left:93.25px;top:489.12px" class="cls_019"><span class="cls_019">c)</span></div>
+<div style="position:absolute;left:121.60px;top:489.12px" class="cls_014"><span class="cls_014">ensure that all necessary contractual arrangements with </span><span class="cls_015">you</span><span class="cls_014"> are made and confirmed in writing</span></div>
+<div style="position:absolute;left:121.60px;top:501.12px" class="cls_014"><span class="cls_014">with </span><span class="cls_015">you</span><span class="cls_014"> and that all necessary authorisations, (which for the avoidance of doubt shall include, but</span></div>
+<div style="position:absolute;left:121.60px;top:513.12px" class="cls_014"><span class="cls_014">not be limited to, the obtaining of licences, permits, visas, copyright and patents) be obtained in a</span></div>
+<div style="position:absolute;left:121.60px;top:525.12px" class="cls_014"><span class="cls_014">timely manner and valid for the </span><span class="cls_015">period of event</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:549.12px" class="cls_019"><span class="cls_019">9.</span></div>
+<div style="position:absolute;left:93.25px;top:549.12px" class="cls_014"><span class="cls_014">actual or threatened war, invasion, act of foreign enemies, hostilities (whether war be declared or not),</span></div>
+<div style="position:absolute;left:93.25px;top:561.12px" class="cls_014"><span class="cls_014">civil war, rebellion, revolution, insurrection, military or usurped power.</span></div>
+<div style="position:absolute;left:64.90px;top:585.12px" class="cls_019"><span class="cls_019">10.</span></div>
+<div style="position:absolute;left:93.25px;top:585.12px" class="cls_014"><span class="cls_014">civil commotion assuming the proportions of or amounting to a popular uprising, riot, martial law or the</span></div>
+<div style="position:absolute;left:93.25px;top:597.12px" class="cls_014"><span class="cls_014">act of any lawfully constituted authority in the furtherance of maintaining public order.</span></div>
+<div style="position:absolute;left:64.90px;top:621.12px" class="cls_019"><span class="cls_019">11.</span></div>
+<div style="position:absolute;left:93.25px;top:621.12px" class="cls_014"><span class="cls_014">seizure or destruction under quarantine or customs regulations, confiscation, nationalisation or requisition</span></div>
+<div style="position:absolute;left:93.25px;top:633.12px" class="cls_014"><span class="cls_014">or destruction of or damage to property, by or under the order of any government or public or local</span></div>
+<div style="position:absolute;left:93.25px;top:645.12px" class="cls_014"><span class="cls_014">authority, or the handling of contraband or the engaging in illicit trade or transportation.</span></div>
+<div style="position:absolute;left:64.90px;top:669.12px" class="cls_019"><span class="cls_019">12.</span></div>
+<div style="position:absolute;left:93.25px;top:669.12px" class="cls_014"><span class="cls_014">any order for repatriation, internment, imprisonment, deportation or the refusal of permit to enter any</span></div>
+<div style="position:absolute;left:93.25px;top:681.12px" class="cls_014"><span class="cls_014">country where the </span><span class="cls_015">event</span><span class="cls_014"> is to be held.</span></div>
+<div style="position:absolute;left:64.90px;top:705.84px" class="cls_019"><span class="cls_019">13.</span></div>
+<div style="position:absolute;left:93.25px;top:705.84px" class="cls_014"><span class="cls_014">nuclear reaction, nuclear radiation or radioactive contamination, ionising radiations or contamination by</span></div>
+<div style="position:absolute;left:93.25px;top:717.84px" class="cls_014"><span class="cls_014">radioactivity from any nuclear fuel or from any nuclear waste from the combustion of nuclear fuel, the</span></div>
+<div style="position:absolute;left:93.25px;top:729.84px" class="cls_014"><span class="cls_014">radioactive, toxic, explosive or other hazardous properties of any explosive nuclear assembly or nuclear</span></div>
+<div style="position:absolute;left:93.25px;top:741.84px" class="cls_014"><span class="cls_014">component thereof.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:11914px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background15.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:105.62px" class="cls_019"><span class="cls_019">14.</span></div>
+<div style="position:absolute;left:93.25px;top:105.62px" class="cls_014"><span class="cls_014">seepage and/or pollution and/or contamination unless it is discovered during the </span><span class="cls_015">period</span><span class="cls_014"> and is a direct</span></div>
+<div style="position:absolute;left:93.25px;top:117.62px" class="cls_014"><span class="cls_014">cause of a loss covered under this policy.</span></div>
+<div style="position:absolute;left:64.90px;top:141.62px" class="cls_019"><span class="cls_019">15.</span></div>
+<div style="position:absolute;left:93.25px;top:141.62px" class="cls_014"><span class="cls_014">the withdrawal, insufficiency or lack of finance howsoever caused, the financial failure of any venture,</span></div>
+<div style="position:absolute;left:93.25px;top:153.62px" class="cls_014"><span class="cls_014">variations in the rate of exchange, rate of interest or stability of any currency, financial default,</span></div>
+<div style="position:absolute;left:93.25px;top:165.62px" class="cls_014"><span class="cls_014">insolvency, or failure to pay of any person, corporation or entity, all whether a party to this policy or</span></div>
+<div style="position:absolute;left:93.25px;top:177.62px" class="cls_014"><span class="cls_014">otherwise.</span></div>
+<div style="position:absolute;left:64.90px;top:201.62px" class="cls_019"><span class="cls_019">16.</span></div>
+<div style="position:absolute;left:93.25px;top:201.62px" class="cls_014"><span class="cls_014">lack of or inadequate receipts, sales or profits of any venture, lack of or inadequate response or</span></div>
+<div style="position:absolute;left:93.25px;top:213.62px" class="cls_014"><span class="cls_014">inadequate financial or other support or withdrawal of such support from any party, lack of or inadequate</span></div>
+<div style="position:absolute;left:93.25px;top:225.62px" class="cls_014"><span class="cls_014">attendance or insufficient interest prior to the date and time scheduled for any </span><span class="cls_015">event</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:249.62px" class="cls_019"><span class="cls_019">17.</span></div>
+<div style="position:absolute;left:93.25px;top:249.62px" class="cls_014"><span class="cls_014">the actual or threatened malicious use of pathogenic or poisonous biological or chemical materials</span></div>
+<div style="position:absolute;left:93.25px;top:261.62px" class="cls_014"><span class="cls_014">regardless of any other cause or event contributing, concurrently or in any other sequence, thereto.</span></div>
+<div style="position:absolute;left:64.90px;top:285.62px" class="cls_019"><span class="cls_019">18.</span></div>
+<div style="position:absolute;left:93.25px;top:285.62px" class="cls_014"><span class="cls_014">any </span><span class="cls_015">communicable disease</span><span class="cls_014"> unless the </span><span class="cls_015">venue</span><span class="cls_014"> is closed by or under the order of any government or</span></div>
+<div style="position:absolute;left:93.25px;top:297.62px" class="cls_014"><span class="cls_014">public or local authority as a sole and direct result of a </span><span class="cls_015">communicable disease</span><span class="cls_014"> which originates and</span></div>
+<div style="position:absolute;left:93.25px;top:309.62px" class="cls_014"><span class="cls_014">manifests itself within the confines of the </span><span class="cls_015">venue</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:333.62px" class="cls_019"><span class="cls_019">19.</span></div>
+<div style="position:absolute;left:93.25px;top:333.62px" class="cls_014"><span class="cls_014">the threat or fear of any </span><span class="cls_015">communicable disease</span><span class="cls_014"> whether actual or perceived.</span></div>
+<div style="position:absolute;left:64.90px;top:357.62px" class="cls_019"><span class="cls_019">20.</span></div>
+<div style="position:absolute;left:93.25px;top:357.62px" class="cls_015"><span class="cls_015">National mourning</span><span class="cls_014">, unless following the death of a member of the Royal Family or Head of State below</span></div>
+<div style="position:absolute;left:93.25px;top:369.62px" class="cls_014"><span class="cls_014">the age of 75 years, and such death occurs within 7 days of the start of the </span><span class="cls_015">event</span><span class="cls_014"> or during the </span><span class="cls_015">period</span></div>
+<div style="position:absolute;left:93.25px;top:381.62px" class="cls_015"><span class="cls_015">of</span><span class="cls_014"> </span><span class="cls_015">event</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:405.62px" class="cls_019"><span class="cls_019">21.</span></div>
+<div style="position:absolute;left:93.25px;top:405.62px" class="cls_014"><span class="cls_014">any act of </span><span class="cls_015">terrorism</span><span class="cls_014">, </span><span class="cls_015">threat of terrorism</span><span class="cls_014"> or fear of </span><span class="cls_015">terrorism</span><span class="cls_014"> thereof (whether actual or perceived)</span></div>
+<div style="position:absolute;left:93.25px;top:417.62px" class="cls_014"><span class="cls_014">regardless of any other cause or event contributing concurrently or in any other sequence to the loss.</span></div>
+<div style="position:absolute;left:64.90px;top:441.62px" class="cls_019"><span class="cls_019">22.</span></div>
+<div style="position:absolute;left:93.25px;top:441.62px" class="cls_014"><span class="cls_014">any loss resulting from or in connection with any action taken in controlling, preventing, suppressing or in</span></div>
+<div style="position:absolute;left:93.25px;top:453.62px" class="cls_014"><span class="cls_014">any way relating to any act of </span><span class="cls_015">terrorism</span><span class="cls_014">, </span><span class="cls_015">threat of</span><span class="cls_014"> </span><span class="cls_015">terrorism</span><span class="cls_014"> or fear of </span><span class="cls_015">terrorism</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:477.62px" class="cls_019"><span class="cls_019">23.</span></div>
+<div style="position:absolute;left:93.25px;top:477.62px" class="cls_014"><span class="cls_014">teleconferencing or similar picture or data image communication links, to or from any part of the </span><span class="cls_015">event</span><span class="cls_014">,</span></div>
+<div style="position:absolute;left:93.25px;top:489.62px" class="cls_014"><span class="cls_014">unless agreed by </span><span class="cls_015">us</span><span class="cls_014"> in writing and stated in the </span><span class="cls_015">schedule</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:513.62px" class="cls_019"><span class="cls_019">24.</span></div>
+<div style="position:absolute;left:93.25px;top:513.62px" class="cls_014"><span class="cls_014">failure to vacate the </span><span class="cls_015">venue</span><span class="cls_014"> at the expiration of the lease if </span><span class="cls_015">you</span><span class="cls_014"> are the owner or manager of the </span><span class="cls_015">venue</span></div>
+<div style="position:absolute;left:93.25px;top:525.62px" class="cls_014"><span class="cls_014">or are an affiliate company thereof.</span></div>
+<div style="position:absolute;left:64.90px;top:549.62px" class="cls_019"><span class="cls_019">25.</span></div>
+<div style="position:absolute;left:93.25px;top:549.62px" class="cls_014"><span class="cls_014">any happening which is insured by or would, but for the existence of this policy, be insured by any other</span></div>
+<div style="position:absolute;left:93.25px;top:561.62px" class="cls_014"><span class="cls_014">insurance(s) except for any excess beyond the amount which would have been payable under such other</span></div>
+<div style="position:absolute;left:93.25px;top:573.62px" class="cls_014"><span class="cls_014">insurance(s) had this policy not been effected.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:12765px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background16.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:103.22px" class="cls_012"><span class="cls_012">Loss calculation</span></div>
+<div style="position:absolute;left:64.90px;top:141.12px" class="cls_014"><span class="cls_014">An explanation of how </span><span class="cls_015">your </span><span class="cls_014">loss will be calculated.</span></div>
+<div style="position:absolute;left:64.90px;top:165.12px" class="cls_015"><span class="cls_015">Net loss </span><span class="cls_014">represents:</span></div>
+<div style="position:absolute;left:64.90px;top:189.12px" class="cls_019"><span class="cls_019">1.</span></div>
+<div style="position:absolute;left:93.25px;top:189.12px" class="cls_015"><span class="cls_015">Expenses </span><span class="cls_014">which have been irrevocably expended in connection with the </span><span class="cls_015">event</span><span class="cls_014">, less such part of the</span></div>
+<div style="position:absolute;left:93.25px;top:201.12px" class="cls_015"><span class="cls_015">gross revenue </span><span class="cls_014">retained, less any savings </span><span class="cls_015">you </span><span class="cls_014">are able to effect to mitigate such loss;</span></div>
+<div style="position:absolute;left:93.25px;top:225.12px" class="cls_014"><span class="cls_014">and</span></div>
+<div style="position:absolute;left:64.90px;top:249.12px" class="cls_019"><span class="cls_019">2.</span></div>
+<div style="position:absolute;left:93.25px;top:249.12px" class="cls_014"><span class="cls_014">The reduction in </span><span class="cls_015">net profit </span><span class="cls_014">(only when </span><span class="cls_015">gross revenue </span><span class="cls_014">is insured and stated in the </span><span class="cls_015">schedule</span><span class="cls_014">) which </span><span class="cls_015">you</span></div>
+<div style="position:absolute;left:93.25px;top:261.12px" class="cls_014"><span class="cls_014">can demonstrate to </span><span class="cls_015">us </span><span class="cls_014">would have been earned had the </span><span class="cls_015">event </span><span class="cls_014">taken place;</span></div>
+<div style="position:absolute;left:93.25px;top:285.12px" class="cls_014"><span class="cls_014">and</span></div>
+<div style="position:absolute;left:64.90px;top:309.12px" class="cls_019"><span class="cls_019">3.</span></div>
+<div style="position:absolute;left:93.25px;top:309.12px" class="cls_014"><span class="cls_014">the return of contracted fees or contracted charges for attendance or space, whether or not </span><span class="cls_015">you </span><span class="cls_014">are</span></div>
+<div style="position:absolute;left:93.25px;top:321.12px" class="cls_014"><span class="cls_014">contractually obliged to return such fees, and which </span><span class="cls_015">you </span><span class="cls_014">can demonstrate is commercially and essentially</span></div>
+<div style="position:absolute;left:93.25px;top:333.12px" class="cls_014"><span class="cls_014">justifiable.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:13616px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background17.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:103.22px" class="cls_012"><span class="cls_012">General conditions</span></div>
+<div style="position:absolute;left:64.90px;top:141.12px" class="cls_014"><span class="cls_014">General conditions that are applicable to </span><span class="cls_015">your</span><span class="cls_014"> policy:</span></div>
+<div style="position:absolute;left:64.90px;top:165.12px" class="cls_019"><span class="cls_019">1.</span></div>
+<div style="position:absolute;left:93.25px;top:165.12px" class="cls_015"><span class="cls_015">You</span><span class="cls_014"> shall at all times do and cooperate with all things necessary to avoid or diminish a loss under this</span></div>
+<div style="position:absolute;left:93.25px;top:177.12px" class="cls_014"><span class="cls_014">policy, including where possible </span><span class="cls_015">rescheduling</span><span class="cls_014"> the </span><span class="cls_015">event</span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:201.12px" class="cls_019"><span class="cls_019">2.</span></div>
+<div style="position:absolute;left:93.25px;top:201.12px" class="cls_014"><span class="cls_014">No other insurance shall be taken out by </span><span class="cls_015">you </span><span class="cls_014">to protect the interest insured under this policy without </span><span class="cls_015">our</span></div>
+<div style="position:absolute;left:93.25px;top:213.12px" class="cls_014"><span class="cls_014">prior written approval. In the event that such other insurance is taken out, </span><span class="cls_015">we</span><span class="cls_014"> reserve the right to amend</span></div>
+<div style="position:absolute;left:93.25px;top:225.12px" class="cls_014"><span class="cls_014">the terms and conditions of this policy.</span></div>
+<div style="position:absolute;left:64.90px;top:249.12px" class="cls_019"><span class="cls_019">3.</span></div>
+<div style="position:absolute;left:93.25px;top:249.12px" class="cls_014"><span class="cls_014">The premium and any expense incurred in the formulation of a claim shall not be recoverable items.</span></div>
+<div style="position:absolute;left:64.90px;top:273.12px" class="cls_019"><span class="cls_019">4.</span></div>
+<div style="position:absolute;left:93.25px;top:273.12px" class="cls_014"><span class="cls_014">This policy is non-cancellable and there can be no return of premium, unless </span><span class="cls_015">you</span><span class="cls_014"> have purchased an</span></div>
+<div style="position:absolute;left:93.25px;top:285.12px" class="cls_014"><span class="cls_014">annual and/or multiple event cover, in which case please refer to the cancellation and cooling off</span></div>
+<div style="position:absolute;left:93.25px;top:297.12px" class="cls_014"><span class="cls_014">procedure on final page of this policy wording.</span></div>
+<div style="position:absolute;left:64.90px;top:321.12px" class="cls_019"><span class="cls_019">5.</span></div>
+<div style="position:absolute;left:93.25px;top:321.12px" class="cls_014"><span class="cls_014">All salvage, recoveries and payments due to </span><span class="cls_015">you</span><span class="cls_014"> will be applied as if recovered or received prior to</span></div>
+<div style="position:absolute;left:93.25px;top:333.12px" class="cls_014"><span class="cls_014">settlement of the loss and all necessary adjustments will be made by the parties involved.</span></div>
+<div style="position:absolute;left:64.90px;top:357.12px" class="cls_019"><span class="cls_019">6.</span></div>
+<div style="position:absolute;left:93.25px;top:357.12px" class="cls_014"><span class="cls_014">In the course of handling </span><span class="cls_015">your</span><span class="cls_014"> claim, we may take over and defend or settle any claim in </span><span class="cls_015">your</span><span class="cls_014"> name or</span></div>
+<div style="position:absolute;left:93.25px;top:369.12px" class="cls_014"><span class="cls_014">prosecute (in </span><span class="cls_015">your</span><span class="cls_014"> name for </span><span class="cls_015">our</span><span class="cls_014"> own benefit) any claim for indemnity or damages.  </span><span class="cls_015">You</span><span class="cls_014"> shall cooperate</span></div>
+<div style="position:absolute;left:93.25px;top:381.12px" class="cls_014"><span class="cls_014">and do everything that may be necessary and requested by </span><span class="cls_015">us</span><span class="cls_014"> in order for </span><span class="cls_015">us</span><span class="cls_014"> to secure such rights.</span></div>
+<div style="position:absolute;left:64.90px;top:405.12px" class="cls_019"><span class="cls_019">7.</span></div>
+<div style="position:absolute;left:93.25px;top:405.12px" class="cls_014"><span class="cls_014">No legal action shall be brought upon this policy unless </span><span class="cls_015">you</span><span class="cls_014"> have complied with all the provisions of this</span></div>
+<div style="position:absolute;left:93.25px;top:417.12px" class="cls_014"><span class="cls_014">policy and have commenced such action within 12 (twelve) months after the loss occurs.</span></div>
+<div style="position:absolute;left:64.90px;top:441.12px" class="cls_019"><span class="cls_019">8.</span></div>
+<div style="position:absolute;left:93.25px;top:441.12px" class="cls_014"><span class="cls_014">This policy may not be assigned in whole or in part without </span><span class="cls_015">our</span><span class="cls_014"> prior written consent.</span></div>
+<div style="position:absolute;left:64.90px;top:465.12px" class="cls_019"><span class="cls_019">9.</span></div>
+<div style="position:absolute;left:93.25px;top:465.12px" class="cls_014"><span class="cls_014">If </span><span class="cls_015">you </span><span class="cls_014">make a fraudulent claim under this policy, </span><span class="cls_015">we</span><span class="cls_014">:</span></div>
+<div style="position:absolute;left:93.25px;top:489.12px" class="cls_019"><span class="cls_019">a)</span></div>
+<div style="position:absolute;left:121.60px;top:489.12px" class="cls_014"><span class="cls_014">are not liable to pay the claim; and</span></div>
+<div style="position:absolute;left:93.25px;top:501.12px" class="cls_019"><span class="cls_019">b)</span></div>
+<div style="position:absolute;left:121.60px;top:501.12px" class="cls_014"><span class="cls_014">may recover from </span><span class="cls_015">you </span><span class="cls_014">any sums that </span><span class="cls_015">we </span><span class="cls_014">have paid to </span><span class="cls_015">you </span><span class="cls_014">in respect of the claim; and</span></div>
+<div style="position:absolute;left:93.25px;top:513.12px" class="cls_019"><span class="cls_019">c)</span></div>
+<div style="position:absolute;left:121.60px;top:513.12px" class="cls_014"><span class="cls_014">may, by notice to </span><span class="cls_015">you</span><span class="cls_014">,</span><span class="cls_015"> </span><span class="cls_014">treat the policy as having been terminated with effect from the time of the</span></div>
+<div style="position:absolute;left:121.60px;top:525.12px" class="cls_014"><span class="cls_014">fraudulent act.</span></div>
+<div style="position:absolute;left:64.90px;top:549.12px" class="cls_014"><span class="cls_014">If </span><span class="cls_015">we </span><span class="cls_014">exercise our right under condition 9 c) above:</span></div>
+<div style="position:absolute;left:93.25px;top:573.12px" class="cls_019"><span class="cls_019">d)</span></div>
+<div style="position:absolute;left:121.60px;top:573.12px" class="cls_015"><span class="cls_015">we </span><span class="cls_014">shall not be liable to </span><span class="cls_015">you </span><span class="cls_014"> in respect of a relevant event occurring after the time of the</span></div>
+<div style="position:absolute;left:121.60px;top:585.12px" class="cls_014"><span class="cls_014">fraudulent act.  A relevant event is whatever gives rise to </span><span class="cls_015">our </span><span class="cls_014">liability under the policy (such as</span></div>
+<div style="position:absolute;left:121.60px;top:597.12px" class="cls_014"><span class="cls_014">the occurrence of a loss, the making of a claim, or the notification of a potential claim); and</span></div>
+<div style="position:absolute;left:93.25px;top:609.12px" class="cls_019"><span class="cls_019">e)</span></div>
+<div style="position:absolute;left:121.60px;top:609.12px" class="cls_015"><span class="cls_015">we </span><span class="cls_014">need not return any of the premiums paid.</span></div>
+<div style="position:absolute;left:64.90px;top:633.12px" class="cls_019"><span class="cls_019">10.</span></div>
+<div style="position:absolute;left:93.25px;top:633.12px" class="cls_014"><span class="cls_014">The law of England and Wales will apply to this contract unless </span><span class="cls_015">you</span><span class="cls_014"> and </span><span class="cls_015">we </span><span class="cls_014">agree otherwise; or at the</span></div>
+<div style="position:absolute;left:93.25px;top:645.12px" class="cls_014"><span class="cls_014">date of the contract </span><span class="cls_015">you</span><span class="cls_014"> are a resident of (or, in the case of a business, the registered office or principal</span></div>
+<div style="position:absolute;left:93.25px;top:657.12px" class="cls_014"><span class="cls_014">place of business is situated in): Scotland, Northern Ireland, Channel Islands or the Isle of Man; in which</span></div>
+<div style="position:absolute;left:93.25px;top:669.12px" class="cls_014"><span class="cls_014">case (in the absence of agreement to the contrary) the law of that country will apply.</span></div>
+<div style="position:absolute;left:64.90px;top:693.12px" class="cls_019"><span class="cls_019">11.</span></div>
+<div style="position:absolute;left:93.25px;top:693.12px" class="cls_015"><span class="cls_015">You</span><span class="cls_014"> shall maintain insurance adequate to cover the 100% of the </span><span class="cls_015">expenses</span><span class="cls_014"> (and </span><span class="cls_015">gross revenue</span><span class="cls_014"> if</span></div>
+<div style="position:absolute;left:93.25px;top:705.12px" class="cls_014"><span class="cls_014">insured) for each insured </span><span class="cls_015">event</span><span class="cls_014">, should </span><span class="cls_015">you</span><span class="cls_014"> fail to do so </span><span class="cls_015">you</span><span class="cls_014"> will be considered as being </span><span class="cls_015">your</span><span class="cls_014"> own</span></div>
+<div style="position:absolute;left:93.25px;top:717.12px" class="cls_014"><span class="cls_014">insurers and </span><span class="cls_015">your</span><span class="cls_014"> claim will be reduced by the percentage that the </span><span class="cls_015">limit</span><span class="cls_014"> stated in the </span><span class="cls_015">schedule</span><span class="cls_014"> bears to</span></div>
+<div style="position:absolute;left:93.25px;top:729.12px" class="cls_015"><span class="cls_015">your</span><span class="cls_014"> actual </span><span class="cls_015">expenses</span><span class="cls_014"> (and </span><span class="cls_015">gross</span><span class="cls_014"> </span><span class="cls_015">revenue</span><span class="cls_014"> if insured) for the </span><span class="cls_015">event</span><span class="cls_014">.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:14467px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background18.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:105.62px" class="cls_019"><span class="cls_019">12.</span></div>
+<div style="position:absolute;left:90.40px;top:105.62px" class="cls_015"><span class="cls_015">We</span><span class="cls_014"> shall not provide cover nor be responsible to pay any claim or provide any benefit hereunder to the</span></div>
+<div style="position:absolute;left:90.40px;top:117.62px" class="cls_014"><span class="cls_014">extent that the provision of such cover, payment of such claim or provision of such benefit would</span></div>
+<div style="position:absolute;left:90.40px;top:129.62px" class="cls_014"><span class="cls_014">expose </span><span class="cls_015">us</span><span class="cls_014"> or any member of </span><span class="cls_015">our</span><span class="cls_014"> group to any sanction, prohibition or restriction under United Nations</span></div>
+<div style="position:absolute;left:90.40px;top:141.62px" class="cls_014"><span class="cls_014">resolutions or the trade or economic sanctions, laws or regulations of any country.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:15318px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background19.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:103.22px" class="cls_012"><span class="cls_012">Use of language</span></div>
+<div style="position:absolute;left:64.90px;top:139.56px" class="cls_014"><span class="cls_014">Unless otherwise agreed, the contractual terms and conditions and other information relating to this contract will</span></div>
+<div style="position:absolute;left:64.90px;top:149.29px" class="cls_014"><span class="cls_014">be in English.</span></div>
+<div style="position:absolute;left:64.90px;top:177.61px" class="cls_012"><span class="cls_012">Financial Services Compensation Scheme</span></div>
+<div style="position:absolute;left:64.90px;top:213.95px" class="cls_015"><span class="cls_015">We</span><span class="cls_014"> are members of the Financial Services Compensation Scheme (FSCS). </span><span class="cls_015">You</span><span class="cls_014"> may be entitled to compensation</span></div>
+<div style="position:absolute;left:64.90px;top:223.68px" class="cls_014"><span class="cls_014">from this scheme if </span><span class="cls_015">we</span><span class="cls_014"> cannot meet </span><span class="cls_015">our</span><span class="cls_014"> obligations, depending on the type of insurance and the circumstances</span></div>
+<div style="position:absolute;left:64.90px;top:233.40px" class="cls_014"><span class="cls_014">of </span><span class="cls_015">your</span><span class="cls_014"> claim.</span></div>
+<div style="position:absolute;left:64.90px;top:254.40px" class="cls_014"><span class="cls_014">Further information about the scheme is available from the FSCS website </span><A HREF="http://www.fscs.org.uk/">www.fscs.org.uk</A>, or write to Financial</div>
+<div style="position:absolute;left:64.90px;top:266.40px" class="cls_014"><span class="cls_014">Services Compensation Scheme, PO BOX 300, Mitcheldean, GL17 1DY.</span></div>
+<div style="position:absolute;left:64.90px;top:324.00px" class="cls_012"><span class="cls_012">Cooling off and cancellation</span></div>
+<div style="position:absolute;left:64.90px;top:360.35px" class="cls_015"><span class="cls_015">Your</span><span class="cls_014"> cancellation rights:</span></div>
+<div style="position:absolute;left:64.90px;top:385.79px" class="cls_019"><span class="cls_019">a)</span></div>
+<div style="position:absolute;left:93.25px;top:385.79px" class="cls_014"><span class="cls_014">If </span><span class="cls_015">you</span><span class="cls_014"> have taken out an annual or multiple event policy and decide that for any reason this policy does</span></div>
+<div style="position:absolute;left:93.25px;top:395.52px" class="cls_014"><span class="cls_014">not meet </span><span class="cls_015">your </span><span class="cls_014">needs then please return it to </span><span class="cls_015">your</span><span class="cls_014"> insurance intermediary within 14 days from the day of</span></div>
+<div style="position:absolute;left:93.25px;top:405.24px" class="cls_014"><span class="cls_014">the purchase or the day on which you receive </span><span class="cls_015">your</span><span class="cls_014"> policy documentation, whichever is later.  On the</span></div>
+<div style="position:absolute;left:93.25px;top:414.96px" class="cls_014"><span class="cls_014">condition that no claims have been made or are pending, </span><span class="cls_015">we</span><span class="cls_014"> will refund </span><span class="cls_015">your</span><span class="cls_014"> premium in full.  There is</span></div>
+<div style="position:absolute;left:93.25px;top:424.68px" class="cls_014"><span class="cls_014">no cooling off period for policies of less than one month’s duration.  Following this </span><span class="cls_015">you </span><span class="cls_014">may cancel the</span></div>
+<div style="position:absolute;left:93.25px;top:434.41px" class="cls_014"><span class="cls_014">insurance cover at any time by informing </span><span class="cls_015">your </span><span class="cls_014">insurance intermediary.</span></div>
+<div style="position:absolute;left:64.90px;top:453.85px" class="cls_019"><span class="cls_019">b)</span></div>
+<div style="position:absolute;left:93.25px;top:453.85px" class="cls_015"><span class="cls_015">We</span><span class="cls_014"> shall not be bound to accept renewal of any insurance and may at time cancel any insurance</span></div>
+<div style="position:absolute;left:93.25px;top:463.58px" class="cls_014"><span class="cls_014">document by giving 14 days notice in writing where there is a valid reason for doing so.  A cancellation</span></div>
+<div style="position:absolute;left:93.25px;top:473.30px" class="cls_014"><span class="cls_014">letter will be sent to </span><span class="cls_015">you</span><span class="cls_014"> at</span><span class="cls_015"> your</span><span class="cls_014"> last known address.  Valid reasons may include but not limited to:-</span></div>
+<div style="position:absolute;left:93.25px;top:495.02px" class="cls_019"><span class="cls_019">i)</span></div>
+<div style="position:absolute;left:121.60px;top:495.02px" class="cls_014"><span class="cls_014">Fraud</span></div>
+<div style="position:absolute;left:93.25px;top:504.75px" class="cls_019"><span class="cls_019">ii)</span></div>
+<div style="position:absolute;left:121.60px;top:504.75px" class="cls_014"><span class="cls_014">Non-payment of premium</span></div>
+<div style="position:absolute;left:93.25px;top:514.47px" class="cls_019"><span class="cls_019">iii)</span></div>
+<div style="position:absolute;left:121.60px;top:514.47px" class="cls_014"><span class="cls_014">Threatening and abusive behaviour</span></div>
+<div style="position:absolute;left:93.25px;top:524.19px" class="cls_019"><span class="cls_019">iv)</span></div>
+<div style="position:absolute;left:121.60px;top:524.19px" class="cls_014"><span class="cls_014">Non-compliance with policy terms and conditions</span></div>
+<div style="position:absolute;left:64.90px;top:543.64px" class="cls_019"><span class="cls_019">c)</span></div>
+<div style="position:absolute;left:93.25px;top:543.64px" class="cls_014"><span class="cls_014">Provided the premium has been paid in full </span><span class="cls_015">you</span><span class="cls_014"> will be entitled to a proportionate rebate of premium in</span></div>
+<div style="position:absolute;left:93.25px;top:553.36px" class="cls_014"><span class="cls_014">respect of the unexpired period showing on the </span><span class="cls_015">schedule</span><span class="cls_014">.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:16169px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background20.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:103.22px" class="cls_012"><span class="cls_012">Complaints Procedure</span></div>
+<div style="position:absolute;left:64.90px;top:139.56px" class="cls_014"><span class="cls_014">Any enquiry or complaint that </span><span class="cls_015">you</span><span class="cls_014"> may have should in the first instance be addressed to the broker who arranged</span></div>
+<div style="position:absolute;left:64.90px;top:149.29px" class="cls_014"><span class="cls_014">this cover for </span><span class="cls_015">you</span><span class="cls_014">. Please quote </span><span class="cls_015">your</span><span class="cls_014"> Broker Insurance Document Number in all correspondence so that </span><span class="cls_015">your</span></div>
+<div style="position:absolute;left:64.90px;top:159.01px" class="cls_014"><span class="cls_014">complaint may be dealt with speedily.</span></div>
+<div style="position:absolute;left:64.90px;top:178.45px" class="cls_014"><span class="cls_014">If </span><span class="cls_015">your</span><span class="cls_014"> complaint is regarding this policy or the handling of a claim, please contact:</span></div>
+<div style="position:absolute;left:64.90px;top:197.90px" class="cls_014"><span class="cls_014">Beazley Furlonge Ltd</span></div>
+<div style="position:absolute;left:64.90px;top:207.62px" class="cls_014"><span class="cls_014">Plantation Place South</span></div>
+<div style="position:absolute;left:64.90px;top:217.35px" class="cls_014"><span class="cls_014">60 Great Tower Street</span></div>
+<div style="position:absolute;left:64.90px;top:227.07px" class="cls_014"><span class="cls_014">London EC3R 5AD</span></div>
+<div style="position:absolute;left:64.90px;top:236.79px" class="cls_014"><span class="cls_014">Tel No: +44 (0)20 7667 0623</span></div>
+<div style="position:absolute;left:64.90px;top:246.52px" class="cls_014"><span class="cls_014">Fax No: +44 (0)20 7674 7100</span></div>
+<div style="position:absolute;left:64.90px;top:265.96px" class="cls_014"><span class="cls_014">Email: </span><A HREF="mailto:beazley.complaints@beazley.com">beazley.complaints@beazley.com</A> </span></div>
+<div style="position:absolute;left:64.90px;top:285.41px" class="cls_014"><span class="cls_014">In the event that </span><span class="cls_015">you</span><span class="cls_014"> remain dissatisfied and wish to make a complaint, it may be possible in certain circumstances</span></div>
+<div style="position:absolute;left:64.90px;top:295.13px" class="cls_014"><span class="cls_014">for </span><span class="cls_015">you</span><span class="cls_014"> to refer the matter to the Complaints Team at Lloyd’s. Their address is:</span></div>
+<div style="position:absolute;left:64.90px;top:314.58px" class="cls_014"><span class="cls_014">Complaints</span></div>
+<div style="position:absolute;left:64.90px;top:324.30px" class="cls_014"><span class="cls_014">Lloyd’s</span></div>
+<div style="position:absolute;left:64.90px;top:334.02px" class="cls_014"><span class="cls_014">One Lime Street</span></div>
+<div style="position:absolute;left:64.90px;top:343.75px" class="cls_014"><span class="cls_014">London, EC3M 7HA</span></div>
+<div style="position:absolute;left:64.90px;top:363.19px" class="cls_014"><span class="cls_014">Tel No: 020 7327 5693</span></div>
+<div style="position:absolute;left:64.90px;top:372.91px" class="cls_014"><span class="cls_014">Fax No: 020 7327 5225</span></div>
+<div style="position:absolute;left:64.90px;top:382.64px" class="cls_014"><span class="cls_014">E-mail:</span><span class="cls_019"> </span><A HREF="mailto:complaints@lloyds.com">complaints@lloyds.com</A> </span></div>
+<div style="position:absolute;left:64.90px;top:402.08px" class="cls_014"><span class="cls_014">Details of Lloyd’s complaints procedures are set out in a leaflet “Your Complaint - How We Can Help” available at</span></div>
+<div style="position:absolute;left:64.90px;top:411.81px" class="cls_024"><span class="cls_024"> </span><A HREF="http://www.lloyds.com/complaints">www.lloyds.com/complaints</A> <span class="cls_022"> </span><span class="cls_014">and are also available from the above address.</span></div>
+<div style="position:absolute;left:64.90px;top:431.25px" class="cls_014"><span class="cls_014">If </span><span class="cls_015">you</span><span class="cls_014"> remain dissatisfied after Lloyd’s has considered </span><span class="cls_015">your</span><span class="cls_014"> complaint, </span><span class="cls_015">you </span><span class="cls_014">may have the right to refer </span><span class="cls_015">your</span></div>
+<div style="position:absolute;left:64.90px;top:440.98px" class="cls_014"><span class="cls_014">complaint to the Financial Ombudsman Service (FOS).</span></div>
+<div style="position:absolute;left:64.90px;top:460.42px" class="cls_014"><span class="cls_014">The contact details for the FOS are:</span></div>
+<div style="position:absolute;left:64.90px;top:470.14px" class="cls_014"><span class="cls_014">The Financial Ombudsman Service</span></div>
+<div style="position:absolute;left:64.90px;top:479.87px" class="cls_014"><span class="cls_014">Exchange Tower</span></div>
+<div style="position:absolute;left:64.90px;top:489.59px" class="cls_014"><span class="cls_014">London, E14 9SR</span></div>
+<div style="position:absolute;left:64.90px;top:509.04px" class="cls_014"><span class="cls_014">Tel No: 0800 023 4567 (calls to this number are free from “fixed lines” in the UK) or</span></div>
+<div style="position:absolute;left:64.90px;top:518.76px" class="cls_014"><span class="cls_014">0300 123 9123 (calls to this number are charged at the same rate as 01 and 02 numbers on mobile phone tariffs</span></div>
+<div style="position:absolute;left:64.90px;top:528.48px" class="cls_014"><span class="cls_014">in the UK).</span></div>
+<div style="position:absolute;left:64.90px;top:547.93px" class="cls_014"><span class="cls_014">E-mail: </span><A HREF="mailto:complaint.info@financial-ombudsman.org.uk">complaint.info@financial-ombudsman.org.uk</A> </span></div>
+<div style="position:absolute;left:64.90px;top:567.38px" class="cls_014"><span class="cls_014">The FOS is an independent service in the UK for settling disputes between consumers and businesses providing</span></div>
+<div style="position:absolute;left:64.90px;top:577.10px" class="cls_014"><span class="cls_014">financial services. </span><span class="cls_015">You</span><span class="cls_014"> can find more information on the FOS at </span><A HREF="http://www.financial-ombudsman.org.uk/">www.financial-ombudsman.org.uk</A> </span><span class="cls_014">.</span></div>
+<div style="position:absolute;left:64.90px;top:596.54px" class="cls_014"><span class="cls_014">If </span><span class="cls_015">you</span><span class="cls_014"> have purchased </span><span class="cls_015">your</span><span class="cls_014"> policy online </span><span class="cls_015">you</span><span class="cls_014"> can also make a complaint via the EU’s online dispute resolution</span></div>
+<div style="position:absolute;left:64.90px;top:606.27px" class="cls_014"><span class="cls_014">(ODR) platform. The website for the ODR platform is: </span><A HREF="https://webgate.ec.europa.eu/odr/main/index.cfm?event=main.home.chooseLanguage">http://ec.europa.eu/odr</A> </span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:17020px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background21.jpg" width=595 height=841></div>
+<div style="position:absolute;left:64.90px;top:102.69px" class="cls_012"><span class="cls_012">Data Protection Short Form Information Notice</span></div>
+<div style="position:absolute;left:64.90px;top:125.69px" class="cls_012"><span class="cls_012">(Layer 1)</span></div>
+<div style="position:absolute;left:64.90px;top:165.12px" class="cls_015"><span class="cls_015">Your</span><span class="cls_014"> personal information notice</span></div>
+<div style="position:absolute;left:64.90px;top:185.28px" class="cls_013"><span class="cls_013">Who we are</span></div>
+<div style="position:absolute;left:64.90px;top:196.56px" class="cls_015"><span class="cls_015">We</span><span class="cls_014"> are the insurers identified in the contract of insurance and/or in the certificate of insurance.</span></div>
+<div style="position:absolute;left:64.90px;top:216.73px" class="cls_013"><span class="cls_013">The basics</span></div>
+<div style="position:absolute;left:64.90px;top:228.01px" class="cls_015"><span class="cls_015">We </span><span class="cls_014">collect and use relevant information about</span><span class="cls_015"> you</span><span class="cls_014"> to provide </span><span class="cls_015">you</span><span class="cls_014"> with </span><span class="cls_015">your</span><span class="cls_014"> insurance cover or the insurance</span></div>
+<div style="position:absolute;left:64.90px;top:240.01px" class="cls_014"><span class="cls_014">cover that benefits </span><span class="cls_015">you</span><span class="cls_014"> and to meet</span><span class="cls_015"> our</span><span class="cls_014"> legal obligations.  This information includes details such as </span><span class="cls_015">your</span><span class="cls_014"> name,</span></div>
+<div style="position:absolute;left:64.90px;top:252.01px" class="cls_014"><span class="cls_014">address and contact details and any other information that </span><span class="cls_015">we</span><span class="cls_014"> collect about </span><span class="cls_015">you</span><span class="cls_014"> in connection with the insurance</span></div>
+<div style="position:absolute;left:64.90px;top:264.01px" class="cls_014"><span class="cls_014">cover from which </span><span class="cls_015">you</span><span class="cls_014"> benefit. This information may include more sensitive details such as information about </span><span class="cls_015">your</span></div>
+<div style="position:absolute;left:64.90px;top:276.01px" class="cls_014"><span class="cls_014">health and any criminal convictions </span><span class="cls_015">you</span><span class="cls_014"> may have.</span></div>
+<div style="position:absolute;left:64.90px;top:300.01px" class="cls_014"><span class="cls_014">In certain circumstances, </span><span class="cls_015">we</span><span class="cls_014"> may need </span><span class="cls_015">your</span><span class="cls_014"> consent to process certain categories of information about </span><span class="cls_015">you</span></div>
+<div style="position:absolute;left:64.90px;top:312.01px" class="cls_014"><span class="cls_014">(including sensitive details such as information about </span><span class="cls_015">your</span><span class="cls_014"> health and any criminal convictions </span><span class="cls_015">you</span><span class="cls_014"> may have).</span></div>
+<div style="position:absolute;left:64.90px;top:324.01px" class="cls_014"><span class="cls_014">Where </span><span class="cls_015">we</span><span class="cls_014"> need </span><span class="cls_015">your</span><span class="cls_014"> consent, </span><span class="cls_015">we</span><span class="cls_014"> will ask you for it separately. </span><span class="cls_015">You</span><span class="cls_014"> do not have to give your consent and </span><span class="cls_015">you</span></div>
+<div style="position:absolute;left:64.90px;top:336.01px" class="cls_014"><span class="cls_014">may withdraw </span><span class="cls_015">your</span><span class="cls_014"> consent at any time. However, if </span><span class="cls_015">you</span><span class="cls_014"> do not give </span><span class="cls_015">your</span><span class="cls_014"> consent, or </span><span class="cls_015">you</span><span class="cls_014"> withdraw </span><span class="cls_015">your</span></div>
+<div style="position:absolute;left:64.90px;top:348.01px" class="cls_014"><span class="cls_014">consent, this may affect </span><span class="cls_015">our </span><span class="cls_014">ability to provide the insurance cover from which </span><span class="cls_015">you </span><span class="cls_014">benefit and may prevent </span><span class="cls_015">us</span></div>
+<div style="position:absolute;left:64.90px;top:360.01px" class="cls_014"><span class="cls_014">from providing cover for </span><span class="cls_015">you</span><span class="cls_014"> or handling </span><span class="cls_015">your</span><span class="cls_014"> claims.</span></div>
+<div style="position:absolute;left:64.90px;top:384.01px" class="cls_014"><span class="cls_014">The way insurance works means that </span><span class="cls_015">your </span><span class="cls_014">information may be shared with, and used by, a number of third</span></div>
+<div style="position:absolute;left:64.90px;top:396.01px" class="cls_014"><span class="cls_014">parties in the insurance sector for example, insurers, agents or brokers, reinsurers, loss adjusters, sub-</span></div>
+<div style="position:absolute;left:64.90px;top:408.01px" class="cls_014"><span class="cls_014">contractors, regulators, law enforcement agencies, fraud and crime prevention and detection agencies and</span></div>
+<div style="position:absolute;left:64.90px;top:420.01px" class="cls_014"><span class="cls_014">compulsory insurance databases. </span><span class="cls_015">We</span><span class="cls_014"> will only disclose </span><span class="cls_015">your </span><span class="cls_014">personal information in connection with the insurance</span></div>
+<div style="position:absolute;left:64.90px;top:432.01px" class="cls_014"><span class="cls_014">cover that </span><span class="cls_015">we</span><span class="cls_014"> provide and to the extent required or permitted by law.</span></div>
+<div style="position:absolute;left:64.90px;top:452.17px" class="cls_013"><span class="cls_013">Other people's details you provide to us</span></div>
+<div style="position:absolute;left:64.90px;top:463.45px" class="cls_014"><span class="cls_014">Where</span><span class="cls_015"> you</span><span class="cls_014"> provide</span><span class="cls_015"> us</span><span class="cls_014"> or </span><span class="cls_015">your</span><span class="cls_014"> agent or broker with details about other people, </span><span class="cls_015">you</span><span class="cls_014"> must provide this notice to</span></div>
+<div style="position:absolute;left:64.90px;top:475.45px" class="cls_014"><span class="cls_014">them.</span></div>
+<div style="position:absolute;left:64.90px;top:495.62px" class="cls_013"><span class="cls_013">Want more details?</span></div>
+<div style="position:absolute;left:64.90px;top:506.90px" class="cls_014"><span class="cls_014">For more information about how </span><span class="cls_015">we</span><span class="cls_014"> use</span><span class="cls_015"> your</span><span class="cls_014"> personal information please see our full privacy notice(s), which</span></div>
+<div style="position:absolute;left:64.90px;top:518.90px" class="cls_014"><span class="cls_014">is/are available online on </span><span class="cls_015">our </span><span class="cls_014">website(s) or in other formats on request.</span></div>
+<div style="position:absolute;left:64.90px;top:539.07px" class="cls_013"><span class="cls_013">Contacting us and your rights</span></div>
+<div style="position:absolute;left:64.90px;top:550.35px" class="cls_015"><span class="cls_015">You</span><span class="cls_014"> have rights in relation to the information </span><span class="cls_015">we </span><span class="cls_014">hold about </span><span class="cls_015">you</span><span class="cls_014">, including the right to access </span><span class="cls_015">your</span><span class="cls_014"> information.</span></div>
+<div style="position:absolute;left:64.90px;top:562.35px" class="cls_014"><span class="cls_014">If </span><span class="cls_015">you</span><span class="cls_014"> wish to exercise</span><span class="cls_015"> your</span><span class="cls_014"> rights, discuss how</span><span class="cls_015"> we</span><span class="cls_014"> use </span><span class="cls_015">your</span><span class="cls_014"> information or request a copy of </span><span class="cls_015">our</span><span class="cls_014"> full privacy</span></div>
+<div style="position:absolute;left:64.90px;top:574.35px" class="cls_014"><span class="cls_014">notice(s), please contact </span><span class="cls_015">us</span><span class="cls_014"> on </span><A HREF="mailto:DPO@beazley.com">DPO@beazley.com</A> </span><span class="cls_019"> </span><span class="cls_014">or the agent or broker that arranged this insurance.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:17871px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background22.jpg" width=595 height=841></div>
+<div style="position:absolute;left:56.30px;top:106.12px" class="cls_005"><span class="cls_005">Attaching to and Forming Part of Certificate: BUK/202753</span></div>
+<div style="position:absolute;left:56.30px;top:130.12px" class="cls_005"><span class="cls_005">In Respect of Event(s) : 1</span></div>
+<div style="position:absolute;left:70.30px;top:156.25px" class="cls_007"><span class="cls_007">Adverse Weather Extension</span></div>
+<div style="position:absolute;left:70.30px;top:177.93px" class="cls_005"><span class="cls_005">The adverse weather exclusion, listed in the exclusions section of the policy wording, is hereby deleted and the</span></div>
+<div style="position:absolute;left:70.30px;top:189.93px" class="cls_005"><span class="cls_005">following definition is added to the policy:-</span></div>
+<div style="position:absolute;left:70.30px;top:213.93px" class="cls_005"><span class="cls_005">Adverse Weather is insured by this policy and is defined as extreme weather conditions which:</span></div>
+<div style="position:absolute;left:88.30px;top:237.93px" class="cls_005"><span class="cls_005">a)   occur on the day(s) of the </span><span class="cls_007">event</span><span class="cls_005"> and which are deemed by </span><span class="cls_007">you</span><span class="cls_005"> or the </span><span class="cls_007">event</span><span class="cls_005"> organiser on the day of the </span><span class="cls_007">event</span></div>
+<div style="position:absolute;left:106.30px;top:249.93px" class="cls_005"><span class="cls_005">to pose a serious threat to the safety of those attending the </span><span class="cls_007">event;</span></div>
+<div style="position:absolute;left:106.30px;top:273.93px" class="cls_005"><span class="cls_005">and/or</span></div>
+<div style="position:absolute;left:88.30px;top:297.93px" class="cls_005"><span class="cls_005">b)   occur during the </span><span class="cls_007">policy period</span><span class="cls_005"> and which result in conditions which the local authority consider to pose a</span></div>
+<div style="position:absolute;left:106.30px;top:309.93px" class="cls_005"><span class="cls_005">serious threat to the safety of those attending the </span><span class="cls_007">event;</span></div>
+<div style="position:absolute;left:106.30px;top:333.93px" class="cls_005"><span class="cls_005">and/or</span></div>
+<div style="position:absolute;left:88.30px;top:357.93px" class="cls_005"><span class="cls_005">c)   occur during the </span><span class="cls_007">policy period</span><span class="cls_005"> and which prevent </span><span class="cls_007">You</span><span class="cls_005"> or the </span><span class="cls_007">event</span><span class="cls_005"> organiser from undertaking the necessary</span></div>
+<div style="position:absolute;left:106.30px;top:369.93px" class="cls_005"><span class="cls_005">set up to enable the </span><span class="cls_007">event</span><span class="cls_005"> to proceed due to:</span></div>
+<div style="position:absolute;left:106.30px;top:393.93px" class="cls_005"><span class="cls_005">(i)  concern for the safety of those responsible for the necessary set up, or</span></div>
+<div style="position:absolute;left:106.30px;top:417.93px" class="cls_005"><span class="cls_005">(ii)  reasons of physical impossibility</span></div>
+<div style="position:absolute;left:70.30px;top:441.93px" class="cls_005"><span class="cls_005">In any claim and/or action, suit or proceeding to enforce a claim for a loss hereunder the burden of proving that the loss</span></div>
+<div style="position:absolute;left:70.30px;top:453.93px" class="cls_005"><span class="cls_005">results from adverse weather shall fall upon </span><span class="cls_007">you</span><span class="cls_005">.</span></div>
+</div>
+<div style="position:absolute;left:50%;margin-left:-297px;top:18722px;width:595px;height:841px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="d109e52e-81c5-11eb-8b25-0cc47a792c0a_id_d109e52e-81c5-11eb-8b25-0cc47a792c0a_files/background23.jpg" width=595 height=841></div>
+<div style="position:absolute;left:56.30px;top:106.12px" class="cls_005"><span class="cls_005">Attaching to and Forming Part of Certificate: BUK/202753</span></div>
+<div style="position:absolute;left:56.30px;top:128.12px" class="cls_005"><span class="cls_005">In Respect of Event(s) : 1</span></div>
+<div style="position:absolute;left:70.30px;top:153.31px" class="cls_007"><span class="cls_007">Stage, Marquee and Professionally Erected Temporary Structures Covering Condition</span></div>
+<div style="position:absolute;left:70.30px;top:170.75px" class="cls_005"><span class="cls_005">It is a condition of this policy that any stage area(s), marquees or professionally erected temporary structures at the</span></div>
+<div style="position:absolute;left:70.30px;top:181.69px" class="cls_007"><span class="cls_007">event(s)</span><span class="cls_005"> are to be covered on three sides and above and all electrical equipment is to be protected from weather to the</span></div>
+<div style="position:absolute;left:70.30px;top:192.63px" class="cls_005"><span class="cls_005">required industry standard.</span></div>
+</div>
+
+</body>
+</html>
