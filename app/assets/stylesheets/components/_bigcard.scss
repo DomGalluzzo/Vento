@@ -1,59 +1,85 @@
 .big-banner{
-    font-size: 50px;
+	font-size: 50px;
 }
 
 .card-text{
-    font-size: 100px;
+	font-size: 75px;
 }
 
 .card-title{
-    font-size: 15px;
-    color: black;
+	font-size: 15px;
+	color: black;
 }
 
 .card-content {
-    border-radius: 25px;
-    height: 100%;
-    width: 70%;
+	border-radius: 25px;
+	height: 100%;
+	width: 70%;
 }
 .insured-button {
-    border-radius: 22px;
-    width: 184px;
-    height: 44px;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0 33px;
-    margin: 32 auto 0;
-    background-color: #ff3000;
+	border-radius: 22px;
+	width: 184px;
+	height: 44px;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 0 33px;
+	margin: 32 auto 0;
+	background-color: rgba(255,48,0,0.9);
+	box-shadow: 0 0 15px rgba(199, 36, 0, 0.5);
+
+	.fas.fa-fire {
+		color: #01736e;
+		transition-duration: 350ms;
+  }
+
+		&:hover {
+			background-color: #01736e;
+  		box-shadow: 0 0 15px rgba(1, 87, 82, 0.5);
+  		transition-duration: 350ms;
+
+  			.fas.fa-fire {
+    			color: #ff3000;
+    			transition-duration: 350ms;
+  			}
+		}
 }
 
 .email-button{
-    border-radius: 22px;
-    width: 164px;
-    height: 34px;
-    font-size: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0 33px;
-    margin: 32 auto 0;
-    background-color: #F0EBE7;
+	border-radius: 22px;
+	width: 164px;
+	height: 34px;
+	font-size: 9px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 0 33px;
+	margin: 32 auto 0;
+	background-color: #F0EBE7;
 }
 
 .group-list{
-    padding-left: 2rem;
-    list-style-type: none;
+	padding-left: 2rem;
+	list-style-type: none;
 }
 
 .group-item{
-    margin-left: -50px;
-    padding-left: 2rem;
-    background-image: url(rounded-square-png.png);
-    background-position: 0 0;
-    background-size: 1.3rem 1.3rem;
-    background-repeat: no-repeat;
-    transition: 1s;
-    // transform: translateX(50px);
+	margin-left: -50px;
+	padding-left: 2rem;
+	background-image: url(rounded-square-png.png);
+	background-position: 0 0;
+	background-size: 1.3rem 1.3rem;
+	background-repeat: no-repeat;
+	transition: 1s;
+	// transform: translateX(50px);
+}
+
+.big-card > .card {
+	border: none;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2)
+}
+
+#email-button {
+	box-shadow: 0 0 20px rgba(75, 75, 75, 0.4)
 }

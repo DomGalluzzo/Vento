@@ -32,11 +32,13 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { initMapbox } from '../plugins/init_mapbox';
 import { animation } from './list_animation.js';
 import { initAutocomplete } from '../plugins/init_autocomplete.js';
+import { modalPopout } from './modal_pop.js';
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   animation();
   initMapbox();
   initAutocomplete();
+  modalPopout();
 });
 

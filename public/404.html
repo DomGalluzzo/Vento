@@ -1,67 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta charset="UTF-8">
+  <title>Error 404 - Page not found</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,900">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    html,
+    body {
+      height: 100%;
+    }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    body {
+      color: #4c4a50;
+      font-family: 'Lato', 'sans-serif';
+      font-weight: 300;
+      font-size: 1em;
+      margin: 0;
+      position: relative;
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    h1 {
+      font-size: 2em;
+      font-weight: 900;
+      line-height: 1.1em;
+      margin: 0;
+    }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    h2 {
+      font-size: 1.5em;
+      font-weight: 300;
+      line-height: 1.1em;
+      margin: 0;
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+
+    .container {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .display-table {
+      display: table;
+      width: 100%;
+    }
+
+    .display-table-cell {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .icons {
+      display: none;
+    }
+
+    .icon {
+      display: inline-block;
+      height: 3em;
+      width: 3em;
+    }
+
+    .icon-left {
+      margin-right: 1em;
+    }
+
+    .icon-right {
+      margin-left: 1em;
+    }
+
+    .icon-x {
+      background-color: #ca2735;
+      border-radius: 50%;
+      fill: #fff;
+      padding: .5em;
+    }
+    .page-404 {
+
+      background-color: #FAD961;
+      background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
+    }
+
+
+    /* .page-404 {
+      background: radial-gradient(ellipse farthest-side at right top, #2ca6e0 0%, #1766b3 100%) no-repeat;
+    } */
+
+    .message {
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+      padding: 1em 2em;
+      text-transform: uppercase;
+
+      h1 {
+        font-weight: 900;
+      }
+
+      h2 {
+        font-weight: 300;
+      }
+
+    }
+
+    .animated {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    .bounceIn {
+      animation-name: bounceIn;
+      animation-duration: .75s;
+    }
+
+    @keyframes bounceIn {
+
+      0%, 20%, 40%, 60%, 80%, 100% {
+        transition-timing-function: cubic-bezier(.215, .61, .355, 1);
+      }
+
+      0% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+      }
+
+      20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+      }
+
+      40% {
+        transform: scale3d(.9, .9, .9);
+      }
+
+      60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03);
+      }
+
+      80% {
+        transform: scale3d(.97, .97, .97);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+      }
+
+    }
   </style>
 </head>
+<body class="page-404">
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+  <div class="container">
+    <div class="message animated bounceIn">
+      <div class="display-table">
+        <div class="display-table-cell">
+          <svg class="icon icon-left icon-x"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-x"></use></svg>
+        </div>
+
+        <div class="display-table-cell">
+          <h1>Error 404</h1>
+          <h2>Page not Found!</h2>
+        </div>
+      </div>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
+
+  <svg class="icons" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><symbol viewBox="0 0 512 512" id="icon-x"><title>x</title><path d="M438.393 374.595L319.757 255.977l118.62-118.63-63.782-63.74-118.6 118.618-118.62-118.603-63.768 63.73 118.64 118.63L73.62 374.626l63.73 63.768 118.65-118.66 118.65 118.645z"/></symbol></svg>
+
+
 </body>
 </html>

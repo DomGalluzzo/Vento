@@ -1,3 +1,6 @@
+<head>
+  <title>Vento - Add Your Festival's Details</title>
+</head>
 <body class="body festivals">
   
   <%= simple_form_for @festival do |f| %>
@@ -25,7 +28,7 @@
             <%= f.input_field :genre, as: :radio_buttons, collection: [['0', 'Festival'], ['1', 'Conference'], ['2','Other']], label_method: :second, value_method: :first, html: {id: "radio-festival"} %>
           </div>
           <div class="btn-box">
-            <%= f.submit "Submit", class: "submit" %>
+            <%= f.submit "Submit", class: "submit", id: "festival-btn"%>
           </div>
         </div>
       </div>
