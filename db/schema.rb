@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 2021_03_09_225243) do
     t.bigint "contract_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "plannable_type"
-    t.bigint "plannable_id"
+    t.string "plannable_type", null: false
+    t.bigint "plannable_id", null: false
     t.index ["contract_id"], name: "index_contract_plans_on_contract_id"
     t.index ["plannable_type", "plannable_id"], name: "index_contract_plans_on_plannable_type_and_plannable_id"
   end
