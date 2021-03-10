@@ -1,3 +1,9 @@
+.cards-pill{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .card-shape{
     background: linear-gradient(#E2E8E8, #cac9c9);
     border-radius: 15px;
@@ -22,10 +28,14 @@
 }
 
 .insurance-details{
-    height: 220px;
     border-radius: 20px;
 }
 
 .link-color{
     color: black;
 }
+
+.title-header {
+    padding: 40px 300px 40px 300px;
+}
+
