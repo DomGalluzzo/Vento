@@ -5,6 +5,6 @@
 
 <% @festivals.each do |festival| %>
     <ul>
-      <li><%= link_to festival.name, contract_path(festival.contract) %></li>
+      <li><%= link_to festival.name, contract_path(festival.contract.id) %></li>
     </ul> 
 <% end %>
