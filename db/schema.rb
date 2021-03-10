@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_09_225243) do
+ActiveRecord::Schema.define(version: 2021_03_10_181318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_03_09_225243) do
     t.bigint "festival_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "price"
+    t.integer "price_cents", default: 0, null: false
     t.index ["festival_id"], name: "index_contracts_on_festival_id"
   end
 
@@ -59,6 +59,18 @@ ActiveRecord::Schema.define(version: 2021_03_09_225243) do
     t.float "longitude"
     t.string "address"
     t.index ["user_id"], name: "index_festivals_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "state"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "checkout_session_id"
+    t.bigint "user_id", null: false
+    t.bigint "contract_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contract_id"], name: "index_orders_on_contract_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "public_injuries", force: :cascade do |t|
@@ -87,4 +99,6 @@ ActiveRecord::Schema.define(version: 2021_03_09_225243) do
   add_foreign_key "contract_plans", "contracts"
   add_foreign_key "contracts", "festivals"
   add_foreign_key "festivals", "users"
+  add_foreign_key "orders", "contracts"
+  add_foreign_key "orders", "users"
 end
