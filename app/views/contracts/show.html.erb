@@ -16,7 +16,7 @@
           <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
         </div>
         
-        <% @contract.contract_plans.each do |plan| %>
+        <!-- <% @contract.contract_plans.each do |plan| %>
           <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of?(Cancellation) %>
             <% liability = plan.plannable.liability %>
             <% budget = plan.plannable.budget %>
@@ -39,7 +39,14 @@
               £<%= (budget * 0.02)%>
             </div>
           <% end %>      
-        <% end %>
+        <% end %> -->
+
+        <div>
+          <h3 class="vento-font">Price </h3>
+          <div class="card festival-dates pl-3 mb-4">
+          £<%= @contract.price %>
+          </div>  
+        </div>
 
      
         <div>
@@ -47,6 +54,9 @@
           <%#= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
 
         </div>
+
+     
+        
         <% @contract.contract_plans.each do |plan| %>
           <div class="card insurance-details px-3 py-3">
           <% if plan.plannable.kind_of?(PublicInjury) %>
@@ -86,10 +96,6 @@
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   </div>
-
-  <h1>
-    $$$$  <%= @contract.price %>
-  </h1>
 
 </div>
 
