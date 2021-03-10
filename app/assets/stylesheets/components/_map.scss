@@ -3,12 +3,11 @@
   width: 70vw;
   justify-content: space-between;
   margin: auto;
-  padding-top: 50px;
 }
 
 .map-body{
   position: relative;
-  width: 600px;
+  width: 550px;
 }
 
 
@@ -16,7 +15,28 @@
   position: absolute;
   top: 0px;
   right: 0px;
-  border-radius: 50px;
+  border-radius: 10px;
+}
+
+.svg-map-container{
+  position: absolute;
+  top: 600px;
+   
+}
+
+.svg-img-margin{
+  margin-left: -30px;
+}
+
+@media only screen and (max-width: 1280px){
+  .map-container{
+    width: 90vw;
+  }
+
+
+  #map {
+    width: 80%;
+  }
 }
 
 // .card-map{

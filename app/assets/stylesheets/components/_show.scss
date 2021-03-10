@@ -1,14 +1,30 @@
 .card-shape{
-    background: linear-gradient(#E2E8E8, #cac9c9);
-    border-radius: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.card-title{
+    margin-bottom: 2.75rem;
+}
+
+.card-body{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .user-name{
     font-family: "GraphikLCG-Medium"; 
+    font-size: 1.50rem;
 }
 
 .vento-font{
     font-family: "GraphikLCG-Medium"; 
+    font-size: 1rem;
 }
 
 .festvial-name{
@@ -22,10 +38,31 @@
 }
 
 .insurance-details{
-    height: 220px;
     border-radius: 20px;
+    border: none;
 }
 
 .link-color{
     color: black;
+}
+
+.title-header {
+    padding: 40px 300px 40px 300px;
+}
+
+.help-button {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.svg-img-margin{
+    margin-left: -30px;
+}
+
+@media only screen and (max-width: 1280px) {
+    .title-header {
+        padding: 40px 60px 40px 60px;
+    }
 }
