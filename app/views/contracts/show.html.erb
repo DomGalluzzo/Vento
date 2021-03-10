@@ -79,7 +79,7 @@
         <% @contract.contract_plans.each do |plan| %>
           <div class="card insurance-details px-3 py-3">
             <% if plan.plannable.kind_of?(PublicInjury) %>
-            <button class="btn btn-danger rounded-pill" data-modal-target="#modal1">Public Injury</button>
+            <button class="btn btn-outline-secondary rounded-pill" data-modal-target="#modal1">Public Injury</button>
             <div class="modal-card" id="modal1">
               <div class="modal-header">
                 <h5 class="modal-title">Public Injury</h5>
@@ -96,7 +96,7 @@
             </div>
             <%# next %>
             <% else %>
-            <button class="btn btn-danger rounded-pill" data-modal-target="#modal"><%= plan.plannable_type %></button>
+            <button class="btn btn-outline-secondary rounded-pill" data-modal-target="#modal"><%= plan.plannable_type %></button>
             <div class="modal-card" id="modal">
               <div class="modal-header">
                 <h5 class="modal-title"><%= plan.plannable_type %></h5>
@@ -117,17 +117,18 @@
         <% end %>
       </div>
       
+      <div class="stripe-btn"> 
       <%= form_tag orders_path do %>
         <%= hidden_field_tag 'contract_id', @contract.id %>
-        <%= submit_tag 'Buy Now', class: 'btn btn-primary' %>
+        <%= submit_tag 'Buy Now', class: 'btn btn-danger rounded-pill btn-block' %>
       <% end %>
+      </div>
 
-      <div class="help-button text-center mt-4">
       <div id="overlay"></div>
       <div class="help-button text-center mt-5">
           <%# <a href="#" class="card-link link-color">Help ?</a> %>
-          <%= link_to "Need Help?", "#{root_path}#faq", class: "btn btn-secondary rounded-pill" %> <br>
-          <%= link_to "Download your contract", contract_path(format: :pdf), class: "btn btn-secondary rounded-pill" %>
+          <%= link_to "Need Help?", "#{root_path}#faq", class: "btn btn-outline-secondary rounded-pill" %> <br>
+          <%= link_to "Download your contract", contract_path(format: :pdf), class: "btn btn-outline-secondary rounded-pill" %>
       </div>
     </div>
   </div>
