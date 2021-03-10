@@ -41,7 +41,20 @@
   padding: 0 33px;
   margin: 0 auto;
   background-color: #ff3000;
+  box-shadow: 0 0 20px rgba(199, 36, 0, 0.6);
+
+  .fas.fa-fire {
+    color: #01736e;
+    transition-duration: 350ms;
+  }
 }
 .boton:hover {
-  background-color: #01736E;
+  background-color: #01736e;
+  box-shadow: 0 0 20px rgba(1, 87, 82, 0.6);
+  transition-duration: 300ms;
+
+  .fas.fa-fire {
+    color: #ff3000;
+    transition-duration: 300ms;
+  }
 }
