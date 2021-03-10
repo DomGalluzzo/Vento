@@ -8,7 +8,9 @@ class ContractPlansController < ApplicationController
     # @contract = Contract.find(params[:contract_id])
     @contract_plan = ContractPlan.new(params[:plannable_id])
     @contract_plan.contract = @contract
+    #@contract.price = (@contract_plan.budget * 0.02 + @contract_plan.liability * 0.00001 + @contract_plan.total * 0.1)
     if @contract_plan.save
+      @contract.price_sum
       flash[:success] = "ContractPlan successfully created"
       redirect_to @contract_plan
     else

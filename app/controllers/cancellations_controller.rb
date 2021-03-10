@@ -12,6 +12,7 @@ class CancellationsController < ApplicationController
       @contract_plan.contract = @contract
       @contract_plan.plannable = @cancellation
       @contract_plan.save!
+      @contract.price_sum
       flash[:success] = "Cancellation successfully created"
       redirect_to @contract
     else

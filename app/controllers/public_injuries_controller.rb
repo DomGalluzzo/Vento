@@ -13,6 +13,7 @@ class PublicInjuriesController < ApplicationController
       @contract_plan.contract = @contract
       @contract_plan.plannable = @public_injury
       @contract_plan.save!
+      @contract.price_sum
       flash[:success] = "PublicInjury successfully created"
       redirect_to @contract
     else

@@ -9,4 +9,8 @@ class PublicInjury < ApplicationRecord
 
   validates :dangerous, exclusion: [nil]
 
+  def price
+    self.liability * 0.00001 + self.total * 0.1
+  end
+
 end
