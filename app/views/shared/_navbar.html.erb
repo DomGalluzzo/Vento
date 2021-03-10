@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top"  >
+<div class="navbar navbar-expand-md navbar-light navbar-lewagon sticky-top"  >
   <%= link_to "/", class: "navbar-brand" do %>
     <%= image_tag "vento-logo.png", class: "logo" %>
     <% end %>
@@ -28,7 +28,7 @@
             <%= link_to "Logout", destroy_user_session_path, method: :delete, data: {confirm: "Are you sure?", title: "Log out?", commit: "Yes", cancel: "No"}, class: "nav-link" %>
         </li>
         <% else %>
-          <li class="nav-item list-link">
+          <li class="nav-item">
             <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
