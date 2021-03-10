@@ -41,7 +41,7 @@
   padding: 0 33px;
   margin: 0 auto;
   background-color: rgba(255,48,0,0.9);
-  box-shadow: 0 0 25px rgba(199, 36, 0, 0.5);
+  box-shadow: 0 0 15px rgba(199, 36, 0, 0.5);
 
   .fas.fa-fire {
     color: #01736e;
@@ -50,7 +50,7 @@
 }
 .boton:hover {
   background-color: #01736e;
-  box-shadow: 0 0 25px rgba(1, 87, 82, 0.5);
+  box-shadow: 0 0 15px rgba(1, 87, 82, 0.5);
   transition-duration: 350ms;
 
   .fas.fa-fire {
