@@ -15,4 +15,9 @@ class Cancellation < ApplicationRecord
   validates :loss, exclusion: [nil]
 
   validates :weather, exclusion: [nil]
+
+  def price
+    self.budget * 0.02
+  end
+
 end

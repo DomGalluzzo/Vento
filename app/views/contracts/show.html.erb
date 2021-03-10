@@ -1,3 +1,7 @@
+<head>
+  <title>Vento - Your Festival Contract</title>
+</head>
+
 <div class="title-header">
   <h2>Event Details</h2>
   <hr>
@@ -31,7 +35,7 @@
           <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
         </div>
         
-        <% @contract.contract_plans.each do |plan| %>
+        <!-- <% @contract.contract_plans.each do |plan| %>
           <% if plan.plannable.kind_of?(PublicInjury) && plan.plannable.kind_of?(Cancellation) %>
             <% liability = plan.plannable.liability %>
             <% budget = plan.plannable.budget %>
@@ -41,26 +45,37 @@
               £<%= (liability * 0.00001) + (total * 0.1) + (budget * 0.02) %>
             </div>
           <% elsif plan.plannable.kind_of?(PublicInjury) %>
-            <h3 class="vento-font">Quote</h3>
+            <h3 class="vento-font">Public Injury Quote</h3>
             <% liability = plan.plannable.liability %>
             <% total = plan.plannable.total %>
             <div class="card festival-dates pl-3 mb-4">
               £<%= (liability * 0.00001) + (total * 0.1)%>
             </div>
           <% elsif plan.plannable.kind_of?(Cancellation) %>
-            <h3 class="vento-font">Quote</h3>
+            <h3 class="vento-font"> Canecellation Quote</h3>
             <% budget = plan.plannable.budget %>
             <div class="card festival-dates pl-3 mb-4">
               £<%= (budget * 0.02)%>
             </div>
           <% end %>      
-        <% end %>
-        
+        <% end %> -->
+
+        <div>
+          <h3 class="vento-font">Price </h3>
+          <div class="card festival-dates pl-3 mb-4">
+          £<%= @contract.price %>
+          </div>  
+        </div>
+
+     
         <div>
           <h3 class="vento-font text-center">Insurance Coverages <%= render 'dropdown' %></h3>
           <%#= link_to "Add coverages", new_contract_cancellation_path(@contract.id)%>
 
         </div>
+
+     
+        
         <% @contract.contract_plans.each do |plan| %>
           <div class="card insurance-details px-3 py-3">
             <% if plan.plannable.kind_of?(PublicInjury) %>
