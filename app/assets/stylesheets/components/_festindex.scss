@@ -1,0 +1,221 @@
+$outer-border: black;
+$inner-border: black;
+$text-color: black;
+$barcode: 'Libre Barcode 39 Text', cursive;
+$font-primary: "GraphikLCG-Medium";
+
+.page-header {
+  text-align: center;
+}
+
+:root {
+  /* configurable constants */
+  --negative-color: #fcf9f7b6;
+  --card-background-color: #fff;
+  --dash-color: #a8a8a8;
+  --card-width: 220px;
+  --header-height: 50px;
+  --content-height: 310px;
+  --cutout-radius: 6px;
+  --box-padding: 10px;
+  --shadow-alpha: 0.2;
+  
+  /* calculated constants */
+  --half-shadow-alpha: calc(var(--shadow-alpha) / 2);
+  --shadow-color: rgba(0, 0, 0, var(--shadow-alpha));
+  --half-shadow-color: rgba(0, 0, 0, var(--half-shadow-alpha));
+}
+
+#card {
+  background-color: var(--card-background-color);
+  width: var(--card-width);
+  position: relative;
+  box-shadow: 0 0 15px var(--shadow-color);
+}
+
+#header {
+  height: var(--header-height);
+  width: 100%;
+  padding: 0;
+  font-family: $barcode;
+  font-size: 40px;
+}
+
+#separator {
+  width: calc(var(--card-width) - 5 * var(--cutout-radius));
+  margin: auto;
+  margin-top: 2px;
+  border-top: 3px dashed rgba(255,48,0,0.6);
+}
+
+#content {
+  height: var(--content-height);
+  width: 100%;
+  padding: var(--box-padding);
+}
+
+.cutout,
+.cutout-cover {
+  top: calc(var(--header-height) - var(--cutout-radius));
+  height: calc(2 * var(--cutout-radius));
+  background-color: var(--negative-color);
+  position: absolute;
+  border-radius: var(--cutout-radius);
+}
+
+.cutout {
+  width: calc(2 * var(--cutout-radius));
+  background-image: radial-gradient(transparent, transparent, var(--half-shadow-color), var(--shadow-color));
+}
+
+.cutout-cover {
+  width: var(--cutout-radius);
+}
+
+#left-cutout,
+#left-cutout-cover {
+  left: calc(-1 * var(--cutout-radius));
+}
+
+#right-cutout,
+#right-cutout-cover {
+  right: calc(-1 * var(--cutout-radius));
+}
+
+#festival-cards {
+  display: grid;
+  // grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+#card {
+  background-color: rgba(101, 169, 165, 0.6);
+
+    :hover {
+      text-decoration: none;
+      color: $text-color;
+    }
+}
+
+#content {
+  font-family: $font-primary;
+}
+
+.festival-name {
+  font-size: x-large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  word-break: break-all;
+}
+
+.festival-address {
+  font-size: smaller;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.festival-dates {
+  font-size: smaller;
+  font-weight: lighter;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.letters {
+  opacity: 0.5;
+  z-index: -1;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.letter-div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 10%;
+  width: 25%;
+}
+
+
+
+// .divider {
+//   height: 15%;
+// }
+
+.festivals-links {
+  color: $text-color;
+}
+
+@-webkit-keyframes bob-on-hover {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+  50% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+@keyframes bob-on-hover {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+  50% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+@-webkit-keyframes bob-on-hover-float {
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+@keyframes bob-on-hover-float {
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+.festivals.card {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.festivals.card:hover,
+.festivals.card:focus,
+.festivals.card:active {
+  -webkit-animation-name: bob-on-hover-float, bob-on-hover;
+  animation-name: bob-on-hover-float, bob-on-hover;
+  -webkit-animation-duration: 0.3s, 1.5s;
+  animation-duration: 0.3s, 1.5s;
+  -webkit-animation-delay: 0s, 0.3s;
+  animation-delay: 0s, 0.3s;
+  -webkit-animation-timing-function: ease-out, ease-in-out;
+  animation-timing-function: ease-out, ease-in-out;
+  -webkit-animation-iteration-count: 1, infinite;
+  animation-iteration-count: 1, infinite;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-direction: normal, alternate;
+  animation-direction: normal, alternate;
+}

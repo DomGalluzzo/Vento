@@ -7,4 +7,11 @@ module ApplicationHelper
       "No"
     end
   end
+
+  # Open and read SVG file
+  def show_svg(path)
+    File.open("app/assets/images/svg_img/#{path}", "rb") do |file|
+      raw file.read
+    end
+  end
 end
