@@ -77,7 +77,7 @@
      
         
         <% @contract.contract_plans.each do |plan| %>
-          <div class="card insurance-details px-3 py-3">
+          <div class="card insurance-details px-3 py-2 d-flex justify-content-center">
             <% if plan.plannable.kind_of?(PublicInjury) %>
             <button class="btn btn-outline-secondary rounded-pill" data-modal-target="#modal1">Public Injury</button>
             <div class="modal-card" id="modal1">
@@ -128,7 +128,7 @@
       <div class="help-button text-center mt-5">
           <%# <a href="#" class="card-link link-color">Help ?</a> %>
           <%= link_to "Need Help?", "#{root_path}#faq", class: "btn btn-outline-secondary rounded-pill" %> <br>
-          <%= link_to "Download your contract", contract_path(format: :pdf), class: "btn btn-outline-secondary rounded-pill" %>
+          
       </div>
     </div>
   </div>

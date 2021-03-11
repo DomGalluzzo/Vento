@@ -32,36 +32,13 @@
   .map-container{
     width: 90vw;
   }
-
-
+  
   #map {
     width: 80%;
   }
+  .svg-map-container{
+    position: absolute;
+    top: 570px;
+     
+  }
 }
-
-// .card-map{
-//   position: absolute;
-//   left: 50%;
-//   bottom: 1px;
-//   width: 600px; 
-//   height:200px;
-//   margin-bottom: 475px;
-// }
-
-// #map{
-//   border-radius: 50px;
-//   border-color: transparent;
-// }
-
-// @media only screen and (max-width: 768px){
-//   .card-map{
-//     position: absolute;
-//     top: 20px;
-//     bottom: 1px;
-//     width: 500px; 
-//     height:200px;
-//   }
-//   #map{
-//     right: 60%;
-//   }
-// }
