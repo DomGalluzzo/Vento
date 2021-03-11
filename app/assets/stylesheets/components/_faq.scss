@@ -91,7 +91,7 @@ $secondary-color: #F9F3EF;
 }
 
 .flip-card-back {
-  background-color: rgba($color: $secondary-color, $alpha: 0.5);
+  background-color: white;
   color: black;
   transform: rotateY(180deg);
   border-radius: 30px;
