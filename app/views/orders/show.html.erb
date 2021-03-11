@@ -8,6 +8,7 @@
                 <li><strong>TOTAL</strong> <%= humanized_money_with_symbol @order.amount %></li>
                 </li>
             </ul>
+            <%= link_to "Download your contract", contract_path(format: :pdf), class: "btn btn-outline-secondary rounded-pill" %>
         </div>
     </div>
 </div>
