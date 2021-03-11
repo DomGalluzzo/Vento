@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'     
   end
 
+  get "contracts/download_pdf"
+
   root to: 'pages#home'
 
   # get 'contract_plans/new'
