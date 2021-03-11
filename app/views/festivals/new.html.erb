@@ -19,10 +19,10 @@
             <%= f.input :address, label: false, placeholder: "Bethel, New York" %>
             
             <h5 id="festival-titles">Event <strong><u>start</u></strong> date</h5>
-            <%= f.input :start_date, as: :date, html5: true, label: false %>
+            <%= f.input :start_date, as: :date, order: [:month, :day, :year], html5: true, label: false %>
 
             <h5 id="festival-titles">Event <strong><u>end</u></strong> date</h5>
-            <%= f.input :end_date, as: :date, html5: true, label: false %>
+            <%= f.input :end_date, as: :date, order: [:month, :day, :year], html5: true, label: false %>
 
             <h5 id="festival-titles">Event type</h5>
             <%= f.input_field :genre, as: :radio_buttons, collection: [['0', 'Festival'], ['1', 'Conference'], ['2','Other']], label_method: :second, value_method: :first, html: {id: "radio-festival"} %>

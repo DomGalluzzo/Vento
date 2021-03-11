@@ -32,7 +32,8 @@
           <h3 class="vento-font">Event Dates</h3>
         </div>
         <div class="card festival-dates pl-3 mb-4">
-          <span><%= @contract.festival.start_date %> to <%= @contract.festival.end_date %></span>
+          <span><%= @contract.festival.start_date.month %>/<%=@contract.festival.start_date.day %>/<%= @contract.festival.start_date.year %>
+           - <%= @contract.festival.end_date.month %>/<%= @contract.festival.end_date.day %>/<%= @contract.festival.end_date.year %></span>
         </div>
         
         <!-- <% @contract.contract_plans.each do |plan| %>
