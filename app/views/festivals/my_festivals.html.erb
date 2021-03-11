@@ -1,5 +1,7 @@
 <head>
   <title>Vento - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
 </head>
 <h1>My Events</h1>
 
@@ -11,9 +13,11 @@
         <div class="festivals card" id="card">
           <%= link_to contract_path(festival), class: "festivals-links" do %>
 
-            <div id="header"><%= festival.name %></div>
+            <div id="header">D522723844</div>
             <div id="separator"></div>
-            <div id="content"></div>
+            <div id="content">
+              <%= festival.start_date.month %>/<%= festival.start_date.day %>/<%= festival.start_date.year %> - <%= festival.end_date.month %>/<%= festival.end_date.day %>/<%= festival.end_date.year %>
+            </div>
             <div id="left-cutout" class="cutout"></div>
             <div id="right-cutout" class="cutout"></div>
             <div id="left-cutout-cover" class="cutout-cover"></div>
