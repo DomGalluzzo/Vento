@@ -3,34 +3,24 @@
 </head>
 <h1>My Events</h1>
 
+
 <div class="festivals container">
   <div class="festivals row">
     <% @festivals.each do |festival| %>
-      <div class="festivals col-sm-12 col-lg-6">
-        <div class="festivals card-body w-100">
+      <div class="festivals col-sm-12 col-md-6 col-lg-4" id="festival-cards">
+        <div class="festivals card" id="card">
           <%= link_to contract_path(festival), class: "festivals-links" do %>
-            <h6 class="festivals address"><%= festival.address %></h6>
-            <h5 class="festivals card-title"><%= festival.name %></h5>
-            
-            <div class="festivals detail row">
-              <div class="festivals col-sm-4" id="col1">
-                <%= festival.start_date.month %>
-                <%= festival.start_date.day %>
-                <%= festival.start_date.year %>
-              </div>
 
-              <div class="festivals col-sm-4" id="col2">
-                <p class="festivals card-text">Admit One</p>
-              </div>
-
-              <div class="festivals col-sm-4" id="col3">
-                <p class="festivals card-text">$10</p>
-              </div>
-            </div>
-
+            <div id="header"><%= festival.name %></div>
+            <div id="separator"></div>
+            <div id="content"></div>
+            <div id="left-cutout" class="cutout"></div>
+            <div id="right-cutout" class="cutout"></div>
+            <div id="left-cutout-cover" class="cutout-cover"></div>
+            <div id="right-cutout-cover" class="cutout-cover"></div>
           <% end %>
         </div>
-      </div>
+      </div>  
     <% end %>
   </div>
 </div>
