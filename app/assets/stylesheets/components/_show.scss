@@ -25,8 +25,12 @@
     font-size: 1rem;
 }
 
+.card-festival{
+    display: flex;
+    justify-content: space-between;
+}
+
 .festvial-name{
-    height: 25px;
     border-radius: 20px;
 }
 
@@ -62,9 +66,58 @@
     margin: 5px 10px 0 10px;
 }
 
+.map-container{
+    display: flex;
+    width: 70vw;
+    justify-content: space-between;
+    margin: auto;
+  }
+  
+  .map-body{
+    position: relative;
+    width: 550px;
+  }
+  
+  
+  #map {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-radius: 10px;
+  }
+  
+  .svg-map-container{
+    position: absolute;
+    top: 600px;
+     
+  }
+  
+  .svg-img-margin{
+    margin-left: -30px;
+  }
+  
+  @media only screen and (max-width: 1280px){
+    .map-container{
+      width: 90vw;
+    }
+    
+    #map {
+      width: 80%;
+    }
+    .svg-map-container{
+      position: absolute;
+      top: 570px;
+       
+    }
+  }
+  
 
 @media only screen and (max-width: 1280px) {
     .title-header {
         padding: 40px 60px 40px 60px;
     }
+}
+
+@media only screen and (max-width: 600px){
+
 }
