@@ -22,7 +22,12 @@
     <!-- <a href="#" class="btn boton text-white" role="button"><i class="fas fa-fire"></i>Get covered instantly</a> -->
   </div>
 </div>
-<lottie-player src="/vento_animation.json"  background="transparent"  speed="1"  style="width: 100%; height: auto;"  loop autoplay></lottie-player>
+<div style="position: relative;">
+  <lottie-player src="/vento_animation.json"  background="transparent"  speed="1"  style="width: 100%; height: auto;"  loop autoplay></lottie-player>
+  <div class="wave-top-image" style="position: absolute; bottom: 0px;">
+    <%= image_tag "shape-top.png", class: "wave-top-imagen", style: "border: none; height: 80px; width: 100vw; " %>
+  </div>
+</div>
 
 
 <%= render 'shared/card' %> 
