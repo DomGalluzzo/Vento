@@ -1,19 +1,24 @@
-<div class="container">
-  <div class="row py-4">
-        <div class="col">
-            <h1>Checkout summary</h1>
-            <p>Purchase of <strong><%= @order.contract.id %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
-            <button id="pay" class="btn btn-primary">Pay</button>
-            <script src="https://js.stripe.com/v3/"></script>
-            <script>
-                const paymentButton = document.getElementById('pay');
-                paymentButton.addEventListener('click', () => {
-                const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-                stripe.redirectToCheckout({
-                sessionId: '<%= @order.checkout_session_id %>'
-                });
-                });
-            </script>
+<div class="payment-container"
+    <div style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1582711012124-a56cf82307a0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2910&q=80'); height: 85vh; width: 100vw; background-size: cover;">
+        <div class="card checkout-card text-center mx-auto p-2" style=" width: 18rem; background-color: rgba(230,230,230,0.3);">
+            <div class="card-header">
+                <h1 class="card-title">Your Cart</h1>
+            </div>
+            <ul class="list-group list-group-flush list-elements">
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.1);">Order id: <strong><%= @order.contract.id %></strong></li>
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.1);">Price: <strong><%= humanized_money_with_symbol @order.amount %></strong></li>
+                <button id="pay" class="btn btn-danger button-element">Pay</button>
+                <script src="https://js.stripe.com/v3/"></script>
+                <script>
+                    const paymentButton = document.getElementById('pay');
+                    paymentButton.addEventListener('click', () => {
+                    const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+                    stripe.redirectToCheckout({
+                    sessionId: '<%= @order.checkout_session_id %>'
+                    });
+                    });
+                </script>
+            </ul>
         </div>
     </div>
 </div>
