@@ -1,0 +1,23 @@
+.payment-container{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.checkout-card{
+    border-radius: 15px;
+    font-family: "GraphikLCG-Regular";
+}
+
+.card-title{
+    font-family: "GraphikLCG-Bold";
+    font-size: 40px;
+}
+
+.list-elements{
+    border-radius: 15px;
+}
+
+.button-element{
+    border-radius: 5px;
+}
