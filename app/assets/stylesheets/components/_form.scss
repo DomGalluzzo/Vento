@@ -137,3 +137,10 @@ $font-color: rgba(0,0,0,0.6);
 #festival-titles {
   color: rgba(255, 48, 0, 0.6);
 }
+
+
+@media only screen and (max-width: 768px) {
+  .container.cancellation{
+    width: 90vw;
+  }
+}
