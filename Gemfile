@@ -34,7 +34,7 @@ gem 'wkhtmltopdf-binary'
 gem 'money-rails'
 gem 'stripe'
 gem 'stripe_event'
-
+gem 'sendgrid-ruby'
 
 
 gem 'autoprefixer-rails'
