@@ -12,12 +12,12 @@
     </div>
 </div>
 <div class="container">
-    <div class="row m-0">
-        <div class="big-card col-sm-6">
+    <div class="row" style="margin-top:50px;">
+        <div class="big-card col-sm-12 col-lg-6">
             <div class="card p-2 card-content text-center mb-3 ml-auto">
                 <%= image_tag "vento-2.png", class: "card image top mt-4 ml-auto mr-auto", style: "border: none; height: 10px; width: 50px; " %>
                 <div class="card-body text-center">
-                    <h5 class="card-title mb-0" style="font-family: 'GraphikLCG-Regular' ">Your personalised quote</h5>
+                    <h5 class="card-title mb-0" style="font-family: 'GraphikLCG-Regular'; font-size: 2rem ">Your personalised quote</h5>
                     <p class="card-text text-center mb-5" style=" line-height: 5rem;font-family: 'GraphikLCG-Regular'">£500</p>
                     <%= link_to new_festival_path, class: "btn insured-button text-white ml-auto mb-3 mr-auto" do  %>
                         <i class="fas fa-fire"></i>Get insured
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="list col-sm-6">
+        <div class="list col-sm-12 col-lg-6">
             <ul class="group-list" style="font-family: 'GraphikLCG-Regular' ">
                 <li class="group-item">
                     <h3>Choose your cover</h3>
