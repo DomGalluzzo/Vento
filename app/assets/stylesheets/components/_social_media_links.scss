@@ -4,9 +4,10 @@ $actual: #2a2a2a;
 
 .social-media-footer-title {
   text-align: center;
-  color: black;
-  margin-top: 100px;
-
+  color: white;
+  margin-top: 0px;
+  // background-color: red;
+  margin-bottom: 50px;
     h5{
       font-family: "GraphikLCG-Regular";
       font-size: 1.5em;
@@ -16,6 +17,7 @@ $actual: #2a2a2a;
 
 .social-media-footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 45vh;
