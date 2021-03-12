@@ -34,14 +34,6 @@ class ContractsController < ApplicationController
       end  
   end
 
-  def download_pdf
-    send_file(
-      "#{Rails.root}/app/assets/images/Policy2.pdf",
-      filename: "Policy2.pdf",
-      type: "application/pdf"
-    )
-  end
-
   private
 
   def contract_params
