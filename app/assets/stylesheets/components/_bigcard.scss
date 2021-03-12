@@ -1,13 +1,13 @@
 .big-banner{
-	font-size: 50px;
+	font-size: 3rem;
 }
 
 .card-text{
-	font-size: 75px;
+	font-size: 2.5rem;
 }
 
 .card-title{
-	font-size: 15px;
+	font-size: 1rem;
 	color: black;
 }
 
@@ -20,7 +20,7 @@
 	border-radius: 22px;
 	width: 184px;
 	height: 44px;
-	font-size: 15px;
+	font-size: 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
@@ -61,18 +61,21 @@
 
 .group-list{
 	padding-left: 2rem;
-	list-style-type: none;
+	list-style-type: square;
 }
 
 .group-item{
-	margin-left: -50px;
-	padding-left: 2rem;
-	background-image: url(rounded-square-png.png);
-	background-position: 0 0;
-	background-size: 1.3rem 1.3rem;
-	background-repeat: no-repeat;
-	transition: 1s;
-	// transform: translateX(50px);
+	padding-left: 1rem;
+
+	h3 {
+		font-size: 1.75rem;
+		font-weight: bold;
+	}
+
+	p{
+		font-size: 1.25rem;
+		font-weight: 400;
+	}
 }
 
 .big-card > .card {
@@ -82,4 +85,15 @@
 
 #email-button {
 	box-shadow: 0 0 20px rgba(75, 75, 75, 0.4)
+}
+
+
+@media only screen and (max-width: 768px) {
+	.card-content {
+		width: 100%;
+	}
+
+	.group-list{
+		margin-top: 50px;
+	}
 }
