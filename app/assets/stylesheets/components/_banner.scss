@@ -7,7 +7,7 @@
 
 
 .first >h1 {
-  font-size: 60px;
+  font-size: 3rem;
 }
 
 .first > h1 {
@@ -16,6 +16,7 @@
 
 .second > p {
   font-family: "GraphikLCG-Regular";
+  font-size: 0.75rem;
 }
 
 .second {
@@ -26,9 +27,9 @@
   align-items: center;
 }
 
-.second > p {
-  font-size: 14px;
-}
+// .second > p {
+//   font-size: 1rem;
+// }
 
 .boton {
   border-radius: 33.5px;

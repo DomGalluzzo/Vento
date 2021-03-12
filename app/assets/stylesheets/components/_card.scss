@@ -38,6 +38,7 @@
 
 .policy-bg-color{
   background-color: #E0E9E9;
+  padding-top: 20px;
 }
 
 .policy-bg-color > h2{
@@ -50,7 +51,7 @@
 @media only screen and (max-width: 768px){
   .card-policy{
     height: 300px;
-    width: 100% !important;
+    width: 80% !important;
     border-radius: 50px;
     display: flex;
     justify-content: space-around;
