@@ -1,10 +1,44 @@
 <head>
   <title>Vento - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
 </head>
-<h1>My Events</h1>
 
-<% @festivals.each do |festival| %>
-    <ul>
-      <li><%= link_to festival.name, contract_path(festival.contract) %></li>
-    </ul> 
-<% end %>
+<h1 class="page-header">My Events</h1>
+
+<div class="festivals container">
+  <div class="festivals row">
+    <% @festivals.each do |festival| %>
+      <div class="festivals col-sm-12 col-md-6 col-lg-4" id="festival-cards">
+        <div class="festivals card" id="card">
+          <%= link_to contract_path(festival), class: "festivals-links" do %>
+
+            <div id="header"><%= 3819502648 %></div>
+            <div id="separator"></div>
+            <div class="d-flex flex-column" id="content">
+              <p class="letter-div"><%= image_tag "V.png", size: "30x30", class: "letters" %></p>
+
+              <p class="festival-name mt-auto"><%= image_tag "E.png", size: "30x30", class: "letters" %><span><%= festival.name %></span></p>
+
+              <p class="letter-div"><%= image_tag "N.png", size: "30x30", class: "letters" %></p>
+
+              <div class="divider"></div>
+
+              <p class="festival-address mt-auto"><%= image_tag "T.png", size: "30x30", class: "letters" %><span><%= festival.address %></span></p>
+
+              <div class="divider"></div>
+
+              <p class="festival-dates mt-auto"><%= image_tag "O.png", size: "30x30", class: "letters" %><span><%= festival.start_date.month %>/<%= festival.start_date.day %>/<%= festival.start_date.year %> &#8212; <%= festival.end_date.month %>/<%= festival.end_date.day %>/<%= festival.end_date.year %></span></p>
+
+
+            </div>
+            <div id="left-cutout" class="cutout"></div>
+            <div id="right-cutout" class="cutout"></div>
+            <div id="left-cutout-cover" class="cutout-cover"></div>
+            <div id="right-cutout-cover" class="cutout-cover"></div>
+          <% end %>
+        </div>
+      </div>  
+    <% end %>
+  </div>
+</div>
