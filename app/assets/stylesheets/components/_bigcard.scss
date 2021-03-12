@@ -66,6 +66,8 @@
 
 .group-item{
 	padding-left: 1rem;
+	transition: 1s;
+	margin-left: -40px;
 
 	h3 {
 		font-size: 1.75rem;
@@ -95,5 +97,9 @@
 
 	.group-list{
 		margin-top: 50px;
+	}
+
+	.group-item{
+		width: 70vw;
 	}
 }
